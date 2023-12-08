@@ -19,16 +19,9 @@ const styles = StyleSheet.create({
         borderWidth:1,
         justifyContent:"center",
         alignItems:"center",
-        backgroundColor: '#grey', // Replace with the actual color code
+        backgroundColor: 'grey', // Replace with the actual color code
       //  alignSelf: 'center',
-        shadowColor: 'rgba(0, 0, 0, 0.4)', // Adjust shadow color as needed
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 4,
-        elevation: 5, //
+       
     },
     textStyle:{
         color:"white"
