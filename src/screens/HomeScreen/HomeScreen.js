@@ -15,22 +15,38 @@ const DATA = [
   {
     id: 1,
     image: require("../../../assets/images/sweater.png"),
+    title: "Turtleneck Sweater",
+    price: "$ 39.99",
   },
   {
     id: 2,
     image: require("../../../assets/images/longDress.png"),
+    title: "Long Sleeve Dress",
+    price: "$ 45",
   },
   {
     id: 3,
     image: require("../../../assets/images/denim.jpg"),
+    title: "Denim Jeans",
+    price: "$ 25",
   },
   {
     id: 4,
-    image: require("../../../assets/images/longDress.png"),
+    image: require("../../../assets/images/blackShirt.jpg"),
+    title: "Black Cotton Shirt",
+    price: "$ 30",
   },
   {
     id: 5,
-    image: require("../../../assets/images/denim.jpg"),
+    image: require("../../../assets/images/whiteShirt.jpg"),
+    title: "White Loose Shirt",
+    price: "$ 28.99",
+  },
+  {
+    id: 6,
+    image: require("../../../assets/images/blueSweater.jpg"),
+    title: "Blue Sweater",
+    price: "$ 50",
   },
 ];
 
@@ -156,7 +172,7 @@ const HomeScreen = () => {
           >
             <View>
               <Image
-                style={{ width: 330, height: 209 }}
+                style={{ width: 350, height: 209 }}
                 resizeMode="cover"
                 source={require("../../../assets/images/S1.png")}
               />
@@ -166,7 +182,7 @@ const HomeScreen = () => {
             </View>
             <View>
               <Image
-                style={{ width: 330, height: 209 }}
+                style={{ width: 350, height: 209 }}
                 resizeMode="cover"
                 source={require("../../../assets/images/S1.png")}
               />
@@ -176,7 +192,7 @@ const HomeScreen = () => {
             </View>
             <View>
               <Image
-                style={{ width: 330, height: 209 }}
+                style={{ width: 350, height: 209 }}
                 resizeMode="cover"
                 source={require("../../../assets/images/S1.png")}
               />
@@ -206,6 +222,10 @@ const HomeScreen = () => {
                   source={item.image}
                   style={styles.cardImage}
                 />
+                <View style={{ marginTop: 10 }}>
+                  <Text style={{ fontWeight: "600" }}>{item.title}</Text>
+                  <Text style={{ fontWeight: "600" }}>{item.price}</Text>
+                </View>
               </View>
             )}
             keyExtractor={(item) => item.id}
@@ -233,7 +253,7 @@ const HomeScreen = () => {
           <Image
           style={{width:119, height:158}}
           resizeMode="cover"
-           source={require("../../../assets/images/denim.jpg")} />
+          source={require("../../../assets/images/denim.jpg")} />
         </View> */}
         </View>
 
@@ -259,13 +279,72 @@ const HomeScreen = () => {
                   />
                 </View>
                 <View style={styles.textBlock}>
-                  <Text>White Fashion Hoodie</Text>
-                  <Text>$ 29.00</Text>
+                  <Text style={{ fontWeight: "600" }}>{item.title}</Text>
+                  <Text style={{ fontWeight: "600" }}>{item.price}</Text>
                 </View>
               </View>
             )}
             keyExtractor={(item) => item.id}
           />
+        </View>
+
+        <View style={styles.textContainer}>
+          <Text style={styles.textStyle}>Top Collection</Text>
+          <TouchableOpacity>
+            <Text style={{ color: "#9B9B9B", fontSize: 16 }}>show all</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.bannerStyle}>
+          <View style={styles.textBanner}>
+            <Text style={styles.textColor}>Sale upto 40%</Text>
+            <Text
+              style={[
+                styles.textColor,
+                { fontSize: 24, fontWeight: "500", marginTop: 15 },
+              ]}
+            >
+              FOR SLIM
+            </Text>
+            <Text
+              style={[styles.textColor, { fontSize: 24, fontWeight: "500" }]}
+            >
+              & BEAUTY
+            </Text>
+          </View>
+          <View style={{ flex: 1, right: 0 }}>
+            <Image
+              style={{ width: "100%", height: 158 }}
+              resizeMode="cover"
+              source={require("../../../assets/images/slim.jpg")}
+            />
+          </View>
+        </View>
+
+        <View style={[styles.bannerStyle, { height: 229, marginTop: 20 }]}>
+          <View style={styles.textBanner}>
+            <Text style={styles.textColor}>Summer Collection 2023</Text>
+            <Text
+              style={[
+                styles.textColor,
+                { fontSize: 24, fontWeight: "500", marginTop: 15 },
+              ]}
+            >
+              Most Fabulous
+            </Text>
+            <Text
+              style={[styles.textColor, { fontSize: 24, fontWeight: "500" }]}
+            >
+              Design
+            </Text>
+          </View>
+          <View style={{ flex: 1, right: 0 }}>
+            <Image
+              style={{ width: "100%", height: 229 }}
+              resizeMode="cover"
+              source={require("../../../assets/images/Belle.jpg")}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -317,7 +396,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerSlider: {
-    width: 330,
+    width: 350,
     height: 209,
     alignSelf: "center",
     marginTop: 30,
@@ -345,7 +424,9 @@ const styles = StyleSheet.create({
   },
   productContainer: {
     flex: 1,
-    margin: 10,
+    margin: 13,
+    justifyContent: "center",
+    //backgroundColor: "red",
   },
   bannerContainer: {
     height: 157,
@@ -366,14 +447,26 @@ const styles = StyleSheet.create({
   },
   recommendCategory: {
     flexDirection: "row",
-    width:213,
-    height:66,
-    backgroundColor:"#F9F9F9",
-    borderRadius:20,
-    marginHorizontal:10
+    width: 213,
+    height: 66,
+    backgroundColor: "#F9F9F9",
+    borderRadius: 20,
+    marginHorizontal: 10,
   },
-  textBlock:{
-    flex:1,
-    justifyContent:"center",
-  }
+  textBlock: {
+    flex: 1,
+    justifyContent: "center",
+    marginHorizontal: 7,
+  },
+  bannerStyle: {
+    marginTop: 0,
+    width: 350,
+    alignSelf: "center",
+    borderRadius: 20,
+    height: 157,
+    flex: 1,
+    backgroundColor: "#F8F8FA",
+    flexDirection: "row",
+    overflow: "hidden",
+  },
 });
