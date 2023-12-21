@@ -63,7 +63,7 @@ function ProfileStackScreen() {
   };
   return (
     <ProfileStack.Navigator screenOptions={screenOptions}>
-      <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
     </ProfileStack.Navigator>
   );
 }
@@ -109,7 +109,7 @@ function MyTabs() {
               );
           },
         }}
-        name="HomeScreen"
+        name="Home"
         component={HomeStackScreen}
       />
 
@@ -131,7 +131,7 @@ function MyTabs() {
               );
           },
         }}
-        name="SearchScreen"
+        name="Search"
         component={SearchStackScreen}
       />
 
@@ -153,7 +153,7 @@ function MyTabs() {
               );
           },
         }}
-        name="CartScreen"
+        name="Cart"
         component={CartStackScreen}
       />
 
@@ -179,7 +179,7 @@ function MyTabs() {
               );
           },
         }}
-        name="Profile_Screen"
+        name="Profile"
         component={ProfileStackScreen}
       />
     </Tab.Navigator>
