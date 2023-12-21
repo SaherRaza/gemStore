@@ -346,6 +346,69 @@ const HomeScreen = () => {
             />
           </View>
         </View>
+
+        <View style={{ flexDirection: "row", margin: 30 }}>
+          <View
+            style={[
+              styles.bannerStyle,
+              { height: 220, marginTop: 20, width: 160, marginRight: 15 },
+            ]}
+          >
+            <View style={{ flex: 1, right: 0 }}>
+              <Image
+                style={{ width: "100%", height: 220 }}
+                resizeMode="cover"
+                source={require("../../../assets/images/office.jpg")}
+              />
+            </View>
+            <View style={styles.textBanner}>
+              <Text style={styles.textColor}>T-Shirts</Text>
+              <Text
+                style={[
+                  styles.textColor,
+                  { fontSize: 20, fontWeight: "500", marginTop: 15 },
+                ]}
+              >
+                Office
+              </Text>
+              <Text
+                style={[styles.textColor, { fontSize: 20, fontWeight: "500" }]}
+              >
+                Life
+              </Text>
+            </View>
+          </View>
+          <View
+            style={[
+              styles.bannerStyle,
+              { height: 220, marginTop: 20, width: 160 },
+            ]}
+          >
+            <View style={styles.textBanner}>
+              <Text style={styles.textColor}>Dresses</Text>
+              <Text
+                style={[
+                  styles.textColor,
+                  { fontSize: 20, fontWeight: "500", marginTop: 15 },
+                ]}
+              >
+                Elegant
+              </Text>
+              <Text
+                style={[styles.textColor, { fontSize: 20, fontWeight: "500" }]}
+              >
+                Design
+              </Text>
+            </View>
+            <View style={{ flex: 1, right: 0 }}>
+              <Image
+                style={{ width: "100%", height: 220 }}
+                resizeMode="cover"
+                source={require("../../../assets/images/dress.jpg")}
+              />
+            </View>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );
