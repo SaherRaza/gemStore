@@ -11,6 +11,33 @@ import {
 import React, { useState } from "react";
 import { Ionicons, Feather } from "@expo/vector-icons";
 
+const CategoryList = [
+  {
+    id: 1,
+    title: "CLOTHING",
+    image: require("../../../assets/images/clothing.png"),
+    bgColor: "#A3A798",
+  },
+  {
+    id: 2,
+    title: "ACCESSORIES",
+    image: require("../../../assets/images/BAG.png"),
+    bgColor: "#898280",
+  },
+  {
+    id: 3,
+    title: "SHOES",
+    image: require("../../../assets/images/SHOES.png"),
+    bgColor: "#44565C",
+  },
+  {
+    id: 4,
+    title: "COLLECTION",
+    image: require("../../../assets/images/COLLECTION.png"),
+    bgColor: "#B9AEB2",
+  },
+];
+
 const SearchScreen = () => {
   const [text, onChangeText] = useState("Useless Text");
   const [number, onChangeNumber] = useState("");
@@ -51,6 +78,36 @@ const SearchScreen = () => {
             <Ionicons name="filter" size={24} color="#43484B" />
           </TouchableOpacity>
         </View>
+
+        {CategoryList.map((item) => (
+          <TouchableWithoutFeedback>
+            <View
+              style={[
+                styles.categoryContainer,
+                { backgroundColor: item.bgColor },
+              ]}
+            >
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  paddingLeft: 20,
+                }}
+              >
+                <Text style={[styles.textStyle, { color: "white" }]}>
+                  {item.title}
+                </Text>
+              </View>
+              <View style={{ flex: 1, alignItems: "flex-end" }}>
+                <Image
+                  resizeMode="cover"
+                  style={{ width: 123, height: 126 }}
+                  source={item.image}
+                />
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        ))}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -91,6 +148,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    margin: 15,
   },
   inputContainer: {
     flexDirection: "row",
@@ -112,5 +170,15 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     justifyContent: "center",
     alignItems: "center",
+  },
+  categoryContainer: {
+    width: 350,
+    height: 126,
+    borderRadius: 20,
+    alignSelf: "center",
+    marginTop: 10,
+    flexDirection: "row",
+    overflow: "hidden",
+    marginVertical: 15,
   },
 });
