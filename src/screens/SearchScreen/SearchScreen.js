@@ -7,9 +7,20 @@ import {
   TextInput,
   Keyboard,
   TouchableWithoutFeedback,
+  ScrollView,
 } from "react-native";
-import React, { useState } from "react";
-import { Ionicons, Feather } from "@expo/vector-icons";
+import React, { useState, useEffect } from "react";
+import { Ionicons, Feather, MaterialIcons, Entypo } from "@expo/vector-icons";
+
+// Function to estimate the width of the text
+const calculateWidth = (text) => {
+  const characterWidth = 10; // This is an approximation and would change based on the actual font size and type
+  const padding = 20; // Total horizontal padding in the recentSearchItem
+  const iconWidth = 34; // Approximate width of the icon and margin
+  const textWidth = text.length * characterWidth;
+
+  return Math.max(textWidth + padding + iconWidth, 100); // Minimum width of 100 to handle short text
+};
 
 const CategoryList = [
   {
@@ -39,18 +50,65 @@ const CategoryList = [
 ];
 
 const SearchScreen = () => {
-  const [text, onChangeText] = useState("Useless Text");
-  const [number, onChangeNumber] = useState("");
+  const [text, onChangeText] = useState("");
+  const [recentSearches, setRecentSearches] = useState([]);
+  const [showCategories, setShowCategories] = useState(true);
+  const [showBackButton, setShowBackButton] = useState(false);
+
+  const addSearch = (newSearch) => {
+    if (newSearch.trim() !== !recentSearches.includes(newSearch.trim())) {
+      setRecentSearches([...recentSearches, newSearch.trim()]);
+      setShowBackButton(true);
+      onChangeText(""); // clear the search input
+    }
+  };
+
+  // function to remove a search from list
+
+  const removeSearch = (index) => {
+    const updatedSearches = [...recentSearches];
+    updatedSearches.splice(index, 1);
+    setRecentSearches(updatedSearches);
+  };
+
+  // function to clear all searches
+  const clearAllSearches = () => {
+    setRecentSearches([]);
+  };
+
+  useEffect(() => {
+    if (text || recentSearches.length > 0) {
+      setShowCategories(false); // Hide categories when typing or when there are recent searches
+    } else {
+      setShowCategories(true); // Show categories when not typing and no recent searches
+    }
+  }, [text, recentSearches]);
+
+  // function to handle back button press
+  const handleBackPress = () => {
+    onChangeText(""); // clear the search input
+    setShowBackButton(false); // Hide back button
+    setShowCategories(true); // Show categories
+    setRecentSearches(""); // Clear recent searches
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity>
-            <Image
-              style={styles.iconStyle}
-              source={require("../../../assets/images/DrawerIcon.png")}
-            />
-          </TouchableOpacity>
+          {text || showBackButton ? (
+            <TouchableOpacity onPress={handleBackPress}>
+              <Ionicons name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity>
+              <Image
+                style={styles.iconStyle}
+                source={require("../../../assets/images/DrawerIcon.png")}
+              />
+            </TouchableOpacity>
+          )}
+
           <Text style={styles.textStyle}>Discover</Text>
           <TouchableOpacity>
             <View style={styles.circle} />
@@ -67,11 +125,12 @@ const SearchScreen = () => {
               style={styles.iconStyle}
             />
             <TextInput
-              onChangeText={onChangeNumber}
-              value={number}
+              onChangeText={onChangeText}
+              value={text}
               placeholder="Search..."
               placeholderTextColor={"#43484B"}
               keyboardType="default"
+              onSubmitEditing={() => addSearch(text)} // Use onSubmitEditing to trigger the search
             />
           </View>
           <TouchableOpacity style={styles.filterIcon}>
@@ -79,35 +138,72 @@ const SearchScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {CategoryList.map((item) => (
-          <TouchableWithoutFeedback>
+        {/* Displaying Recent Searches */}
+        {recentSearches.length > 0 && (
+          <ScrollView style={{ height: 60 }}>
             <View
-              style={[
-                styles.categoryContainer,
-                { backgroundColor: item.bgColor },
-              ]}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginRight: 40,
+                marginLeft: 40,
+                marginVertical: 10,
+              }}
             >
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  paddingLeft: 20,
-                }}
-              >
-                <Text style={[styles.textStyle, { color: "white" }]}>
-                  {item.title}
-                </Text>
-              </View>
-              <View style={{ flex: 1, alignItems: "flex-end" }}>
-                <Image
-                  resizeMode="cover"
-                  style={{ width: 123, height: 126 }}
-                  source={item.image}
-                />
-              </View>
+              <Text>Recent Searches</Text>
+              <TouchableOpacity onPress={clearAllSearches}>
+                <MaterialIcons name="delete-outline" size={24} color="black" />
+              </TouchableOpacity>
             </View>
-          </TouchableWithoutFeedback>
-        ))}
+            {recentSearches.map((search, index) => (
+              <View
+                key={index}
+                style={[
+                  styles.recentSearchItem,
+                  { width: calculateWidth(search) }, // Set the width dynamically based on the search text
+                ]}
+              >
+                <Text style={styles.recentSearchText}>{search}</Text>
+                <TouchableOpacity onPress={() => removeSearch(index)}>
+                  <Entypo name="cross" size={18} color="grey" />
+                </TouchableOpacity>
+              </View>
+            ))}
+          </ScrollView>
+        )}
+
+        {showCategories &&
+          CategoryList.map((item, index) => (
+            <TouchableWithoutFeedback>
+              <View
+                key={index}
+                style={[
+                  styles.categoryContainer,
+                  { backgroundColor: item.bgColor },
+                ]}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    paddingLeft: 20,
+                  }}
+                >
+                  <Text style={[styles.textStyle, { color: "white" }]}>
+                    {item.title}
+                  </Text>
+                </View>
+                <View style={{ flex: 1, alignItems: "flex-end" }}>
+                  <Image
+                    resizeMode="cover"
+                    style={{ width: 123, height: 126 }}
+                    source={item.image}
+                  />
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+          ))}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -180,5 +276,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     overflow: "hidden",
     marginVertical: 15,
+  },
+  recentSearchItem: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    padding: 10,
+    backgroundColor: "#FAFAFA",
+    marginHorizontal: 20,
+    marginBottom: 5,
+    borderRadius: 10,
+  },
+  recentSearchText: {
+    fontSize: 16,
   },
 });
