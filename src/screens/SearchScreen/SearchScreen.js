@@ -12,16 +12,6 @@ import {
 import React, { useState, useEffect } from "react";
 import { Ionicons, Feather, MaterialIcons, Entypo } from "@expo/vector-icons";
 
-// Function to estimate the width of the text
-const calculateWidth = (text) => {
-  const characterWidth = 10; // This is an approximation and would change based on the actual font size and type
-  const padding = 20; // Total horizontal padding in the recentSearchItem
-  const iconWidth = 34; // Approximate width of the icon and margin
-  const textWidth = text.length * characterWidth;
-
-  return Math.max(textWidth + padding + iconWidth, 100); // Minimum width of 100 to handle short text
-};
-
 const CategoryList = [
   {
     id: 1,
@@ -49,7 +39,7 @@ const CategoryList = [
   },
 ];
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [text, onChangeText] = useState("");
   const [recentSearches, setRecentSearches] = useState([]);
   const [showCategories, setShowCategories] = useState(true);
@@ -74,6 +64,7 @@ const SearchScreen = () => {
   // function to clear all searches
   const clearAllSearches = () => {
     setRecentSearches([]);
+    setShowBackButton(false);
   };
 
   useEffect(() => {
@@ -140,14 +131,18 @@ const SearchScreen = () => {
 
         {/* Displaying Recent Searches */}
         {recentSearches.length > 0 && (
-          <ScrollView style={{ height: 60 }}>
+          <ScrollView
+            style={{
+              height: 60,
+              marginRight: 40,
+              marginLeft: 40,
+            }}
+          >
             <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",
-                marginRight: 40,
-                marginLeft: 40,
                 marginVertical: 10,
               }}
             >
@@ -156,26 +151,24 @@ const SearchScreen = () => {
                 <MaterialIcons name="delete-outline" size={24} color="black" />
               </TouchableOpacity>
             </View>
-            {recentSearches.map((search, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.recentSearchItem,
-                  { width: calculateWidth(search) }, // Set the width dynamically based on the search text
-                ]}
-              >
-                <Text style={styles.recentSearchText}>{search}</Text>
-                <TouchableOpacity onPress={() => removeSearch(index)}>
-                  <Entypo name="cross" size={18} color="grey" />
-                </TouchableOpacity>
-              </View>
-            ))}
+            <View style={styles.recentSearchContainer}>
+              {recentSearches.map((search, index) => (
+                <View key={index} style={styles.recentSearchItem}>
+                  <Text style={styles.recentSearchText}>{search}</Text>
+                  <TouchableOpacity onPress={() => removeSearch(index)}>
+                    <Entypo name="cross" size={18} color="grey" />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
           </ScrollView>
         )}
 
         {showCategories &&
           CategoryList.map((item, index) => (
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate("SelectedCategory")}
+            >
               <View
                 key={index}
                 style={[
@@ -277,14 +270,22 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     marginVertical: 15,
   },
+  recentSearchContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    marginHorizontal: -10, // Negative value to offset child margins
+  },
   recentSearchItem: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
+    alignItems: "center",
     padding: 10,
-    backgroundColor: "#FAFAFA",
-    marginHorizontal: 20,
+    backgroundColor: "#E8E8E8",
+    marginHorizontal: 10, // Spacing between items
     marginBottom: 5,
     borderRadius: 10,
+    // No need for flexWrap here
   },
   recentSearchText: {
     fontSize: 16,

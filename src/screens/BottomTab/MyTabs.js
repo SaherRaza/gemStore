@@ -14,6 +14,7 @@ import HomeScreen from "../HomeScreen/HomeScreen";
 import SearchScreen from "./../SearchScreen/SearchScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import CartScreen from "./../CartScreen/CartScreen";
+import SelectedCategory from "../SearchScreen/SelectedCategory";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -37,6 +38,10 @@ function SearchStackScreen() {
   return (
     <SearchStack.Navigator screenOptions={screenOptions}>
       <SearchStack.Screen name="SearchScreen" component={SearchScreen} />
+      <SearchStack.Screen
+        name="SelectedCategory"
+        component={SelectedCategory}
+      />
     </SearchStack.Navigator>
   );
 }
