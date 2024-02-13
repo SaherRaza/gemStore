@@ -4,15 +4,95 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  FlatList,
+  Image,
 } from "react-native";
 import React from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 
-const SelectedCategory = () => {
+const DATA = [
+  {
+    id: "1",
+    type: "Linen Dress",
+    price: "$52.00",
+    originalPrice: "$90.00",
+    rating: 4.5,
+    reviews: 64,
+    imageUri: require("../../../assets/images/linenDress.png"),
+  },
+  {
+    id: "2",
+    type: "Fitted Waist Dress",
+    price: "$47.99",
+    originalPrice: "$82.00",
+    rating: 4.5,
+    reviews: 53,
+    imageUri: require("../../../assets/images/FiltedWaistDress.png"),
+  },
+  {
+    id: "3",
+    type: "Maxi Dress",
+    price: "$68.00",
+    originalPrice: "Not provided",
+    rating: 4.0,
+    reviews: 46,
+    imageUri: require("../../../assets/images/FiltedWaistDress.png"),
+  },
+  {
+    id: "4",
+    type: "Front Tie Mini Dress",
+    price: "$59.00",
+    originalPrice: "Not provided",
+    rating: 4.0,
+    reviews: 38,
+    imageUri: require("../../../assets/images/FiltedWaistDress.png"),
+  },
+  {
+    id: "5",
+    type: "Ohara Dress",
+    price: "$85.00",
+    originalPrice: "Not provided",
+    rating: 4.5,
+    reviews: 50,
+    imageUri: require("../../../assets/images/FiltedWaistDress.png"),
+  },
+  {
+    id: "6",
+    type: "Tie Back Mini Dress",
+    price: "$67.00",
+    originalPrice: "Not provided",
+    rating: 4.5,
+    reviews: 39,
+    imageUri: require("../../../assets/images/FiltedWaistDress.png"),
+  },
+  {
+    id: "7",
+    type: "Leaves Green Dress",
+    price: "$64.00",
+    originalPrice: "Not provided",
+    rating: 4.5,
+    reviews: 83,
+    imageUri: require("../../../assets/images/FiltedWaistDress.png"),
+  },
+  {
+    id: "8",
+    type: "Off Shoulder Dress",
+    price: "$78.99",
+    originalPrice: "Not provided",
+    rating: 4.0,
+    reviews: 25,
+    imageUri: require("../../../assets/images/FiltedWaistDress.png"),
+  },
+];
+
+const SelectedCategory = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
-        <TouchableOpacity style={styles.iconStyle}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.iconStyle}
+        >
           <AntDesign name="left" size={18} color="#1E3354" />
         </TouchableOpacity>
         <View>
@@ -31,7 +111,8 @@ const SelectedCategory = () => {
 
       <View style={styles.filterIconContainer}>
         <View>
-          <Text style={styles.textStyle}>Found 124 results</Text>
+          <Text style={styles.textStyle}>Found</Text>
+          <Text style={styles.textStyle}>124 results</Text>
         </View>
         <TouchableOpacity style={styles.filterIcon}>
           <Text>Filter</Text>
@@ -44,9 +125,57 @@ const SelectedCategory = () => {
         </TouchableOpacity>
       </View>
 
-      <TouchableWithoutFeedback style={styles.cardCategory}>
-        <Text>hh</Text>
-      </TouchableWithoutFeedback>
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={DATA}
+          showsVerticalScrollIndicator={false}
+          inverted
+          keyExtractor={(item) => item.id}
+          numColumns={2} // To display two columns
+          columnWrapperStyle={styles.row} // Styles for the row wrapper
+          renderItem={({ item }) => {
+            // Function to render the stars based on the rating
+            const renderStars = () => {
+              const stars = [];
+              const floorRating = Math.floor(item.rating);
+              for (let i = 0; i < 5; i++) {
+                stars.push(
+                  <FontAwesome
+                    key={i}
+                    name={i < floorRating ? "star" : "star-o"}
+                    size={14}
+                    color={i < floorRating ? "#508A7B" : "508A7B"}
+                  />
+                );
+              }
+              return stars;
+            };
+            return (
+              <View style={styles.card}>
+                <View>
+                  <Image
+                    resizeMode="cover"
+                    source={item.imageUri}
+                    style={styles.image}
+                  />
+                  <TouchableOpacity style={styles.iconPosition}>
+                    <AntDesign name="heart" size={16} color="grey" />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.type}>{item.type}</Text>
+                <Text style={styles.price}>{item.price}</Text>
+                <View style={styles.ratingContainer}>
+                  {/* <Text style={styles.rating}>
+                    {"⭐️".repeat(Math.floor(item.rating))}
+                  </Text> */}
+                  {renderStars()}
+                  <Text style={styles.reviewCount}>({item.reviews})</Text>
+                </View>
+              </View>
+            );
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -84,11 +213,67 @@ const styles = StyleSheet.create({
   filterIcon: {
     flexDirection: "row",
     borderWidth: 1.5,
-    borderColor: "#E5E5E5",
+    borderColor: "grey",
     width: 97,
     height: 40,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    padding: 20,
+    backgroundColor: "white",
+  },
+  row: {
+    flex: 1,
+    justifyContent: "space-around",
+    marginBottom: 15,
+  },
+  card: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 10,
+    width: "45%", // Approximately 45% for each item to fit two in a row with some space in between
+    // alignItems: "center",
+  },
+  image: {
+    width: "100%",
+    height: 200,
+    borderRadius: 10,
+  },
+  iconPosition: {
+    position: "absolute",
+    marginTop: 8,
+    right: 8,
+    width: 27,
+    height: 27,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 360,
+  },
+  type: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 5,
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  rating: {
+    fontSize: 14,
+    color: "gold",
+  },
+  reviewCount: {
+    fontSize: 14,
+    color: "grey",
+    marginLeft: 5,
   },
 });
