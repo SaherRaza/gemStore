@@ -6,32 +6,37 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome, Ionicons, AntDesign, Feather } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import
+  {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+  } from "react-native-responsive-screen";
 import HomeScreen from "../HomeScreen/HomeScreen";
-import SearchScreen from "./../SearchScreen/SearchScreen";
+import SearchScreen from "../SearchScreen/SearchScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
-import CartScreen from "./../CartScreen/CartScreen";
+import CartScreen from "../CartScreen/CartScreen";
 import SelectedCategory from "../SearchScreen/SelectedCategory";
+import DetailScreen from "../SearchScreen/DetailScreen";
 
 const HomeStack = createNativeStackNavigator();
 
-function HomeStackScreen() {
+const HomeStackScreen: React.FC = () =>
+{
   const screenOptions = {
     headerShown: false,
   };
   return (
     <HomeStack.Navigator screenOptions={screenOptions}>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+      {/* Other screens if any */}
     </HomeStack.Navigator>
   );
-}
+};
 
 const SearchStack = createNativeStackNavigator();
 
-function SearchStackScreen() {
+function SearchStackScreen()
+{
   const screenOptions = {
     headerShown: false,
   };
@@ -42,12 +47,14 @@ function SearchStackScreen() {
         name="SelectedCategory"
         component={SelectedCategory}
       />
+      <SearchStack.Screen name="DetailScreen" component={DetailScreen} />
     </SearchStack.Navigator>
   );
 }
 const CartStack = createNativeStackNavigator();
 
-function CartStackScreen() {
+function CartStackScreen()
+{
   const screenOptions = {
     headerShown: false,
     tabBarHideOnKeyboard: true,
@@ -61,7 +68,8 @@ function CartStackScreen() {
 
 const ProfileStack = createNativeStackNavigator();
 
-function ProfileStackScreen() {
+function ProfileStackScreen()
+{
   const screenOptions = {
     headerShown: false,
     tabBarHideOnKeyboard: true,
@@ -75,7 +83,8 @@ function ProfileStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function MyTabs()
+{
   return (
     <Tab.Navigator
       screenOptions={{
@@ -99,7 +108,8 @@ function MyTabs() {
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) => {
+          tabBarIcon: ({ focused, tintColor, color }) =>
+          {
             if (focused)
               return (
                 <View>
@@ -121,7 +131,8 @@ function MyTabs() {
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) => {
+          tabBarIcon: ({ focused, tintColor, color }) =>
+          {
             if (focused)
               return (
                 <View>
@@ -143,7 +154,8 @@ function MyTabs() {
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) => {
+          tabBarIcon: ({ focused, tintColor, color }) =>
+          {
             if (focused)
               return (
                 <View>
@@ -165,7 +177,8 @@ function MyTabs() {
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) => {
+          tabBarIcon: ({ focused, tintColor, color }) =>
+          {
             if (focused)
               return (
                 <View>

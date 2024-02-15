@@ -85,7 +85,8 @@ const DATA = [
   },
 ];
 
-const SelectedCategory = ({ navigation }) => {
+const SelectedCategory = ({ navigation, route }) => {
+  const { category } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
@@ -104,7 +105,7 @@ const SelectedCategory = ({ navigation }) => {
               },
             ]}
           >
-            Dresses
+            {category}
           </Text>
         </View>
       </View>
@@ -144,7 +145,7 @@ const SelectedCategory = ({ navigation }) => {
                     key={i}
                     name={i < floorRating ? "star" : "star-o"}
                     size={14}
-                    color={i < floorRating ? "#508A7B" : "508A7B"}
+                    color={i < floorRating ? "#508A7B" : "#508A7B"}
                   />
                 );
               }
@@ -185,6 +186,7 @@ export default SelectedCategory;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   headerStyle: {
     flexDirection: "row",
@@ -193,10 +195,10 @@ const styles = StyleSheet.create({
     marginLeft: 40,
   },
   iconStyle: {
-    width: 36,
-    height: 36,
+    width: 32,
+    height: 32,
     borderRadius: 360,
-    backgroundColor: "white",
+    backgroundColor: "#E5E5E5",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -6,6 +6,7 @@ import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MyTabs from "./src/screens/BottomTab/MyTabs";
+import DetailScreen from "./src/screens/SearchScreen/DetailScreen";
 const Stack = createNativeStackNavigator();
 export default function App() {
   // useEffect(() => {
@@ -18,7 +19,7 @@ export default function App() {
   // }, []);
   return (
     <>
-      <StatusBar style="auto" />
+      {/* <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator
           //  initialRouteName="LoginScreen"
@@ -28,7 +29,8 @@ export default function App() {
         >
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> */}
+      <HomeScreen />
     </>
   );
 }

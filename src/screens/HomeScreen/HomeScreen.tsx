@@ -1,4 +1,5 @@
-import {
+import
+{
   Image,
   StyleSheet,
   Text,
@@ -6,12 +7,24 @@ import {
   View,
   FlatList,
   ScrollView,
+  ImageSourcePropType,
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons, Foundation } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
 
-const DATA = [
+
+interface Product
+{
+  id: number;
+  image: ImageSourcePropType; // The type for image sources
+  title: string;
+  price: string;
+}
+
+
+
+const DATA: Product[] = [
   {
     id: 1,
     image: require("../../../assets/images/sweater.png"),
@@ -50,11 +63,13 @@ const DATA = [
   },
 ];
 
-const HomeScreen = () => {
-  const [selectedIcon, setSelectedIcon] = useState(null); // manages the selected category
+const HomeScreen: React.FC = () =>
+{
+  const [selectedIcon, setSelectedIcon] = useState<number | null>(null); // manages the selected category
 
   // updates the selected category
-  const handlePress = (index) => {
+  const handlePress = (index: number) =>
+  {
     setSelectedIcon(index);
   };
 
@@ -214,6 +229,7 @@ const HomeScreen = () => {
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
+            keyExtractor={(item: Product, index: number) => item.id.toString()}
             data={DATA}
             renderItem={({ item }) => (
               <View style={styles.productContainer}>
@@ -228,7 +244,6 @@ const HomeScreen = () => {
                 </View>
               </View>
             )}
-            keyExtractor={(item) => item.id}
           />
         </View>
 
@@ -268,6 +283,7 @@ const HomeScreen = () => {
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
+            keyExtractor={(item: Product, index: number) => item.id.toString()}
             data={DATA}
             renderItem={({ item }) => (
               <View style={styles.recommendCategory}>
@@ -284,7 +300,6 @@ const HomeScreen = () => {
                 </View>
               </View>
             )}
-            keyExtractor={(item) => item.id}
           />
         </View>
 

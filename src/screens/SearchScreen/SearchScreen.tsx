@@ -1,4 +1,5 @@
-import {
+import
+{
   StyleSheet,
   Text,
   View,
@@ -8,11 +9,28 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   ScrollView,
+  ImageSourcePropType,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Ionicons, Feather, MaterialIcons, Entypo } from "@expo/vector-icons";
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackNavigationProp } from "@react-navigation/native-stack";
+// Define your navigation params structure if you have any
+type SearchScreenNavigationProp = StackNavigationProp<any>;
 
-const CategoryList = [
+interface Props
+{
+  navigation: SearchScreenNavigationProp;
+}
+interface Category
+{
+  id: number;
+  title: string;
+  image: ImageSourcePropType;
+  bgColor: string;
+}
+
+const CategoryList: Category[] = [
   {
     id: 1,
     title: "CLOTHING",
@@ -39,14 +57,17 @@ const CategoryList = [
   },
 ];
 
-const SearchScreen = ({ navigation }) => {
+const SearchScreen: React.FC = ({ navigation }) =>
+{
   const [text, onChangeText] = useState("");
   const [recentSearches, setRecentSearches] = useState([]);
   const [showCategories, setShowCategories] = useState(true);
   const [showBackButton, setShowBackButton] = useState(false);
 
-  const addSearch = (newSearch) => {
-    if (newSearch.trim() !== !recentSearches.includes(newSearch.trim())) {
+  const addSearch = (newSearch) =>
+  {
+    if (newSearch.trim() !== !recentSearches.includes(newSearch.trim()))
+    {
       setRecentSearches([...recentSearches, newSearch.trim()]);
       setShowBackButton(true);
       onChangeText(""); // clear the search input
@@ -55,28 +76,34 @@ const SearchScreen = ({ navigation }) => {
 
   // function to remove a search from list
 
-  const removeSearch = (index) => {
+  const removeSearch = (index) =>
+  {
     const updatedSearches = [...recentSearches];
     updatedSearches.splice(index, 1);
     setRecentSearches(updatedSearches);
   };
 
   // function to clear all searches
-  const clearAllSearches = () => {
+  const clearAllSearches = () =>
+  {
     setRecentSearches([]);
     setShowBackButton(false);
   };
 
-  useEffect(() => {
-    if (text || recentSearches.length > 0) {
+  useEffect(() =>
+  {
+    if (text || recentSearches.length > 0)
+    {
       setShowCategories(false); // Hide categories when typing or when there are recent searches
-    } else {
+    } else
+    {
       setShowCategories(true); // Show categories when not typing and no recent searches
     }
   }, [text, recentSearches]);
 
   // function to handle back button press
-  const handleBackPress = () => {
+  const handleBackPress = () =>
+  {
     onChangeText(""); // clear the search input
     setShowBackButton(false); // Hide back button
     setShowCategories(true); // Show categories
@@ -165,12 +192,16 @@ const SearchScreen = ({ navigation }) => {
         )}
 
         {showCategories &&
-          CategoryList.map((item, index) => (
+          CategoryList.map((item) => (
             <TouchableWithoutFeedback
-              onPress={() => navigation.navigate("SelectedCategory")}
+              key={item.id.toString()}
+              onPress={() =>
+                navigation.navigate("SelectedCategory", {
+                  category: item.title,
+                })
+              }
             >
               <View
-                key={index}
                 style={[
                   styles.categoryContainer,
                   { backgroundColor: item.bgColor },
