@@ -7,8 +7,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MyTabs from "./src/screens/BottomTab/MyTabs";
 import DetailScreen from "./src/screens/SearchScreen/DetailScreen";
+import SearchScreen from "./src/screens/SearchScreen/SearchScreen";
 const Stack = createNativeStackNavigator();
-export default function App() {
+export default function App()
+{
   // useEffect(() => {
   //   // Load custom fonts
   //   Font.loadAsync({
@@ -19,7 +21,7 @@ export default function App() {
   // }, []);
   return (
     <>
-      {/* <StatusBar style="auto" />
+      <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator
           //  initialRouteName="LoginScreen"
@@ -29,8 +31,8 @@ export default function App() {
         >
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
-      </NavigationContainer> */}
-      <HomeScreen />
+      </NavigationContainer>
+
     </>
   );
 }

@@ -1,4 +1,5 @@
-import {
+import
+{
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,6 +10,9 @@ import {
 } from "react-native";
 import React from "react";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { SearchParamList } from "../BottomTab/MyTabs";
+
 
 const DATA = [
   {
@@ -85,7 +89,10 @@ const DATA = [
   },
 ];
 
-const SelectedCategory = ({ navigation, route }) => {
+type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
+
+const SelectedCategory: React.FC<Props> = ({ navigation, route }) =>
+{
   const { category } = route.params;
   return (
     <View style={styles.container}>
@@ -134,12 +141,15 @@ const SelectedCategory = ({ navigation, route }) => {
           keyExtractor={(item) => item.id}
           numColumns={2} // To display two columns
           columnWrapperStyle={styles.row} // Styles for the row wrapper
-          renderItem={({ item }) => {
+          renderItem={({ item }) =>
+          {
             // Function to render the stars based on the rating
-            const renderStars = () => {
+            const renderStars = () =>
+            {
               const stars = [];
               const floorRating = Math.floor(item.rating);
-              for (let i = 0; i < 5; i++) {
+              for (let i = 0; i < 5; i++)
+              {
                 stars.push(
                   <FontAwesome
                     key={i}

@@ -7,10 +7,10 @@ import { FontAwesome, Ionicons, AntDesign, Feather } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import
-  {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-  } from "react-native-responsive-screen";
+{
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import HomeScreen from "../HomeScreen/HomeScreen";
 import SearchScreen from "../SearchScreen/SearchScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
@@ -18,7 +18,14 @@ import CartScreen from "../CartScreen/CartScreen";
 import SelectedCategory from "../SearchScreen/SelectedCategory";
 import DetailScreen from "../SearchScreen/DetailScreen";
 
-const HomeStack = createNativeStackNavigator();
+
+
+export type HomeParamList = {
+  HomeScreen: undefined;
+};
+
+
+const HomeStack = createNativeStackNavigator<HomeParamList>();
 
 const HomeStackScreen: React.FC = () =>
 {
@@ -33,7 +40,16 @@ const HomeStackScreen: React.FC = () =>
   );
 };
 
-const SearchStack = createNativeStackNavigator();
+
+export type SearchParamList = {
+  SearchScreen: undefined;
+  SelectedCategory: {
+    category: string;
+  };
+  DetailScreen: undefined;
+};
+
+const SearchStack = createNativeStackNavigator<SearchParamList>();
 
 function SearchStackScreen()
 {
@@ -51,7 +67,11 @@ function SearchStackScreen()
     </SearchStack.Navigator>
   );
 }
-const CartStack = createNativeStackNavigator();
+
+export type CartParamList = {
+  CartScreen: undefined;
+};
+const CartStack = createNativeStackNavigator<CartParamList>();
 
 function CartStackScreen()
 {
@@ -66,7 +86,10 @@ function CartStackScreen()
   );
 }
 
-const ProfileStack = createNativeStackNavigator();
+export type ProfileParamList = {
+  ProfileScreen: undefined;
+};
+const ProfileStack = createNativeStackNavigator<ProfileParamList>();
 
 function ProfileStackScreen()
 {
@@ -80,8 +103,14 @@ function ProfileStackScreen()
     </ProfileStack.Navigator>
   );
 }
+export type BottomTabParamList = {
+  Home: HomeParamList;
+  Search: SearchParamList;
+  Cart: CartParamList;
+  Profile: ProfileParamList;
+};
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 function MyTabs()
 {
@@ -108,7 +137,7 @@ function MyTabs()
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) =>
+          tabBarIcon: ({ focused, }) =>
           {
             if (focused)
               return (
@@ -131,7 +160,7 @@ function MyTabs()
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) =>
+          tabBarIcon: ({ focused, }) =>
           {
             if (focused)
               return (
@@ -154,7 +183,7 @@ function MyTabs()
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) =>
+          tabBarIcon: ({ focused, }) =>
           {
             if (focused)
               return (
@@ -177,7 +206,7 @@ function MyTabs()
       <Tab.Screen
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({ focused, tintColor, color }) =>
+          tabBarIcon: ({ focused }) =>
           {
             if (focused)
               return (

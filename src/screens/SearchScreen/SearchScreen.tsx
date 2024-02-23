@@ -14,14 +14,9 @@ import
 import React, { useState, useEffect } from "react";
 import { Ionicons, Feather, MaterialIcons, Entypo } from "@expo/vector-icons";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StackNavigationProp } from "@react-navigation/native-stack";
-// Define your navigation params structure if you have any
-type SearchScreenNavigationProp = StackNavigationProp<any>;
+import { SearchParamList } from "../BottomTab/MyTabs";
 
-interface Props
-{
-  navigation: SearchScreenNavigationProp;
-}
+
 interface Category
 {
   id: number;
@@ -29,6 +24,7 @@ interface Category
   image: ImageSourcePropType;
   bgColor: string;
 }
+
 
 const CategoryList: Category[] = [
   {
@@ -57,26 +53,27 @@ const CategoryList: Category[] = [
   },
 ];
 
-const SearchScreen: React.FC = ({ navigation }) =>
-{
-  const [text, onChangeText] = useState("");
-  const [recentSearches, setRecentSearches] = useState([]);
-  const [showCategories, setShowCategories] = useState(true);
-  const [showBackButton, setShowBackButton] = useState(false);
+type Props = NativeStackScreenProps<SearchParamList, "SearchScreen">;
 
-  const addSearch = (newSearch) =>
+const SearchScreen: React.FC<Props> = ({ navigation }) =>
+{
+  const [text, onChangeText] = useState<string>('');
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [showCategories, setShowCategories] = useState<boolean>(true);
+  const [showBackButton, setShowBackButton] = useState<boolean>(false);
+
+  const addSearch = (newSearch: string): void =>
   {
-    if (newSearch.trim() !== !recentSearches.includes(newSearch.trim()))
+    if (newSearch.trim() !== '' && !recentSearches.includes(newSearch.trim()))
     {
       setRecentSearches([...recentSearches, newSearch.trim()]);
       setShowBackButton(true);
-      onChangeText(""); // clear the search input
+      onChangeText(''); // clear the search input
     }
   };
-
   // function to remove a search from list
 
-  const removeSearch = (index) =>
+  const removeSearch = (index: number): void =>
   {
     const updatedSearches = [...recentSearches];
     updatedSearches.splice(index, 1);
@@ -84,7 +81,7 @@ const SearchScreen: React.FC = ({ navigation }) =>
   };
 
   // function to clear all searches
-  const clearAllSearches = () =>
+  const clearAllSearches = (): void =>
   {
     setRecentSearches([]);
     setShowBackButton(false);
@@ -102,12 +99,12 @@ const SearchScreen: React.FC = ({ navigation }) =>
   }, [text, recentSearches]);
 
   // function to handle back button press
-  const handleBackPress = () =>
+  const handleBackPress = (): void =>
   {
     onChangeText(""); // clear the search input
     setShowBackButton(false); // Hide back button
     setShowCategories(true); // Show categories
-    setRecentSearches(""); // Clear recent searches
+    setRecentSearches([]); // Clear recent searches
   };
 
   return (
@@ -140,7 +137,7 @@ const SearchScreen: React.FC = ({ navigation }) =>
               name="search"
               size={24}
               color="#43484B"
-              style={styles.iconStyle}
+              style={styles.iconPosition}
             />
             <TextInput
               onChangeText={onChangeText}
@@ -279,7 +276,7 @@ const styles = StyleSheet.create({
     width: 280,
     height: 49,
   },
-  iconStyle: {
+  iconPosition: {
     marginRight: 10, // Adjust space between icon and text input
   },
   filterIcon: {
