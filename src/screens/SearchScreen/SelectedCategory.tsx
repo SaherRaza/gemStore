@@ -17,7 +17,7 @@ import { SearchParamList } from "../BottomTab/MyTabs";
 const DATA = [
   {
     id: "1",
-    type: "Linen Dress",
+    title: "Linen Dress",
     price: "$52.00",
     originalPrice: "$90.00",
     rating: 4.5,
@@ -26,7 +26,7 @@ const DATA = [
   },
   {
     id: "2",
-    type: "Fitted Waist Dress",
+    title: "Fitted Waist Dress",
     price: "$47.99",
     originalPrice: "$82.00",
     rating: 4.5,
@@ -35,7 +35,7 @@ const DATA = [
   },
   {
     id: "3",
-    type: "Maxi Dress",
+    title: "Maxi Dress",
     price: "$68.00",
     originalPrice: "Not provided",
     rating: 4.0,
@@ -44,7 +44,7 @@ const DATA = [
   },
   {
     id: "4",
-    type: "Front Tie Mini Dress",
+    title: "Front Tie Mini Dress",
     price: "$59.00",
     originalPrice: "Not provided",
     rating: 4.0,
@@ -53,7 +53,7 @@ const DATA = [
   },
   {
     id: "5",
-    type: "Ohara Dress",
+    title: "Ohara Dress",
     price: "$85.00",
     originalPrice: "Not provided",
     rating: 4.5,
@@ -62,7 +62,7 @@ const DATA = [
   },
   {
     id: "6",
-    type: "Tie Back Mini Dress",
+    title: "Tie Back Mini Dress",
     price: "$67.00",
     originalPrice: "Not provided",
     rating: 4.5,
@@ -71,7 +71,7 @@ const DATA = [
   },
   {
     id: "7",
-    type: "Leaves Green Dress",
+    title: "Leaves Green Dress",
     price: "$64.00",
     originalPrice: "Not provided",
     rating: 4.5,
@@ -80,7 +80,7 @@ const DATA = [
   },
   {
     id: "8",
-    type: "Off Shoulder Dress",
+    title: "Off Shoulder Dress",
     price: "$78.99",
     originalPrice: "Not provided",
     rating: 4.0,
@@ -88,6 +88,15 @@ const DATA = [
     imageUri: require("../../../assets/images/FiltedWaistDress.png"),
   },
 ];
+
+type productProps = {
+  title: string;
+  price: string;
+  originalPrice: string | "Not provided";
+  rating?: number; // if not provided it will be set to 0 by default
+  reviews: number;
+  imageUri: any;
+};
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
 
@@ -162,27 +171,37 @@ const SelectedCategory: React.FC<Props> = ({ navigation, route }) =>
               return stars;
             };
             return (
-              <View style={styles.card}>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={item.imageUri}
-                    style={styles.image}
-                  />
-                  <TouchableOpacity style={styles.iconPosition}>
-                    <AntDesign name="heart" size={16} color="grey" />
-                  </TouchableOpacity>
-                </View>
-                <Text style={styles.type}>{item.type}</Text>
-                <Text style={styles.price}>{item.price}</Text>
-                <View style={styles.ratingContainer}>
-                  {/* <Text style={styles.rating}>
+              <TouchableWithoutFeedback
+              // onPress={() =>
+              // navigation.navigate("SelectedCategory", {
+              //   categoryName: item.name,
+              //   categoryImage: item.image,
+              //   reviews: item.reviews,
+              //   showReviewButton: false,
+              // })}
+              >
+                <View style={styles.card}>
+                  <View>
+                    <Image
+                      resizeMode="cover"
+                      source={item.imageUri}
+                      style={styles.image}
+                    />
+                    <TouchableOpacity style={styles.iconPosition}>
+                      <AntDesign name="heart" size={16} color="grey" />
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.type}>{item.title}</Text>
+                  <Text style={styles.price}>{item.price}</Text>
+                  <View style={styles.ratingContainer}>
+                    {/* <Text style={styles.rating}>
                     {"⭐️".repeat(Math.floor(item.rating))}
                   </Text> */}
-                  {renderStars()}
-                  <Text style={styles.reviewCount}>({item.reviews})</Text>
+                    {renderStars()}
+                    <Text style={styles.reviewCount}>({item.reviews})</Text>
+                  </View>
                 </View>
-              </View>
+              </TouchableWithoutFeedback>
             );
           }}
         />

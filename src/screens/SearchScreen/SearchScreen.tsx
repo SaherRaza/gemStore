@@ -10,12 +10,60 @@ import
   TouchableWithoutFeedback,
   ScrollView,
   ImageSourcePropType,
+  FlatList
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Ionicons, Feather, MaterialIcons, Entypo } from "@expo/vector-icons";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SearchParamList } from "../BottomTab/MyTabs";
+interface Product
+{
+  id: number;
+  image: ImageSourcePropType; // The type for image sources
+  title: string;
+  price: string;
+}
 
+
+
+const DATA: Product[] = [
+  {
+    id: 1,
+    image: require("../../../assets/images/sweater.png"),
+    title: "Turtleneck Sweater",
+    price: "$ 39.99",
+  },
+  {
+    id: 2,
+    image: require("../../../assets/images/longDress.png"),
+    title: "Long Sleeve Dress",
+    price: "$ 45",
+  },
+  {
+    id: 3,
+    image: require("../../../assets/images/denim.jpg"),
+    title: "Denim Jeans",
+    price: "$ 25",
+  },
+  {
+    id: 4,
+    image: require("../../../assets/images/blackShirt.jpg"),
+    title: "Black Cotton Shirt",
+    price: "$ 30",
+  },
+  {
+    id: 5,
+    image: require("../../../assets/images/whiteShirt.jpg"),
+    title: "White Loose Shirt",
+    price: "$ 28.99",
+  },
+  {
+    id: 6,
+    image: require("../../../assets/images/blueSweater.jpg"),
+    title: "Blue Sweater",
+    price: "$ 50",
+  },
+];
 
 interface Category
 {
@@ -188,7 +236,7 @@ const SearchScreen: React.FC<Props> = ({ navigation }) =>
           </ScrollView>
         )}
 
-        {showCategories &&
+        {showCategories ? (
           CategoryList.map((item) => (
             <TouchableWithoutFeedback
               key={item.id.toString()}
@@ -224,7 +272,37 @@ const SearchScreen: React.FC<Props> = ({ navigation }) =>
                 </View>
               </View>
             </TouchableWithoutFeedback>
-          ))}
+          ))) : (
+          <View style={{ flex: 1, }}>
+            <View style={styles.textContainer}>
+              <Text style={styles.textStyle}>Popular this Week</Text>
+              <TouchableOpacity>
+                <Text style={{ color: "#9B9B9B", fontSize: 16 }}>show all</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ marginLeft: 25, }}>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                keyExtractor={(item: Product, index: number) => item.id.toString()}
+                data={DATA}
+                renderItem={({ item }) => (
+                  <View style={styles.productContainer}>
+                    <Image
+                      resizeMode="cover"
+                      source={item.image}
+                      style={styles.cardImage}
+                    />
+                    <View style={{ marginTop: 10 }}>
+                      <Text style={{ fontWeight: "600" }}>{item.title}</Text>
+                      <Text style={{ fontWeight: "600" }}>{item.price}</Text>
+                    </View>
+                  </View>
+                )}
+              />
+            </View>
+          </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -317,5 +395,19 @@ const styles = StyleSheet.create({
   },
   recentSearchText: {
     fontSize: 16,
+  },
+  textContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 35,
+  },
+  cardImage: {
+    width: 126,
+    height: 172,
+    borderRadius: 20,
+  },
+  productContainer: {
+    margin: 13,
+    justifyContent: "center",
   },
 });
