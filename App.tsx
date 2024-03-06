@@ -22,7 +22,7 @@ export default function App()
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <Stack.Navigator
           //  initialRouteName="LoginScreen"
           screenOptions={{
@@ -31,8 +31,8 @@ export default function App()
         >
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
-      </NavigationContainer>
-
+      </NavigationContainer> */}
+      <DetailScreen />
     </>
   );
 }

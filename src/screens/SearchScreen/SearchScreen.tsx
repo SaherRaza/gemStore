@@ -273,17 +273,18 @@ const SearchScreen: React.FC<Props> = ({ navigation }) =>
               </View>
             </TouchableWithoutFeedback>
           ))) : (
-          <View style={{ flex: 1, }}>
+          <View style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
             <View style={styles.textContainer}>
               <Text style={styles.textStyle}>Popular this Week</Text>
               <TouchableOpacity>
                 <Text style={{ color: "#9B9B9B", fontSize: 16 }}>show all</Text>
               </TouchableOpacity>
             </View>
-            <View style={{ marginLeft: 25, }}>
+            <View style={{ margin: 20 }}>
               <FlatList
                 showsHorizontalScrollIndicator={false}
                 horizontal
+                style={{ flexGrow: 0 }}
                 keyExtractor={(item: Product, index: number) => item.id.toString()}
                 data={DATA}
                 renderItem={({ item }) => (
@@ -409,5 +410,6 @@ const styles = StyleSheet.create({
   productContainer: {
     margin: 13,
     justifyContent: "center",
+    alignItems: "center",
   },
 });
