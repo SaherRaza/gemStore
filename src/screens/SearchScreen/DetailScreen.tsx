@@ -11,6 +11,18 @@ type Props = NativeStackScreenProps<SearchParamList, "DetailScreen">;
 const DetailScreen: React.FC<Props> = () =>
 {
   const [favorite, setFavorite] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [review, setReviews] = useState(false);
+
+  const reviewDropdown = () =>
+  {
+    setReviews(!review);
+  };
+
+  const toggleDropdown = () =>
+  {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const toggleFavorite = () =>
   {
@@ -63,10 +75,49 @@ const DetailScreen: React.FC<Props> = () =>
               <ColorCircle color="green" />
             </View>
           </View>
-          <View>
-            <Text>Size</Text>
+          <View style={styles.sizeSectionPosition}>
+            <SizeCircle size="S" />
+            <SizeCircle size="M" />
+            <SizeCircle size="L" />
+
           </View>
         </View>
+        <View style={styles.lineBreak} />
+        <View style={styles.descriptionSection}>
+          <View>
+            <Text>Description</Text>
+          </View>
+          <TouchableOpacity onPress={toggleDropdown}>
+            <AntDesign name={isDropdownOpen ? "up" : "down"} size={20} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.lineBreak} />
+        {isDropdownOpen && (
+          <View>
+
+            <Text style={styles.descriptionText}>
+              Sportswear is no longer under culture, it is no longer indie or cobbled together as it once was.
+              Sport is fashion today. The top is oversized in fit and style, may need to size down.
+            </Text>
+          </View>
+        )}
+        <View style={styles.descriptionSection}>
+          <View>
+            <Text>Reviews</Text>
+          </View>
+          <TouchableOpacity onPress={reviewDropdown}>
+            <AntDesign name={review ? "up" : "down"} size={20} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.lineBreak} />
+        {review && (
+          <View>
+            <Text style={styles.descriptionText}>
+              Sportswear is no longer under culture, it is no longer indie or cobbled together as it once was.
+              Sport is fashion today. The top is oversized in fit and style, may need to size down.
+            </Text>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -125,8 +176,30 @@ const styles = StyleSheet.create({
     borderRadius: 360,
     borderColor: "white"
   },
+  sizeStyle: {
+    height: 28,
+    width: 28,
+    borderRadius: 360,
+    backgroundColor: "grey",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 3
+  },
   colorSectionPosition: {
     flexDirection: "row"
+  },
+  sizeSectionPosition: {
+    flexDirection: "row"
+  },
+  descriptionSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 25
+  },
+  descriptionText: {
+    margin: 25,
+    textAlign: "justify",
+    fontSize: 16
   }
 });
 
@@ -134,5 +207,14 @@ const ColorCircle = ({ color }) =>
 {
   return (
     <TouchableOpacity style={[styles.circleStyle, { backgroundColor: color }]} />
+  );
+};
+
+const SizeCircle = ({ size }) =>
+{
+  return (
+    <TouchableOpacity style={styles.sizeStyle} >
+      <Text>{size}</Text>
+    </TouchableOpacity>
   );
 };

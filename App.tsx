@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MyTabs from "./src/screens/BottomTab/MyTabs";
 import DetailScreen from "./src/screens/SearchScreen/DetailScreen";
 import SearchScreen from "./src/screens/SearchScreen/SearchScreen";
+import CartScreen from "./src/screens/CartScreen/CartScreen";
 const Stack = createNativeStackNavigator();
 export default function App()
 {
@@ -32,7 +33,7 @@ export default function App()
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
       </NavigationContainer> */}
-      <DetailScreen />
+      <CartScreen />
     </>
   );
 }
