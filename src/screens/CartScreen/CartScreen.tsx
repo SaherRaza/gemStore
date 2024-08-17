@@ -68,7 +68,7 @@ const CartScreen = ({ navigation }) =>
           <Text style={[styles.textStyle, { fontWeight: "500" }]}>$110</Text>
         </View>
         <View style={styles.btnContainer}>
-          <CustomButton title="Proceed to Checkout" Width={"80%"} />
+          <CustomButton title="Proceed to Checkout" Width={"85%"} />
         </View>
       </View>
     </View>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 360,
-    backgroundColor: "#E5E5E5",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     alignItems: "center",
     position: 'absolute',
-    bottom: 20,
+    bottom: 0,
     width: "100%"
   },
   bottomContainer: {

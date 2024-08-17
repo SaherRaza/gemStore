@@ -142,13 +142,13 @@ function MyTabs()
             if (focused)
               return (
                 <View>
-                  <Ionicons name="ios-home-outline" size={24} color="black" />
+                  <Ionicons name="home-outline" size={24} color="black" />
                 </View>
               );
             else
               return (
                 <View>
-                  <Ionicons name="ios-home-outline" size={24} color="#838383" />
+                  <Ionicons name="home-outline" size={24} color="#838383" />
                 </View>
               );
           },
@@ -211,14 +211,14 @@ function MyTabs()
             if (focused)
               return (
                 <View>
-                  <Ionicons name="ios-person-outline" size={24} color="black" />
+                  <Ionicons name="person-outline" size={24} color="black" />
                 </View>
               );
             else
               return (
                 <View>
                   <Ionicons
-                    name="ios-person-outline"
+                    name="person-outline"
                     size={24}
                     color="#838383"
                   />

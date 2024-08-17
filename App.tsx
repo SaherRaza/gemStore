@@ -9,6 +9,7 @@ import MyTabs from "./src/screens/BottomTab/MyTabs";
 import DetailScreen from "./src/screens/SearchScreen/DetailScreen";
 import SearchScreen from "./src/screens/SearchScreen/SearchScreen";
 import CartScreen from "./src/screens/CartScreen/CartScreen";
+import CheckOutScreen from "./src/screens/CartScreen/CheckOutScreen";
 const Stack = createNativeStackNavigator();
 export default function App()
 {
@@ -33,7 +34,8 @@ export default function App()
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
       </NavigationContainer> */}
-      <CartScreen />
+      {/* <CartScreen /> */}
+      <CheckOutScreen />
     </>
   );
 }
