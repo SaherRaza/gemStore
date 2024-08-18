@@ -10,6 +10,7 @@ import DetailScreen from "./src/screens/SearchScreen/DetailScreen";
 import SearchScreen from "./src/screens/SearchScreen/SearchScreen";
 import CartScreen from "./src/screens/CartScreen/CartScreen";
 import CheckOutScreen from "./src/screens/CartScreen/CheckOutScreen";
+import CheckOutScreen3 from "./src/screens/CartScreen/CheckOutScreen3";
 const Stack = createNativeStackNavigator();
 export default function App()
 {
@@ -35,7 +36,8 @@ export default function App()
         </Stack.Navigator>
       </NavigationContainer> */}
       {/* <CartScreen /> */}
-      <CheckOutScreen />
+      {/* <CheckOutScreen /> */}
+      <CheckOutScreen3 />
     </>
   );
 }

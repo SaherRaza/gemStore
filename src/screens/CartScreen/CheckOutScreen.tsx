@@ -8,7 +8,12 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    country: Yup.string().required('Country is required'),
+    streetName: Yup.string().required('Street name is required'),
+    city: Yup.string().required('City is required'),
+    state: Yup.string(),
+    zipCode: Yup.string().required('Zip Code is required'),
+    phoneNumber: Yup.string().required('Phone Number is required'),
 });
 const CheckOutScreen = ({ navigation }) =>
 {
@@ -62,7 +67,7 @@ const CheckOutScreen = ({ navigation }) =>
             </View>
 
             <Formik
-                initialValues={{ firstName: '', lastName: '', email: '' }}
+                initialValues={{ firstName: '', lastName: '', country: '' }}
                 validationSchema={validationSchema}
                 onSubmit={values => console.log(values)}
             >
@@ -88,12 +93,12 @@ const CheckOutScreen = ({ navigation }) =>
 
                         <TextInput
                             style={styles.input}
-                            placeholder="Email"
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
+                            placeholder="Country*"
+                            onChangeText={handleChange('country')}
+                            onBlur={handleBlur('country')}
+                            value={values.country}
                         />
-                        {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}
+                        {touched.country && errors.country && <Text style={styles.error}>{errors.country}</Text>}
 
                         <Button onPress={handleSubmit} title="Submit" />
                     </View>
