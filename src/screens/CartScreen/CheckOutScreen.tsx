@@ -1,98 +1,104 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Button } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import { Ionicons } from '@expo/vector-icons';
-const CheckOutScreen = () =>
+import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+});
+const CheckOutScreen = ({ navigation }) =>
 {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [country, setCountry] = useState('');
-    const [streetName, setStreetName] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [zipCode, setZipCode] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
     const [shippingMethod, setShippingMethod] = useState('free');
     const [couponCode, setCouponCode] = useState('');
     const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
 
     return (
         <ScrollView style={styles.container}>
-            <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backButton}>
-                    <Ionicons name="chevron-back" size={24} color="black" />
+
+            <View style={styles.headerStyle}>
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                    style={styles.iconStyle}
+                >
+                    <AntDesign name="left" size={18} color="#1E3354" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Check out</Text>
+
+                <View style={styles.titleContainer}>
+                    <Text style={styles.textStyle}>CheckOut</Text>
+                </View>
+
+                {/* Empty View to balance the layout */}
+                <View style={styles.emptyView} />
+            </View>
+
+            <View style={styles.headerContainer}>
                 <View style={styles.progressContainer}>
-                    <Ionicons name="location-outline" size={20} color="black" />
+                    <Ionicons name="location-outline" size={24} color="black" />
                     <View style={styles.dotsContainer}>
                         <View style={styles.dot} />
                         <View style={styles.dot} />
                         <View style={styles.dot} />
                         <View style={styles.dot} />
+                        <View style={styles.dot} />
                     </View>
-                    <Ionicons name="card-outline" size={20} color="grey" />
+                    <Ionicons name="card-outline" size={24} color="grey" />
                     <View style={styles.dotsContainer}>
                         <View style={styles.dot} />
                         <View style={styles.dot} />
                         <View style={styles.dot} />
                         <View style={styles.dot} />
+                        <View style={styles.dot} />
                     </View>
-                    <Ionicons name="checkmark-circle-outline" size={20} color="grey" />
+                    <Ionicons name="checkmark-circle-outline" size={24} color="grey" />
                 </View>
             </View>
-            <Text style={styles.stepText}>STEP 1</Text>
-            <Text style={styles.title}>Shipping</Text>
+            <View style={{ marginTop: 20 }}>
+                <Text style={styles.stepText}>STEP 1</Text>
+                <Text style={styles.title}>Shipping</Text>
+            </View>
 
-            <TextInput
-                style={styles.input}
-                placeholder="First name *"
-                value={firstName}
-                onChangeText={setFirstName}
-            />
-            <TextInput
-                style={[styles.input, lastName === '' && styles.error]}
-                placeholder="Last name *"
-                value={lastName}
-                onChangeText={setLastName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Country *"
-                value={country}
-                onChangeText={setCountry}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Street name *"
-                value={streetName}
-                onChangeText={setStreetName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="City *"
-                value={city}
-                onChangeText={setCity}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="State / Province"
-                value={state}
-                onChangeText={setState}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Zip-code *"
-                value={zipCode}
-                onChangeText={setZipCode}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Phone number *"
-                value={phoneNumber}
-                onChangeText={setPhoneNumber}
-            />
+            <Formik
+                initialValues={{ firstName: '', lastName: '', email: '' }}
+                validationSchema={validationSchema}
+                onSubmit={values => console.log(values)}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+                    <View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="First Name*"
+                            onChangeText={handleChange('firstName')}
+                            onBlur={handleBlur('firstName')}
+                            value={values.firstName}
+                        />
+                        {touched.firstName && errors.firstName && <Text style={styles.error}>{errors.firstName}</Text>}
 
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Last Name*"
+                            onChangeText={handleChange('lastName')}
+                            onBlur={handleBlur('lastName')}
+                            value={values.lastName}
+                        />
+                        {touched.lastName && errors.lastName && <Text style={styles.error}>{errors.lastName}</Text>}
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                            value={values.email}
+                        />
+                        {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}
+
+                        <Button onPress={handleSubmit} title="Submit" />
+                    </View>
+                )}
+            </Formik>
             <Text style={styles.subTitle}>Shipping method</Text>
             <TouchableOpacity onPress={() => setShippingMethod('free')} style={styles.radioContainer}>
                 <View style={styles.radioCircle}>
@@ -147,22 +153,41 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#fff',
     },
+    headerStyle: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between", // Make sure to use space-between
+        marginTop: 35,
+        paddingHorizontal: 20, // Adjust as needed for padding
+    },
+    iconStyle: {
+        width: 32,
+        height: 32,
+        borderRadius: 360,
+        backgroundColor: "#E1E1E1",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    textStyle: {
+        fontWeight: "bold",
+        fontSize: 16,
+    },
+    titleContainer: {
+        flex: 1,
+        alignItems: 'center', // Center the text horizontally
+    },
+    emptyView: {
+        width: 32, // This view will be the same size as the iconStyle view
+    },
     headerContainer: {
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 15,
         paddingVertical: 10,
         backgroundColor: '#fff',
+        marginTop: 20
     },
-    backButton: {
-        padding: 5,
-    },
-    headerTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
+
     progressContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -170,7 +195,8 @@ const styles = StyleSheet.create({
     dotsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginHorizontal: 3,
+        marginHorizontal: 15,
+        gap: 15,
     },
     dot: {
         width: 3,
@@ -190,16 +216,16 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     input: {
-        height: 50,
-        borderColor: '#ddd',
+        height: 40,
+        borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 10,
-        paddingHorizontal: 10,
         marginBottom: 10,
-        fontSize: 16,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0
     },
     error: {
-        borderColor: 'red',
+        color: 'red',
     },
     subTitle: {
         fontSize: 18,
