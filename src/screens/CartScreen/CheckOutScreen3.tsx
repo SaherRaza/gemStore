@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
+import CustomButton from '../../components/CustomButton';
 const CheckOutScreen3 = () =>
 {
     return (
@@ -43,14 +44,25 @@ const CheckOutScreen3 = () =>
                 </View>
             </View>
 
-            <View style={{ marginLeft: 10, marginTop: 50 }}>
-                <Text style={[styles.textStyle, { fontSize: 30, fontWeight: "500" }]}>Order Completed</Text>
-            </View>
+            <View style={{ flex: 1 }}>
+                <View style={{ marginLeft: 30, marginTop: 50 }}>
+                    <Text style={[styles.textStyle, { fontSize: 30, fontWeight: "500" }]}>Order Completed</Text>
+                </View>
 
-            <View style={styles.imgContainer}>
-                <Image
-                    resizeMode='contain'
-                    source={require("../../../assets/images/order.png")} />
+                <View style={styles.imgContainer}>
+                    <Image
+                        resizeMode='contain'
+                        source={require("../../../assets/images/order.png")} />
+                    <View style={styles.textContainer}>
+                        <Text style={{ textAlign: "center" }}>Thank you for your purchase.</Text>
+                        <Text>You can view your order in ‘My Orders’ section.</Text>
+                    </View>
+
+                </View>
+
+                <View style={styles.btnContainer}>
+                    <CustomButton title='Continue Shopping' Width={"85%"} />
+                </View>
             </View>
         </View>
     );
@@ -61,15 +73,14 @@ export default CheckOutScreen3;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
         backgroundColor: '#fff',
     },
     headerStyle: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between", // Make sure to use space-between
-        marginTop: 35,
         paddingHorizontal: 20, // Adjust as needed for padding
+        marginTop: 60
     },
     iconStyle: {
         width: 32,
@@ -119,6 +130,15 @@ const styles = StyleSheet.create({
     imgContainer: {
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 40
+        marginTop: 120
+    },
+    textContainer: {
+        alignItems: "center",
+        marginTop: 30
+
+    },
+    btnContainer: {
+        alignItems: "center",
+        marginTop: 100
     }
 });
