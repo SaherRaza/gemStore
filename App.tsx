@@ -12,6 +12,9 @@ import CartScreen from "./src/screens/CartScreen/CartScreen";
 import CheckOutScreen from "./src/screens/CartScreen/CheckOutScreen";
 import CheckOutScreen3 from "./src/screens/CartScreen/CheckOutScreen3";
 import MyOrdersScreen from "./src/screens/CartScreen/MyOrdersScreen";
+import CheckOutScreen2 from "./src/screens/CartScreen/CheckOutScreen2";
+import OrderSummary from "./src/screens/CartScreen/OrderSummary";
+import TrackOrderScreen from "./src/screens/CartScreen/TrackOrderScreen";
 const Stack = createNativeStackNavigator();
 export default function App()
 {
@@ -39,7 +42,10 @@ export default function App()
       {/* <CartScreen /> */}
       {/* <CheckOutScreen /> */}
       {/* <CheckOutScreen3 /> */}
-      <MyOrdersScreen />
+      {/* <MyOrdersScreen /> */}
+      {/* <CheckOutScreen2 /> */}
+      {/* <OrderSummary /> */}
+      <TrackOrderScreen />
     </>
   );
 }
