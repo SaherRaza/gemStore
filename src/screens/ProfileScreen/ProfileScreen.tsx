@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: 20,
     margin: 18,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F3F3F6',
   },
   option: {
     flexDirection: 'row',

@@ -5,12 +5,13 @@ interface CustomButtonProps
 {
   title: string;
   Width: number;
+  onPress: () => void;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ title, Width }) =>
+const CustomButton: React.FC<CustomButtonProps> = ({ title, Width, onPress }) =>
 {
   return (
-    <TouchableOpacity style={[styles.container, { width: Width }]}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, { width: Width }]}>
       <Text style={styles.textStyle}>{title}</Text>
     </TouchableOpacity>
   );
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: 'grey', // Replace with the actual color code
+    backgroundColor: '#2D201C', // Replace with the actual color code
     //  alignSelf: 'center',
 
   },

@@ -1,10 +1,17 @@
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React from 'react';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
+// Define the type for your navigation stack
+type RootStackParamList = {
+  WelcomeScreen: undefined;
+  SlidingScreens: undefined;
+};
 
 const WelcomeScreen: React.FC = () =>
 {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <View style={styles.container}>
       <ImageBackground source={require("../../../assets/images/bgImage.png")}
@@ -18,7 +25,7 @@ const WelcomeScreen: React.FC = () =>
             <Text style={styles.textStyle}>The home for a fashionista</Text>
           </View>
           <View style={styles.btnContainer}>
-            <CustomButton title={"Get Started"} Width={193} />
+            <CustomButton onPress={() => navigation.navigate("SlidingScreens")} title={"Get Started"} Width={193} />
           </View>
         </View>
       </ImageBackground>

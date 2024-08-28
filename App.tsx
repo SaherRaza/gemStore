@@ -16,6 +16,8 @@ import CheckOutScreen2 from "./src/screens/CartScreen/CheckOutScreen2";
 import OrderSummary from "./src/screens/CartScreen/OrderSummary";
 import TrackOrderScreen from "./src/screens/CartScreen/TrackOrderScreen";
 import ProfileScreen from "./src/screens/ProfileScreen/ProfileScreen";
+import SignUpScreen from "./src/screens/LoginScreens/SignUpScreen";
+import LoginScreen from "./src/screens/LoginScreens/LoginScreen";
 const Stack = createNativeStackNavigator();
 export default function App()
 {
@@ -32,11 +34,13 @@ export default function App()
       <StatusBar style="auto" />
       {/* <NavigationContainer>
         <Stack.Navigator
-          //  initialRouteName="LoginScreen"
+          initialRouteName="WelcomeScreen"
           screenOptions={{
             headerShown: false,
           }}
         >
+          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+          <Stack.Screen name="SlidingScreens" component={SlidingScreens} />
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
       </NavigationContainer> */}
@@ -47,7 +51,9 @@ export default function App()
       {/* <CheckOutScreen2 /> */}
       {/* <OrderSummary /> */}
       {/* <TrackOrderScreen /> */}
-      <ProfileScreen />
+      {/* <ProfileScreen /> */}
+      {/* <SignUpScreen /> */}
+      <LoginScreen />
     </>
   );
 }
