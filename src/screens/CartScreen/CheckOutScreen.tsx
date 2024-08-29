@@ -198,12 +198,21 @@ const CheckOutScreen = () =>
             <Text style={styles.subTitle}>Shipping method</Text>
 
 
-            <TouchableOpacity onPress={() => setShippingMethod('free')} style={styles.radioContainer}>
+            <TouchableOpacity onPress={() => setShippingMethod('free')}
+                style={[
+                    styles.radioContainer,
+                    shippingMethod === 'free' && styles.selectedContainer,
+                ]}>
                 <View style={styles.radioCircle}>
                     {shippingMethod === 'free' && <View style={styles.selectedRb} />}
                 </View>
-                <Text style={styles.radioText}>Free Delivery to home</Text>
-                <Text style={styles.radioTextSmall}>Delivery from 3 to 7 business days</Text>
+                <View>
+                    <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
+                        <Text style={styles.radioText}>Free </Text>
+                        <Text style={styles.radioText}>Delivery to home</Text>
+                    </View>
+                    <Text style={styles.radioTextSmall}>Delivery from 3 to 7 business days</Text>
+                </View>
             </TouchableOpacity>
 
 
@@ -211,15 +220,26 @@ const CheckOutScreen = () =>
                 <View style={styles.radioCircle}>
                     {shippingMethod === 'standard' && <View style={styles.selectedRb} />}
                 </View>
-                <Text style={styles.radioText}>$9.90 Delivery to home</Text>
-                <Text style={styles.radioTextSmall}>Delivery from 4 to 6 business days</Text>
+                <View>
+                    <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
+                        <Text style={styles.radioText}>$9.90 </Text>
+                        <Text style={styles.radioText}>Delivery to home</Text>
+                    </View>
+                    <Text style={styles.radioTextSmall}>Delivery from 4 to 6 business days</Text>
+                </View>
             </TouchableOpacity>
+
             <TouchableOpacity onPress={() => setShippingMethod('fast')} style={styles.radioContainer}>
                 <View style={styles.radioCircle}>
                     {shippingMethod === 'fast' && <View style={styles.selectedRb} />}
                 </View>
-                <Text style={styles.radioText}>$9.90 Fast Delivery</Text>
-                <Text style={styles.radioTextSmall}>Delivery from 2 to 3 business days</Text>
+                <View>
+                    <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
+                        <Text style={styles.radioText}>$9.90 </Text>
+                        <Text style={styles.radioText}>Fast Delivery</Text>
+                    </View>
+                    <Text style={styles.radioTextSmall}>Delivery from 2 to 3 business days</Text>
+                </View>
             </TouchableOpacity>
 
             <TextInput
@@ -338,13 +358,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
+        padding: 12,
+        gap: 8,
+    },
+    selectedContainer: {
+        backgroundColor: '#D3D3D3', // Light gray background when selected
+        borderTopColor: 'gray', // Top border color when selected
+        borderBottomColor: 'gray', // Bottom border color when selected
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
     },
     radioCircle: {
         height: 20,
         width: 20,
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: '#000',
+        borderColor: '#508A7B',
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 10,
@@ -353,15 +382,15 @@ const styles = StyleSheet.create({
         width: 10,
         height: 10,
         borderRadius: 5,
-        backgroundColor: '#000',
+        backgroundColor: '#508A7B',
     },
     radioText: {
         fontSize: 16,
     },
     radioTextSmall: {
-        fontSize: 12,
+        fontSize: 13,
         color: '#666',
-        marginLeft: 30,
+        marginTop: 9
     },
     validateButton: {
         alignSelf: 'flex-end',
