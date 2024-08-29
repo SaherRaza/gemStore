@@ -17,7 +17,7 @@ const LoginScreen: React.FC = () =>
                 <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#A8A8A8" secureTextEntry={true} />
 
                 <View style={styles.btnContainer}>
-                    <CustomButton title='LOG IN' Width={200} />
+                    <CustomButton onPress={() => console.log("login")} title='LOG IN' Width={200} />
                 </View>
                 <Text style={styles.orText}>or log in with</Text>
 

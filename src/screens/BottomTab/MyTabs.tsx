@@ -17,6 +17,7 @@ import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import CartScreen from "../CartScreen/CartScreen";
 import SelectedCategory from "../SearchScreen/SelectedCategory";
 import DetailScreen from "../SearchScreen/DetailScreen";
+import CheckOutScreen from "../CartScreen/CheckOutScreen";
 
 
 
@@ -70,6 +71,7 @@ function SearchStackScreen()
 
 export type CartParamList = {
   CartScreen: undefined;
+  CheckOutScreen: undefined;
 };
 const CartStack = createNativeStackNavigator<CartParamList>();
 
@@ -82,6 +84,7 @@ function CartStackScreen()
   return (
     <CartStack.Navigator screenOptions={screenOptions}>
       <CartStack.Screen name="CartScreen" component={CartScreen} />
+      <CartStack.Screen name="CheckOutScreen" component={CheckOutScreen} />
     </CartStack.Navigator>
   );
 }

@@ -4,19 +4,22 @@ import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { CartParamList } from '../BottomTab/MyTabs';
 
 const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    country: Yup.string().required('Country is required'),
-    streetName: Yup.string().required('Street name is required'),
-    city: Yup.string().required('City is required'),
+    firstName: Yup.string().required('Field is required'),
+    lastName: Yup.string().required('Field is required'),
+    country: Yup.string().required('Field is required'),
+    streetName: Yup.string().required('Field is required'),
+    city: Yup.string().required('Field is required'),
     state: Yup.string(),
-    zipCode: Yup.string().required('Zip Code is required'),
-    phoneNumber: Yup.string().required('Phone Number is required'),
+    zipCode: Yup.string().required('Field is required'),
+    phoneNumber: Yup.string().required('Field is required'),
 });
-const CheckOutScreen = ({ navigation }) =>
+const CheckOutScreen = () =>
 {
+    const navigation = useNavigation<NavigationProp<CartParamList>>();
     const [shippingMethod, setShippingMethod] = useState('free');
     const [couponCode, setCouponCode] = useState('');
     const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
@@ -42,7 +45,7 @@ const CheckOutScreen = ({ navigation }) =>
 
             <View style={styles.headerContainer}>
                 <View style={styles.progressContainer}>
-                    <Ionicons name="location-outline" size={24} color="black" />
+                    <Ionicons name="location-sharp" size={24} color="black" />
                     <View style={styles.dotsContainer}>
                         <View style={styles.dot} />
                         <View style={styles.dot} />
@@ -67,14 +70,19 @@ const CheckOutScreen = ({ navigation }) =>
             </View>
 
             <Formik
-                initialValues={{ firstName: '', lastName: '', country: '' }}
+                initialValues={{ firstName: '', lastName: '', country: '', streetName: '', city: '', state: '', zipCode: '', phoneNumber: '' }}
                 validationSchema={validationSchema}
                 onSubmit={values => console.log(values)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                     <View>
                         <TextInput
-                            style={styles.input}
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.firstName && errors.firstName ? 'red' : '#D3D3D3',
+                                },
+                            ]}
                             placeholder="First Name*"
                             onChangeText={handleChange('firstName')}
                             onBlur={handleBlur('firstName')}
@@ -83,7 +91,12 @@ const CheckOutScreen = ({ navigation }) =>
                         {touched.firstName && errors.firstName && <Text style={styles.error}>{errors.firstName}</Text>}
 
                         <TextInput
-                            style={styles.input}
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.lastName && errors.lastName ? 'red' : '#D3D3D3',
+                                },
+                            ]}
                             placeholder="Last Name*"
                             onChangeText={handleChange('lastName')}
                             onBlur={handleBlur('lastName')}
@@ -92,7 +105,12 @@ const CheckOutScreen = ({ navigation }) =>
                         {touched.lastName && errors.lastName && <Text style={styles.error}>{errors.lastName}</Text>}
 
                         <TextInput
-                            style={styles.input}
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.country && errors.country ? 'red' : '#D3D3D3',
+                                },
+                            ]}
                             placeholder="Country*"
                             onChangeText={handleChange('country')}
                             onBlur={handleBlur('country')}
@@ -100,11 +118,86 @@ const CheckOutScreen = ({ navigation }) =>
                         />
                         {touched.country && errors.country && <Text style={styles.error}>{errors.country}</Text>}
 
-                        <Button onPress={handleSubmit} title="Submit" />
+                        <TextInput
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.streetName && errors.streetName ? 'red' : '#D3D3D3',
+                                },
+                            ]}
+                            placeholder="Street Name*"
+                            onChangeText={handleChange('streetName')}
+                            onBlur={handleBlur('streetName')}
+                            value={values.streetName}
+                        />
+                        {touched.streetName && errors.streetName && <Text style={styles.error}>{errors.streetName}</Text>}
+
+                        <TextInput
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.city && errors.city ? 'red' : '#D3D3D3',
+                                },
+                            ]}
+                            placeholder="City*"
+                            onChangeText={handleChange('city')}
+                            onBlur={handleBlur('city')}
+                            value={values.city}
+                        />
+                        {touched.city && errors.city && <Text style={styles.error}>{errors.city}</Text>}
+
+                        <TextInput
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.state && errors.state ? 'red' : '#D3D3D3',
+                                },
+                            ]}
+                            placeholder="State/Province"
+                            onChangeText={handleChange('state')}
+                            onBlur={handleBlur('state')}
+                            value={values.state}
+                        />
+                        {/* {touched.state && errors.state && <Text style={styles.error}>{errors.state}</Text>} */}
+
+                        <TextInput
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.zipCode && errors.zipCode ? 'red' : '#D3D3D3',
+                                },
+                            ]}
+                            placeholder="Zip-Code*"
+                            onChangeText={handleChange('zipCode')}
+                            onBlur={handleBlur('zipCode')}
+                            value={values.zipCode}
+                        />
+                        {touched.zipCode && errors.zipCode && <Text style={styles.error}>{errors.zipCode}</Text>}
+
+                        <TextInput
+                            style={[
+                                styles.input,
+                                {
+                                    borderColor: touched.phoneNumber && errors.phoneNumber ? 'red' : '#D3D3D3',
+                                },
+                            ]}
+                            placeholder="Phone number*"
+                            onChangeText={handleChange('phoneNumber')}
+                            onBlur={handleBlur('phoneNumber')}
+                            value={values.phoneNumber}
+                        />
+                        {touched.phoneNumber && errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber}</Text>}
+
+
+                        {/* <Button onPress={handleSubmit} title="Submit" /> */}
                     </View>
                 )}
             </Formik>
+
+
             <Text style={styles.subTitle}>Shipping method</Text>
+
+
             <TouchableOpacity onPress={() => setShippingMethod('free')} style={styles.radioContainer}>
                 <View style={styles.radioCircle}>
                     {shippingMethod === 'free' && <View style={styles.selectedRb} />}
@@ -112,6 +205,8 @@ const CheckOutScreen = ({ navigation }) =>
                 <Text style={styles.radioText}>Free Delivery to home</Text>
                 <Text style={styles.radioTextSmall}>Delivery from 3 to 7 business days</Text>
             </TouchableOpacity>
+
+
             <TouchableOpacity onPress={() => setShippingMethod('standard')} style={styles.radioContainer}>
                 <View style={styles.radioCircle}>
                     {shippingMethod === 'standard' && <View style={styles.selectedRb} />}
@@ -222,20 +317,22 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 10,
         borderTopWidth: 0,
         borderLeftWidth: 0,
-        borderRightWidth: 0
+        borderRightWidth: 0,
+        marginVertical: 12
     },
     error: {
         color: 'red',
     },
     subTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginVertical: 10,
+        fontSize: 22,
+        fontWeight: '600',
+        marginVertical: 20,
+        marginTop: 50
+
     },
     radioContainer: {
         flexDirection: 'row',

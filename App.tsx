@@ -32,9 +32,9 @@ export default function App()
   return (
     <>
       <StatusBar style="auto" />
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="WelcomeScreen"
+          initialRouteName="MyTabs"
           screenOptions={{
             headerShown: false,
           }}
@@ -43,7 +43,7 @@ export default function App()
           <Stack.Screen name="SlidingScreens" component={SlidingScreens} />
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
-      </NavigationContainer> */}
+      </NavigationContainer>
       {/* <CartScreen /> */}
       {/* <CheckOutScreen /> */}
       {/* <CheckOutScreen3 /> */}
@@ -53,7 +53,7 @@ export default function App()
       {/* <TrackOrderScreen /> */}
       {/* <ProfileScreen /> */}
       {/* <SignUpScreen /> */}
-      <LoginScreen />
+      {/* <LoginScreen /> */}
     </>
   );
 }

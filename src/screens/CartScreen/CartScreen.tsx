@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import CustomButton from './../../components/CustomButton';
 import Checkbox from 'expo-checkbox';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { CartParamList } from "../BottomTab/MyTabs";
 
-const CartScreen = ({ navigation }) =>
+const CartScreen = () =>
 {
+  const navigation = useNavigation<NavigationProp<CartParamList>>();
   const [isChecked, setChecked] = useState(false);
   return (
     <View style={styles.container}>
@@ -34,7 +37,7 @@ const CartScreen = ({ navigation }) =>
           <View style={styles.checkboxContainer}>
             <Text style={[styles.textStyle, { lineHeight: 35, fontSize: 14 }]}>SportWear Set</Text>
             <Checkbox
-              style={styles.checkbox}
+              // style={styles.checkbox}
               value={isChecked}
               onValueChange={setChecked}
               color={isChecked ? '#508A7B' : "#8A8A8F"}
@@ -68,7 +71,7 @@ const CartScreen = ({ navigation }) =>
           <Text style={[styles.textStyle, { fontWeight: "500" }]}>$110</Text>
         </View>
         <View style={styles.btnContainer}>
-          <CustomButton title="Proceed to Checkout" Width={"85%"} />
+          <CustomButton onPress={() => navigation.navigate("CheckOutScreen")} title="Proceed to Checkout" Width={300} />
         </View>
       </View>
     </View>
