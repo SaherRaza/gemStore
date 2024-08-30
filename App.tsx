@@ -18,6 +18,7 @@ import TrackOrderScreen from "./src/screens/CartScreen/TrackOrderScreen";
 import ProfileScreen from "./src/screens/ProfileScreen/ProfileScreen";
 import SignUpScreen from "./src/screens/LoginScreens/SignUpScreen";
 import LoginScreen from "./src/screens/LoginScreens/LoginScreen";
+import ForgotPasswordScreen from "./src/screens/LoginScreens/ForgotPasswordScreen";
 const Stack = createNativeStackNavigator();
 export default function App()
 {
@@ -34,12 +35,15 @@ export default function App()
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="MyTabs"
+          initialRouteName="LoginScreen"
           screenOptions={{
             headerShown: false,
           }}
         >
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
           <Stack.Screen name="SlidingScreens" component={SlidingScreens} />
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>

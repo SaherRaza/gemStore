@@ -1,10 +1,16 @@
 import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { AntDesign, EvilIcons } from '@expo/vector-icons';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton';
-
+type RootStackParamList = {
+    LoginScreen: undefined;
+    SignUpScreen: undefined;
+};
 const SignUpScreen: React.FC = () =>
 {
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.textContainer}>
@@ -19,7 +25,7 @@ const SignUpScreen: React.FC = () =>
                 <TextInput style={styles.input} placeholder="Confirm password" placeholderTextColor="#A8A8A8" secureTextEntry={true} />
 
                 <View style={styles.btnContainer}>
-                    <CustomButton title='SIGN UP' Width={200} />
+                    <CustomButton onPress={() => navigation.navigate("LoginScreen")} title='SIGN UP' Width={200} />
                 </View>
                 <Text style={styles.orText}>or sign up with</Text>
 
@@ -37,9 +43,10 @@ const SignUpScreen: React.FC = () =>
                     </TouchableOpacity>
                 </View>
 
-                <Text style={styles.footerText}>
-                    Already have an account? <Text style={styles.loginText}>Log In</Text>
-                </Text>
+            </View>
+            <View style={styles.footerContainer}>
+                <Text style={styles.footerText}>Already have an account?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}><Text style={styles.loginText}>Log In</Text></TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -94,6 +101,16 @@ const styles = StyleSheet.create({
         borderRadius: 360,
         borderWidth: 1,
         borderColor: "grey"
+    },
+    footerContainer: {
+        position: 'absolute',
+        bottom: 50, // 50 units from the bottom of the screen
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 5,
     },
     footerText: {
         color: '#000',

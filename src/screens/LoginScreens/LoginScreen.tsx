@@ -2,9 +2,18 @@ import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Imag
 import React from 'react';
 import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
+type RootStackParamList = {
+    LoginScreen: undefined;
+    SignUpScreen: undefined;
+    MyTabs: undefined;
+    ForgotPasswordScreen: undefined;
+};
 const LoginScreen: React.FC = () =>
 {
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.textContainer}>
@@ -12,12 +21,15 @@ const LoginScreen: React.FC = () =>
                 <Text style={styles.textStyle}>your Account</Text>
             </View>
 
-            <View>
+            <View style={{ marginTop: 60 }}>
                 <TextInput style={styles.input} placeholder="Email Address" placeholderTextColor="#A8A8A8" />
                 <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#A8A8A8" secureTextEntry={true} />
 
+                <TouchableOpacity onPress={() => navigation.navigate("ForgotPasswordScreen")}>
+                    <Text style={styles.forgotPassword}>Forgot Password?</Text>
+                </TouchableOpacity>
                 <View style={styles.btnContainer}>
-                    <CustomButton onPress={() => console.log("login")} title='LOG IN' Width={200} />
+                    <CustomButton onPress={() => navigation.navigate("MyTabs")} title='LOG IN' Width={200} />
                 </View>
                 <Text style={styles.orText}>or log in with</Text>
 
@@ -35,9 +47,10 @@ const LoginScreen: React.FC = () =>
                     </TouchableOpacity>
                 </View>
 
-                <Text style={styles.footerText}>
-                    Don't have an account? <Text style={styles.loginText}>Log In</Text>
-                </Text>
+            </View>
+            <View style={styles.footerContainer}>
+                <Text style={styles.footerText}>Don't have an account?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}><Text style={styles.loginText}>Sign Up</Text></TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -93,6 +106,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "grey"
     },
+    footerContainer: {
+        position: 'absolute',
+        bottom: 50, // 50 units from the bottom of the screen
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 5,
+    },
     footerText: {
         color: '#000',
         textAlign: 'center',
@@ -103,4 +126,10 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         textDecorationLine: 'underline',
     },
+    forgotPassword: {
+        color: '#838383',
+        textAlign: "right",
+        margin: 20,
+        fontSize: 12
+    }
 });
