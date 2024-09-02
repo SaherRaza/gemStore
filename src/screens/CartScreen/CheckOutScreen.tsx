@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { CartParamList } from '../BottomTab/MyTabs';
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 
 const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('Field is required'),
@@ -23,7 +24,13 @@ const CheckOutScreen = () =>
     const [shippingMethod, setShippingMethod] = useState('free');
     const [couponCode, setCouponCode] = useState('');
     const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
+    const [value, setValue] = useState(0);
 
+    const items = [
+        { label: 'Delivery to home', value: 0 },
+        { label: 'Delivery to home', value: 1 },
+        { label: 'Fast Delivery', value: 2 }
+    ];
     return (
         <ScrollView style={styles.container}>
 
@@ -203,9 +210,13 @@ const CheckOutScreen = () =>
                     styles.radioContainer,
                     shippingMethod === 'free' && styles.selectedContainer,
                 ]}>
-                <View style={styles.radioCircle}>
+                {/* <View style={styles.radioCircle}>
                     {shippingMethod === 'free' && <View style={styles.selectedRb} />}
-                </View>
+                </View> */}
+                <RadioForm radio_props={items}
+                    buttonColor='#508A7B'
+                    selectedButtonColor='#508A7B'
+                    initial={value} onPress={(value) => setValue(value)} />
                 <View>
                     <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
                         <Text style={styles.radioText}>Free </Text>
@@ -217,9 +228,9 @@ const CheckOutScreen = () =>
 
 
             <TouchableOpacity onPress={() => setShippingMethod('standard')} style={styles.radioContainer}>
-                <View style={styles.radioCircle}>
+                {/* <View style={styles.radioCircle}>
                     {shippingMethod === 'standard' && <View style={styles.selectedRb} />}
-                </View>
+                </View> */}
                 <View>
                     <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
                         <Text style={styles.radioText}>$9.90 </Text>
@@ -230,9 +241,9 @@ const CheckOutScreen = () =>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => setShippingMethod('fast')} style={styles.radioContainer}>
-                <View style={styles.radioCircle}>
+                {/* <View style={styles.radioCircle}>
                     {shippingMethod === 'fast' && <View style={styles.selectedRb} />}
-                </View>
+                </View> */}
                 <View>
                     <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
                         <Text style={styles.radioText}>$9.90 </Text>
@@ -242,15 +253,23 @@ const CheckOutScreen = () =>
                 </View>
             </TouchableOpacity>
 
-            <TextInput
-                style={styles.input}
-                placeholder="Coupon Code"
-                value={couponCode}
-                onChangeText={setCouponCode}
-            />
-            <TouchableOpacity style={styles.validateButton}>
-                <Text style={styles.validateButtonText}>Validate</Text>
-            </TouchableOpacity>
+
+            <View style={{ marginTop: 30 }}>
+                <Text style={[styles.textStyle, { fontSize: 24, fontWeight: "600" }]}>Coupon Code</Text>
+            </View>
+
+            <View>
+                <TouchableOpacity style={styles.validateButton}>
+                    <Text style={styles.validateButtonText}>Validate</Text>
+                </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Coupon Code"
+                    value={couponCode}
+                    onChangeText={setCouponCode}
+                />
+
+            </View>
 
             <View style={styles.checkboxContainer}>
                 <Checkbox
@@ -394,10 +413,6 @@ const styles = StyleSheet.create({
     },
     validateButton: {
         alignSelf: 'flex-end',
-        backgroundColor: '#ddd',
-        padding: 10,
-        borderRadius: 10,
-        marginVertical: 10,
     },
     validateButtonText: {
         color: '#000',
