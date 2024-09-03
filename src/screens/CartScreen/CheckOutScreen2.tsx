@@ -1,30 +1,60 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Checkbox from 'expo-checkbox';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { CartParamList } from '../BottomTab/MyTabs';
 
 export default function CheckOutScreen2()
 {
+    const navigation = useNavigation<NavigationProp<CartParamList>>();
     const [isAgreed, setIsAgreed] = useState(false);
 
     return (
         <View style={styles.container}>
-            {/* Header */}
-            <View style={styles.header}>
-                <TouchableOpacity>
-                    <Ionicons name="chevron-back" size={24} color="black" />
+
+            <View style={styles.headerStyle}>
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                    style={styles.iconStyle}
+                >
+                    <AntDesign name="left" size={18} color="#1E3354" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Check out</Text>
-                <View style={styles.headerIcons}>
-                    <Ionicons name="location-outline" size={20} color="black" />
-                    <Ionicons name="card-outline" size={20} color="black" style={styles.activeStepIcon} />
-                    <Ionicons name="checkmark-circle-outline" size={20} color="black" />
+
+                <View style={styles.titleContainer}>
+                    <Text style={styles.textStyle}>CheckOut</Text>
                 </View>
+
+                {/* Empty View to balance the layout */}
+                <View style={styles.emptyView} />
             </View>
 
-            {/* Step 2: Payment */}
-            <Text style={styles.stepTitle}>STEP 2</Text>
-            <Text style={styles.sectionTitle}>Payment</Text>
+            <View style={styles.headerContainer}>
+                <View style={styles.progressContainer}>
+                    <Ionicons name="location-sharp" size={24} color="grey" />
+                    <View style={styles.dotsContainer}>
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                    </View>
+                    <Ionicons name="card-outline" size={24} color="black" />
+                    <View style={styles.dotsContainer}>
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                        <View style={styles.dot} />
+                    </View>
+                    <Ionicons name="checkmark-circle-outline" size={24} color="grey" />
+                </View>
+            </View>
+            <View style={{ marginTop: 20 }}>
+                <Text style={styles.stepText}>STEP 2</Text>
+                <Text style={styles.title}>Payment</Text>
+            </View>
+
 
             {/* Payment Method Options */}
             <View style={styles.paymentOptions}>
@@ -52,14 +82,31 @@ export default function CheckOutScreen2()
                 {/* Replace the above placeholder image with the card image */}
             </View>
 
+
+            <View style={{ marginTop: 10 }}>
+                <Text>or check out with</Text>
+            </View>
+
             {/* Payment Providers */}
             <View style={styles.paymentProviders}>
-                <Ionicons name="logo-paypal" size={32} color="#0070BA" />
-                <Ionicons name="logo-visa" size={32} color="#1A1F71" />
-                <Ionicons name="logo-mastercard" size={32} color="#F79E1B" />
-                <Ionicons name="logo-alipay" size={32} color="#00A1E0" />
-                <Ionicons name="logo-amazon" size={32} color="#FF9900" />
+                <TouchableOpacity style={styles.iconContainer}>
+                    <Image resizeMode='contain' source={require("../../../assets/images/PayPal.png")} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.iconContainer}>
+                    <Image resizeMode='contain' source={require("../../../assets/images/visa-logo.png")} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.iconContainer}>
+                    <Image resizeMode='contain' source={require("../../../assets/images/Mastercard.png")} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.iconContainer}>
+                    <Image resizeMode='contain' source={require("../../../assets/images/Alipay.png")} />
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.iconContainer, { backgroundColor: "#1F72CD" }]}>
+                    <Image style={{ backgroundColor: "#1F72CD" }} resizeMode='contain' source={require("../../../assets/images/AMEX.png")} />
+                </TouchableOpacity>
             </View>
+
+
 
             {/* Order Summary */}
             <View style={styles.orderSummary}>
@@ -75,20 +122,17 @@ export default function CheckOutScreen2()
                     <Text style={styles.summaryLabel}>Subtotal</Text>
                     <Text style={styles.subtotalValue}>$110</Text>
                 </View>
-            </View>
 
-            {/* Terms and Conditions */}
-            <View style={styles.terms}>
-                <Checkbox value={isAgreed} onValueChange={setIsAgreed} />
-                <Text style={styles.termsText}>
-                    I agree to <Text style={styles.link}>Terms and conditions</Text>
-                </Text>
-            </View>
 
-            {/* Place Order Button */}
-            <TouchableOpacity style={styles.placeOrderButton}>
-                <Text style={styles.placeOrderButtonText}>Place my order</Text>
-            </TouchableOpacity>
+                {/* Terms and Conditions */}
+                <View style={styles.terms}>
+                    <Checkbox value={isAgreed} onValueChange={setIsAgreed} />
+                    <Text style={styles.termsText}>
+                        I agree to <Text style={styles.link}>Terms and conditions</Text>
+                    </Text>
+                </View>
+
+            </View>
         </View>
     );
 }
@@ -97,21 +141,64 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingHorizontal: 20,
+        //padding: 20
     },
-    header: {
-        flexDirection: 'row',
+    headerStyle: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between", // Make sure to use space-between
+        marginTop: 35,
+        paddingHorizontal: 20, // Adjust as needed for padding
+    },
+    iconStyle: {
+        width: 32,
+        height: 32,
+        borderRadius: 360,
+        backgroundColor: "#E1E1E1",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    textStyle: {
+        fontWeight: "bold",
+        fontSize: 16,
+    },
+    titleContainer: {
+        flex: 1,
+        alignItems: 'center', // Center the text horizontally
+    },
+    emptyView: {
+        width: 32, // This view will be the same size as the iconStyle view
+    },
+    headerContainer: {
+        alignItems: 'center',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingVertical: 15,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        backgroundColor: '#fff',
+        marginTop: 20
     },
-    headerTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    headerIcons: {
+
+    progressContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    dotsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: 15,
+        gap: 15,
+    },
+    dot: {
+        width: 3,
+        height: 3,
+        borderRadius: 1.5,
+        backgroundColor: '#999',
+        marginHorizontal: 1,
+    },
+    stepText: {
+        fontSize: 12,
+        color: '#999',
+        marginBottom: 5,
     },
     activeStepIcon: {
         marginHorizontal: 10,
@@ -120,6 +207,11 @@ const styles = StyleSheet.create({
     stepTitle: {
         fontSize: 14,
         color: '#A0A0A0',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
     sectionTitle: {
         fontSize: 24,
@@ -169,13 +261,25 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 10,
     },
+    iconContainer: {
+        width: 49.58,
+        height: 34,
+        borderColor: "#F1F2F3",
+        borderWidth: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 5
+    },
     paymentProviders: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginVertical: 20,
+        justifyContent: 'space-evenly',
+        padding: 25,
     },
     orderSummary: {
         marginVertical: 20,
+        backgroundColor: "red",
+        flex: 1,
+        margin: 0
     },
     summaryRow: {
         flexDirection: 'row',

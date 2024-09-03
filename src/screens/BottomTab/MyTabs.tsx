@@ -18,6 +18,11 @@ import CartScreen from "../CartScreen/CartScreen";
 import SelectedCategory from "../SearchScreen/SelectedCategory";
 import DetailScreen from "../SearchScreen/DetailScreen";
 import CheckOutScreen from "../CartScreen/CheckOutScreen";
+import CheckOutScreen2 from './../CartScreen/CheckOutScreen2';
+import CheckOutScreen3 from './../CartScreen/CheckOutScreen3';
+import MyOrdersScreen from './../CartScreen/MyOrdersScreen';
+import OrderSummary from './../CartScreen/OrderSummary';
+import TrackOrderScreen from './../CartScreen/TrackOrderScreen';
 
 
 
@@ -72,6 +77,11 @@ function SearchStackScreen()
 export type CartParamList = {
   CartScreen: undefined;
   CheckOutScreen: undefined;
+  CheckOutScreen2: undefined;
+  CheckOutScreen3: undefined;
+  MyOrdersScreen: undefined;
+  OrderSummary: undefined;
+  TrackOrderScreen: undefined;
 };
 const CartStack = createNativeStackNavigator<CartParamList>();
 
@@ -85,6 +95,10 @@ function CartStackScreen()
     <CartStack.Navigator screenOptions={screenOptions}>
       <CartStack.Screen name="CartScreen" component={CartScreen} />
       <CartStack.Screen name="CheckOutScreen" component={CheckOutScreen} />
+      {/* <CartStack.Screen name="CheckOutScreen2" component={CheckOutScreen2} /> */}
+      <CartStack.Screen name="MyOrdersScreen" component={MyOrdersScreen} />
+      <CartStack.Screen name="OrderSummary" component={OrderSummary} />
+      <CartStack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
     </CartStack.Navigator>
   );
 }

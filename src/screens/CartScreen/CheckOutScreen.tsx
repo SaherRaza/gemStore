@@ -279,7 +279,7 @@ const CheckOutScreen = () =>
                 <Text style={styles.checkboxLabel}>Copy address data from shipping</Text>
             </View>
 
-            <TouchableOpacity style={styles.continueButton}>
+            <TouchableOpacity onPress={() => navigation.navigate("CheckOutScreen2")} style={styles.continueButton}>
                 <Text style={styles.continueButtonText}>Continue to payment</Text>
             </TouchableOpacity>
         </ScrollView>
