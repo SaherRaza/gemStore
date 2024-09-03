@@ -24,7 +24,7 @@ const CheckOutScreen3 = () =>
 
             <View style={styles.headerContainer}>
                 <View style={styles.progressContainer}>
-                    <Ionicons name="location-outline" size={24} color="black" />
+                    <Ionicons name="location-outline" size={24} color="grey" />
                     <View style={styles.dotsContainer}>
                         <View style={styles.dot} />
                         <View style={styles.dot} />
@@ -32,7 +32,7 @@ const CheckOutScreen3 = () =>
                         <View style={styles.dot} />
                         <View style={styles.dot} />
                     </View>
-                    <Ionicons name="card-outline" size={24} color="grey" />
+                    <Ionicons name="card" size={24} color="grey" />
                     <View style={styles.dotsContainer}>
                         <View style={styles.dot} />
                         <View style={styles.dot} />
@@ -40,7 +40,7 @@ const CheckOutScreen3 = () =>
                         <View style={styles.dot} />
                         <View style={styles.dot} />
                     </View>
-                    <Ionicons name="checkmark-circle-outline" size={24} color="grey" />
+                    <Ionicons name="checkmark-circle" size={24} color="black" />
                 </View>
             </View>
 

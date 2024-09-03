@@ -46,6 +46,7 @@ export default function App()
           <Stack.Screen name="CheckOutScreen2" component={CheckOutScreen2} />
           <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
           <Stack.Screen name="SlidingScreens" component={SlidingScreens} />
+          <Stack.Screen name="CheckOutScreen3" component={CheckOutScreen3} />
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
       </NavigationContainer>

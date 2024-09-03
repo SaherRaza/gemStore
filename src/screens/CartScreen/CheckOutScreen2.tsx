@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { CartParamList } from '../BottomTab/MyTabs';
+import CustomButton from '../../components/CustomButton';
 
 export default function CheckOutScreen2()
 {
@@ -11,99 +12,102 @@ export default function CheckOutScreen2()
     const [isAgreed, setIsAgreed] = useState(false);
 
     return (
-        <View style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 60 }}
+            style={styles.container}>
+            <View style={{ padding: 20 }}>
+                <View style={styles.headerStyle}>
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}
+                        style={styles.iconStyle}
+                    >
+                        <AntDesign name="left" size={18} color="#1E3354" />
+                    </TouchableOpacity>
 
-            <View style={styles.headerStyle}>
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}
-                    style={styles.iconStyle}
-                >
-                    <AntDesign name="left" size={18} color="#1E3354" />
-                </TouchableOpacity>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.textStyle}>CheckOut</Text>
+                    </View>
 
-                <View style={styles.titleContainer}>
-                    <Text style={styles.textStyle}>CheckOut</Text>
+                    {/* Empty View to balance the layout */}
+                    <View style={styles.emptyView} />
                 </View>
 
-                {/* Empty View to balance the layout */}
-                <View style={styles.emptyView} />
-            </View>
-
-            <View style={styles.headerContainer}>
-                <View style={styles.progressContainer}>
-                    <Ionicons name="location-sharp" size={24} color="grey" />
-                    <View style={styles.dotsContainer}>
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
+                <View style={styles.headerContainer}>
+                    <View style={styles.progressContainer}>
+                        <Ionicons name="location-sharp" size={24} color="grey" />
+                        <View style={styles.dotsContainer}>
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                        </View>
+                        <Ionicons name="card" size={24} color="black" />
+                        <View style={styles.dotsContainer}>
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                            <View style={styles.dot} />
+                        </View>
+                        <Ionicons name="checkmark-circle" size={24} color="grey" />
                     </View>
-                    <Ionicons name="card-outline" size={24} color="black" />
-                    <View style={styles.dotsContainer}>
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
-                        <View style={styles.dot} />
-                    </View>
-                    <Ionicons name="checkmark-circle-outline" size={24} color="grey" />
                 </View>
-            </View>
-            <View style={{ marginTop: 20 }}>
-                <Text style={styles.stepText}>STEP 2</Text>
-                <Text style={styles.title}>Payment</Text>
-            </View>
+                <View style={{ marginTop: 20 }}>
+                    <Text style={styles.stepText}>STEP 2</Text>
+                    <Text style={styles.title}>Payment</Text>
+                </View>
 
 
-            {/* Payment Method Options */}
-            <View style={styles.paymentOptions}>
-                <TouchableOpacity style={styles.paymentOption}>
-                    <Ionicons name="cash-outline" size={24} color="gray" />
-                    <Text>Cash</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.paymentOptionSelected}>
-                    <Ionicons name="card-outline" size={24} color="black" />
-                    <Text>Credit Card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.paymentOption}>
-                    <Ionicons name="ellipsis-horizontal-circle-outline" size={24} color="gray" />
-                    <Text>Other</Text>
-                </TouchableOpacity>
-            </View>
+                {/* Payment Method Options */}
+                <View style={styles.paymentOptions}>
+                    <TouchableOpacity style={styles.paymentOption}>
+                        <Ionicons name="cash-outline" size={24} color="gray" />
+                        <Text>Cash</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.paymentOptionSelected}>
+                        <Ionicons name="card-outline" size={24} color="black" />
+                        <Text>Credit Card</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.paymentOption}>
+                        <Ionicons name="ellipsis-horizontal-circle" size={24} color="gray" />
+                        <Text>Other</Text>
+                    </TouchableOpacity>
+                </View>
 
-            {/* Card Section */}
-            <View style={styles.cardSection}>
-                <Text style={styles.cardSectionTitle}>Choose your card</Text>
-                <TouchableOpacity style={styles.addNew}>
-                    <Text style={styles.addNewText}>Add new+</Text>
-                </TouchableOpacity>
-                <Image source={{ uri: 'https://via.placeholder.com/350x150' }} style={styles.cardImage} />
-                {/* Replace the above placeholder image with the card image */}
-            </View>
+                {/* Card Section */}
+                <View style={styles.cardSection}>
+                    <Text style={styles.cardSectionTitle}>Choose your card</Text>
+                    <TouchableOpacity style={styles.addNew}>
+                        <Text style={styles.addNewText}>Add new+</Text>
+                    </TouchableOpacity>
+                    <Image source={{ uri: 'https://via.placeholder.com/350x150' }} style={styles.cardImage} />
+                    {/* Replace the above placeholder image with the card image */}
+                </View>
 
 
-            <View style={{ marginTop: 10 }}>
-                <Text>or check out with</Text>
-            </View>
+                <View style={{ marginTop: 10 }}>
+                    <Text>or check out with</Text>
+                </View>
 
-            {/* Payment Providers */}
-            <View style={styles.paymentProviders}>
-                <TouchableOpacity style={styles.iconContainer}>
-                    <Image resizeMode='contain' source={require("../../../assets/images/PayPal.png")} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.iconContainer}>
-                    <Image resizeMode='contain' source={require("../../../assets/images/visa-logo.png")} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.iconContainer}>
-                    <Image resizeMode='contain' source={require("../../../assets/images/Mastercard.png")} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.iconContainer}>
-                    <Image resizeMode='contain' source={require("../../../assets/images/Alipay.png")} />
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.iconContainer, { backgroundColor: "#1F72CD" }]}>
-                    <Image style={{ backgroundColor: "#1F72CD" }} resizeMode='contain' source={require("../../../assets/images/AMEX.png")} />
-                </TouchableOpacity>
+                {/* Payment Providers */}
+                <View style={styles.paymentProviders}>
+                    <TouchableOpacity style={styles.iconContainer}>
+                        <Image resizeMode='contain' source={require("../../../assets/images/PayPal.png")} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.iconContainer}>
+                        <Image resizeMode='contain' source={require("../../../assets/images/visa-logo.png")} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.iconContainer}>
+                        <Image resizeMode='contain' source={require("../../../assets/images/Mastercard.png")} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.iconContainer}>
+                        <Image resizeMode='contain' source={require("../../../assets/images/Alipay.png")} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.iconContainer, { backgroundColor: "#1F72CD" }]}>
+                        <Image style={{ backgroundColor: "#1F72CD" }} resizeMode='contain' source={require("../../../assets/images/AMEX.png")} />
+                    </TouchableOpacity>
+                </View>
             </View>
 
 
@@ -114,26 +118,34 @@ export default function CheckOutScreen2()
                     <Text style={styles.summaryLabel}>Product price</Text>
                     <Text style={styles.summaryValue}>$110</Text>
                 </View>
+                <View style={styles.lineBreak} />
                 <View style={styles.summaryRow}>
                     <Text style={styles.summaryLabel}>Shipping</Text>
                     <Text style={styles.summaryValue}>Freeship</Text>
                 </View>
+                <View style={styles.lineBreak} />
                 <View style={styles.summaryRow}>
-                    <Text style={styles.summaryLabel}>Subtotal</Text>
+                    <Text style={[styles.summaryLabel, { fontWeight: "500", color: "black" }]}>Subtotal</Text>
                     <Text style={styles.subtotalValue}>$110</Text>
                 </View>
 
 
                 {/* Terms and Conditions */}
                 <View style={styles.terms}>
-                    <Checkbox value={isAgreed} onValueChange={setIsAgreed} />
-                    <Text style={styles.termsText}>
-                        I agree to <Text style={styles.link}>Terms and conditions</Text>
-                    </Text>
+                    <Checkbox color={"#5ECE7B"}
+                        value={isAgreed} onValueChange={setIsAgreed} />
+                    <Text style={styles.termsText}>I agree to</Text>
+                    <TouchableOpacity>
+                        <Text style={styles.termsLink}>Terms and Conditions</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.btnContainer}>
+                    <CustomButton title='Place my order' onPress={() => navigation.navigate("CheckOutScreen3")} Width={380} />
                 </View>
 
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -270,16 +282,32 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 5
     },
+    lineBreak: {
+        height: 1,
+        width: '95%',
+        backgroundColor: '#F1F2F3',
+        alignSelf: "center"
+    },
     paymentProviders: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         padding: 25,
     },
     orderSummary: {
-        marginVertical: 20,
-        backgroundColor: "red",
-        flex: 1,
-        margin: 0
+        backgroundColor: "#FFFFFF",
+        height: "56%",
+        width: "100%",
+        padding: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        // iOS Shadow properties
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        // Android elevation property
+        elevation: 5,
+        gap: 20
     },
     summaryRow: {
         flexDirection: 'row',
@@ -292,7 +320,7 @@ const styles = StyleSheet.create({
     },
     summaryValue: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: '500',
     },
     subtotalValue: {
         fontSize: 18,
@@ -301,12 +329,15 @@ const styles = StyleSheet.create({
     terms: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginTop: 10
     },
     termsText: {
         marginLeft: 10,
+
     },
-    link: {
-        color: 'blue',
+    termsLink: {
+        textDecorationLine: "underline",
+        marginLeft: 5
     },
     placeOrderButton: {
         backgroundColor: 'black',
@@ -320,4 +351,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    btnContainer: {
+        alignSelf: "center"
+    }
 });
