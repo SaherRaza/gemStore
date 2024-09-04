@@ -39,7 +39,7 @@ export default function MyOrdersScreen()
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity>
-                    <Ionicons name="menu" size={24} color="black" />
+                    <Ionicons name="arrow-back-circle" size={24} color="gray" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>My Orders</Text>
                 <TouchableOpacity>
@@ -47,39 +47,31 @@ export default function MyOrdersScreen()
                 </TouchableOpacity>
             </View>
 
-            {/* Tab Buttons */}
-            <View style={styles.tabs}>
-                <TouchableOpacity style={styles.activeTab}>
-                    <Text style={styles.activeTabText}>Pending</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.inactiveTab}>
-                    <Text style={styles.inactiveTabText}>Delivered</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.inactiveTab}>
-                    <Text style={styles.inactiveTabText}>Cancelled</Text>
-                </TouchableOpacity>
-            </View>
 
-            {/* Order List */}
-            <FlatList
-                data={orders}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <View style={styles.orderCard}>
-                        <View style={styles.orderHeader}>
-                            <Text style={styles.orderNumber}>Order {item.orderNumber}</Text>
-                            <Text style={styles.orderDate}>{item.date}</Text>
+            <View style={{ paddingTop: 30, flex: 1, }}>
+
+
+                {/* Order List */}
+                <FlatList
+                    data={orders}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.orderCard}>
+                            <View style={styles.orderHeader}>
+                                <Text style={styles.orderNumber}>Order {item.orderNumber}</Text>
+                                <Text style={styles.orderDate}>{item.date}</Text>
+                            </View>
+                            <Text style={styles.trackingNumber}>Tracking number: {item.trackingNumber}</Text>
+                            <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
+                            <Text style={styles.subtotal}>Subtotal: <Text style={styles.subtotalValue}>${item.subtotal}</Text></Text>
+                            <Text style={styles.status}>{item.status}</Text>
+                            <TouchableOpacity style={styles.detailsButton}>
+                                <Text style={styles.detailsButtonText}>Details</Text>
+                            </TouchableOpacity>
                         </View>
-                        <Text style={styles.trackingNumber}>Tracking number: {item.trackingNumber}</Text>
-                        <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
-                        <Text style={styles.subtotal}>Subtotal: <Text style={styles.subtotalValue}>${item.subtotal}</Text></Text>
-                        <Text style={styles.status}>{item.status}</Text>
-                        <TouchableOpacity style={styles.detailsButton}>
-                            <Text style={styles.detailsButtonText}>Details</Text>
-                        </TouchableOpacity>
-                    </View>
-                )}
-            />
+                    )}
+                />
+            </View>
         </View>
     );
 }
@@ -96,33 +88,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 20,
         paddingBottom: 10,
-        borderBottomWidth: 1,
         borderBottomColor: '#E5E5E5',
+        marginTop: 50
     },
     headerTitle: {
         fontSize: 18,
         fontWeight: 'bold',
     },
-    tabs: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingVertical: 15,
-    },
-    activeTab: {
-        borderBottomWidth: 2,
-        borderBottomColor: '#000',
-        paddingBottom: 5,
-    },
-    activeTabText: {
-        fontWeight: 'bold',
-        color: '#000',
-    },
-    inactiveTab: {
-        paddingBottom: 5,
-    },
-    inactiveTabText: {
-        color: '#7D7D7D',
-    },
+
     orderCard: {
         backgroundColor: '#fff',
         borderRadius: 8,
@@ -134,6 +107,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 5,
         elevation: 2,
+        margin: 5,
+        gap: 5
     },
     orderHeader: {
         flexDirection: 'row',
@@ -174,9 +149,10 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         borderWidth: 1,
         borderColor: '#E5E5E5',
-        borderRadius: 5,
-        paddingVertical: 5,
-        paddingHorizontal: 10,
+        borderRadius: 20,
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        bottom: 10
     },
     detailsButtonText: {
         fontSize: 14,

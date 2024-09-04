@@ -2,8 +2,11 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton';
+import { CartParamList } from '../BottomTab/MyTabs';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 const CheckOutScreen3 = () =>
 {
+    const navigation = useNavigation<NavigationProp<CartParamList>>();
     return (
         <View style={styles.container}>
             <View style={styles.headerStyle}>
@@ -61,7 +64,7 @@ const CheckOutScreen3 = () =>
                 </View>
 
                 <View style={styles.btnContainer}>
-                    <CustomButton title='Continue Shopping' Width={"85%"} />
+                    <CustomButton onPress={() => ""} title='Continue Shopping' Width={380} />
                 </View>
             </View>
         </View>

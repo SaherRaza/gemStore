@@ -10,7 +10,6 @@ export default function CheckOutScreen2()
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
     const [isAgreed, setIsAgreed] = useState(false);
-
     return (
         <ScrollView showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 60 }}

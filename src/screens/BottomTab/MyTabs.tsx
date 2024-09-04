@@ -96,7 +96,6 @@ function CartStackScreen()
       <CartStack.Screen name="CartScreen" component={CartScreen} />
       <CartStack.Screen name="CheckOutScreen" component={CheckOutScreen} />
       {/* <CartStack.Screen name="CheckOutScreen2" component={CheckOutScreen2} /> */}
-      <CartStack.Screen name="MyOrdersScreen" component={MyOrdersScreen} />
       <CartStack.Screen name="OrderSummary" component={OrderSummary} />
       <CartStack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
     </CartStack.Navigator>

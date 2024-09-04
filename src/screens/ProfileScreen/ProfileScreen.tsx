@@ -4,8 +4,10 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Entypo from '@expo/vector-icons/Entypo';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 const ProfileScreen: React.FC = () =>
 {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
@@ -41,9 +43,9 @@ const ProfileScreen: React.FC = () =>
 
         <View style={styles.lineBreak} />
 
-        <TouchableOpacity style={styles.option}>
+        <TouchableOpacity onPress={() => navigation.navigate("MyOrdersScreen")} style={styles.option}>
           <FontAwesome5 name="ticket-alt" size={24} color="#B1B5C3" />
-          <Text style={styles.optionText}>Voucher</Text>
+          <Text style={styles.optionText}>My Orders</Text>
           <Entypo style={styles.arrowIcon} name="chevron-right" size={24} color="black" />
         </TouchableOpacity>
 
