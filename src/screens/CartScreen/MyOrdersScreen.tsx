@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const orders = [
     {
@@ -34,6 +35,7 @@ const orders = [
 
 export default function MyOrdersScreen()
 {
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             {/* Header */}
@@ -65,7 +67,7 @@ export default function MyOrdersScreen()
                             <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
                             <Text style={styles.subtotal}>Subtotal: <Text style={styles.subtotalValue}>${item.subtotal}</Text></Text>
                             <Text style={styles.status}>{item.status}</Text>
-                            <TouchableOpacity style={styles.detailsButton}>
+                            <TouchableOpacity onPress={() => navigation.navigate("OrderDetailScreen")} style={styles.detailsButton}>
                                 <Text style={styles.detailsButtonText}>Details</Text>
                             </TouchableOpacity>
                         </View>

@@ -1,10 +1,10 @@
 // Import the images statically at the top
-const sweaterImage = require("../../../assets/images/sweater.png");
-const longDressImage = require("../../../assets/images/longDress.png");
-const denimImage = require("../../../assets/images/denim.jpg");
-const blackShirtImage = require("../../../assets/images/blackShirt.jpg");
-const whiteShirtImage = require("../../../assets/images/whiteShirt.jpg");
-const blueSweaterImage = require("../../../assets/images/blueSweater.jpg");
+const sweaterImage = require("../../assets/images/sweater.png");
+const longDressImage = require("../../assets/images/longDress.png");
+const denimImage = require("../../assets/images/denim.jpg");
+const blackShirtImage = require("../../assets/images/blackShirt.jpg");
+const whiteShirtImage = require("../../assets/images/whiteShirt.jpg");
+const blueSweaterImage = require("../../assets/images/blueSweater.jpg");
 
 export type Product = {
     id: number;

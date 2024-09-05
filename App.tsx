@@ -14,11 +14,12 @@ import CheckOutScreen3 from "./src/screens/CartScreen/CheckOutScreen3";
 import MyOrdersScreen from "./src/screens/CartScreen/MyOrdersScreen";
 import CheckOutScreen2 from "./src/screens/CartScreen/CheckOutScreen2";
 import OrderSummary from "./src/screens/CartScreen/OrderSummary";
-import TrackOrderScreen from "./src/screens/CartScreen/TrackOrderScreen";
+import TrackOrderScreen from "./src/screens/CartScreen/OrderDetailScreen";
 import ProfileScreen from "./src/screens/ProfileScreen/ProfileScreen";
 import SignUpScreen from "./src/screens/LoginScreens/SignUpScreen";
 import LoginScreen from "./src/screens/LoginScreens/LoginScreen";
 import ForgotPasswordScreen from "./src/screens/LoginScreens/ForgotPasswordScreen";
+import OrderDetailScreen from "./src/screens/CartScreen/OrderDetailScreen";
 const Stack = createNativeStackNavigator();
 export default function App()
 {
@@ -48,6 +49,7 @@ export default function App()
           <Stack.Screen name="SlidingScreens" component={SlidingScreens} />
           <Stack.Screen name="CheckOutScreen3" component={CheckOutScreen3} />
           <Stack.Screen name="MyOrdersScreen" component={MyOrdersScreen} />
+          <Stack.Screen name="OrderDetailScreen" component={OrderDetailScreen} />
           <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
       </NavigationContainer>
