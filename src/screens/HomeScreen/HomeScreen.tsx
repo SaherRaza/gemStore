@@ -12,56 +12,7 @@ import
 import React, { useState } from "react";
 import { Ionicons, Foundation } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
-
-
-interface Product
-{
-  id: number;
-  image: ImageSourcePropType; // The type for image sources
-  title: string;
-  price: string;
-}
-
-
-
-const DATA: Product[] = [
-  {
-    id: 1,
-    image: require("../../../assets/images/sweater.png"),
-    title: "Turtleneck Sweater",
-    price: "$ 39.99",
-  },
-  {
-    id: 2,
-    image: require("../../../assets/images/longDress.png"),
-    title: "Long Sleeve Dress",
-    price: "$ 45",
-  },
-  {
-    id: 3,
-    image: require("../../../assets/images/denim.jpg"),
-    title: "Denim Jeans",
-    price: "$ 25",
-  },
-  {
-    id: 4,
-    image: require("../../../assets/images/blackShirt.jpg"),
-    title: "Black Cotton Shirt",
-    price: "$ 30",
-  },
-  {
-    id: 5,
-    image: require("../../../assets/images/whiteShirt.jpg"),
-    title: "White Loose Shirt",
-    price: "$ 28.99",
-  },
-  {
-    id: 6,
-    image: require("../../../assets/images/blueSweater.jpg"),
-    title: "Blue Sweater",
-    price: "$ 50",
-  },
-];
+import { Product, DATA } from "../../../assets/data/data";
 
 const HomeScreen: React.FC = () =>
 {
@@ -128,7 +79,7 @@ const HomeScreen: React.FC = () =>
                 { backgroundColor: selectedIcon === 1 ? "#3A2C27" : "#F3F3F3" },
               ]}
             >
-              <Ionicons name="md-male-outline" size={24} color="#9D9D9D" />
+              <Ionicons name="male-outline" size={24} color="#9D9D9D" />
             </View>
           </TouchableOpacity>
 
@@ -147,7 +98,7 @@ const HomeScreen: React.FC = () =>
                 { backgroundColor: selectedIcon === 2 ? "#3A2C27" : "#F3F3F3" },
               ]}
             >
-              <Ionicons name="ios-glasses-outline" size={24} color="#9D9D9D" />
+              <Ionicons name="glasses-outline" size={24} color="#9D9D9D" />
             </View>
           </TouchableOpacity>
 
