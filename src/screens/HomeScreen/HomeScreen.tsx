@@ -27,12 +27,13 @@ const HomeScreen: React.FC = () =>
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Image
             style={styles.iconStyle}
             source={require("../../../assets/images/DrawerIcon.png")}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View />
         <Text style={styles.textStyle}>GemStore</Text>
         <TouchableOpacity>
           <View style={styles.circle} />

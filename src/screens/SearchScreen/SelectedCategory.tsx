@@ -12,6 +12,7 @@ import React from "react";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SearchParamList } from "../BottomTab/MyTabs";
+import { useNavigation } from "@react-navigation/native";
 
 
 const DATA = [
@@ -100,8 +101,9 @@ type productProps = {
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
 
-const SelectedCategory: React.FC<Props> = ({ navigation, route }) =>
+const SelectedCategory: React.FC<Props> = ({ route }) =>
 {
+  const navigation = useNavigation<NativeStackScreenProps<SearchParamList>>();
   const { category } = route.params;
   return (
     <View style={styles.container}>
@@ -172,13 +174,8 @@ const SelectedCategory: React.FC<Props> = ({ navigation, route }) =>
             };
             return (
               <TouchableWithoutFeedback
-              // onPress={() =>
-              // navigation.navigate("SelectedCategory", {
-              //   categoryName: item.name,
-              //   categoryImage: item.image,
-              //   reviews: item.reviews,
-              //   showReviewButton: false,
-              // })}
+                onPress={() =>
+                  navigation.navigate("DetailScreen")}
               >
                 <View style={styles.card}>
                   <View>

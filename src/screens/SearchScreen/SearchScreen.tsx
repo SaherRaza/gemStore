@@ -164,12 +164,7 @@ const SearchScreen: React.FC<Props> = ({ navigation }) =>
               <Ionicons name="arrow-back" size={24} color="black" />
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity>
-              <Image
-                style={styles.iconStyle}
-                source={require("../../../assets/images/DrawerIcon.png")}
-              />
-            </TouchableOpacity>
+            <View />
           )}
 
           <Text style={styles.textStyle}>Discover</Text>
