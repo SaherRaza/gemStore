@@ -14,135 +14,125 @@ const shoe6 = require("../../assets/images/shoe6.jpg");
 const shoe7 = require("../../assets/images/shoe7.jpg");
 const shoe8 = require("../../assets/images/shoe8.jpg");
 const shoe9 = require("../../assets/images/shoe9.jpg");
-const shoe10 = "../../assets/images/shoe10.jpg";
-const shoe11 = "../../assets/images/shoe11.jpg";
-const shoe12 = "../../assets/images/shoe12.jpg";
-const shirt1 = "../../assets/images/t-shirt1.jpg";
-const shirt2 = "../../assets/images/t-shirt2.jpg";
-const shirt3 = "../../assets/images/t-shirt3.jpg";
-const shirt4 = "../../assets/images/t-shirt4.jpg";
-const shirt5 = "../../assets/images/t-shirt5.jpg";
-const shirt6 = "../../assets/images/t-shirt6.jpg";
-const shirt7 = "../../assets/images/t-shirt7.jpg";
-const shirt8 = "../../assets/images/t-shirt8.jpg";
-const hoodie1 = "../../assets/images/hoodie1.jpg";
-const hoodie2 = "../../assets/images/hoodie2.jpg";
-const hoodie3 = "../../assets/images/hoodie3.jpg";
-const hoodie4 = "../../assets/images/hoodie4.jpg";
-const hoodie5 = "../../assets/images/hoodie5.jpg";
-const hoodie6 = "../../assets/images/hoodie6.jpg";
-const hoodie7 = "../../assets/images/hoodie7.jpg";
-const hoodie8 = "../../assets/images/hoodie8.jpg";
-const dress1 = "../../assets/images/dress1.jpg";
-const dress2 = "../../assets/images/dress2.jpg";
-const dress3 = "../../assets/images/dress3.jpg";
-const dress4 = "../../assets/images/dress4.jpg";
-const dress5 = "../../assets/images/dress5.jpg";
-const dress6 = "../../assets/images/dress6.jpg";
-const dress7 = "../../assets/images/dress7.jpg";
-const dress8 = "../../assets/images/dress8.jpg";
-const jeans1 = "../../assets/images/jeans1.jpg";
-const jeans2 = "../../assets/images/jeans2.jpg";
-const jeans3 = "../../assets/images/jeans3.jpg";
-const jeans4 = "../../assets/images/jeans4.jpg";
-const jeans5 = "../../assets/images/jeans5.jpg";
-const jeans6 = "../../assets/images/jeans6.jpg";
-const jeans7 = "../../assets/images/jeans7.jpg";
-const jeans8 = "../../assets/images/jeans8.jpg";
-const jacket1 = "../../assets/images/jacket1.jpg";
-const jacket2 = "../../assets/images/jacket2.jpg";
-const jacket3 = "../../assets/images/jacket3.jpg";
-const jacket4 = "../../assets/images/jacket4.jpg";
-const jacket5 = "../../assets/images/jacket5.jpg";
-const jacket6 = "../../assets/images/jacket6.jpg";
-const jacket7 = "../../assets/images/jacket7.jpg";
-const jacket8 = "../../assets/images/jacket8.jpg";
-const bag1 = "../../assets/images/bag1.jpg";
-const bag2 = "../../assets/images/bag2.jpg";
-const bag3 = "../../assets/images/bag3.jpg";
-const bag4 = "../../assets/images/bag4.jpg";
-const bag5 = "../../assets/images/bag5.jpg";
-const bag6 = "../../assets/images/bag6.jpg";
-const bag7 = "../../assets/images/bag7.jpg";
-const bag8 = "../../assets/images/bag8.jpg";
-const suit1 = "../../assets/images/suit1.jpg";
-const suit2 = "../../assets/mages/suit2.jpg";
-const suit3 = "../../assets/images/suit3.jpg";
-const suit4 = "../../assets/images/suit4.jpg";
-const suit5 = "../../assets/images/suit5.jpg";
-const suit6 = "../../assets/images/suit6.jpg";
-const suit7 = "../../assets/images/suit7.jpg";
-const suit8 = "../../assets/images/suit8.jpg";
+const shoe10 = require("../../assets/images/shoe10.jpg");
+const shoe11 = require("../../assets/images/shoe11.jpg");
+const shoe12 =require( "../../assets/images/shoe12.jpg");
+const shirt1 = require("../../assets/images/t-shirt1.jpg");
+const shirt2 = require("../../assets/images/t-shirt2.jpg");
+const shirt3 = require("../../assets/images/t-shirt3.jpg");
+const shirt4 = require("../../assets/images/t-shirt4.jpg");
+const shirt5 = require("../../assets/images/t-shirt5.jpg");
+const shirt6 = require("../../assets/images/t-shirt6.jpg");
+const shirt7 = require("../../assets/images/t-shirt7.jpg");
+const shirt8 = require("../../assets/images/t-shirt8.jpg");
+const hoodie1 = require("../../assets/images/hoodie1.jpg");
+const hoodie2 = require("../../assets/images/hoodie2.jpg");
+const hoodie3 = require("../../assets/images/hoodie3.jpg");
+const hoodie4 = require("../../assets/images/hoodie4.jpg");
+const hoodie5 = require("../../assets/images/hoodie5.jpg");
+const hoodie6 = require("../../assets/images/hoodie6.jpg");
+const hoodie7 = require("../../assets/images/hoodie7.jpg");
+const hoodie8 = require("../../assets/images/hoodie8.jpg");
+const dress1 = require("../../assets/images/dress1.jpg");
+const dress2 = require("../../assets/images/dress2.jpg");
+const dress3 = require("../../assets/images/dress3.jpg");
+const dress4 = require("../../assets/images/dress4.jpg");
+const dress5 =require("../../assets/images/dress5.jpg");
+const dress6 = require("../../assets/images/dress6.jpg");
+const dress7 = require("../../assets/images/dress7.jpg");
+const dress8 = require("../../assets/images/dress8.jpg");
+const jeans1 = require("../../assets/images/jeans1.jpg");
+const jeans2 = require("../../assets/images/jeans2.jpg");
+const jeans3 = require("../../assets/images/jeans3.jpg");
+const jeans4 = require("../../assets/images/jeans4.jpg");
+const jeans5 = require("../../assets/images/jeans5.jpg");
+const jeans6 = require("../../assets/images/jeans6.jpg");
+const jeans7 = require("../../assets/images/jeans7.jpg");
+const jeans8 =require("../../assets/images/jeans8.jpg");
+const jacket1 =require("../../assets/images/jacket1.jpg");
+const jacket2 = require("../../assets/images/jacket2.jpg");
+const jacket3 = require("../../assets/images/jacket3.jpg");
+const jacket4 = require("../../assets/images/jacket4.jpg");
+const jacket5 = require("../../assets/images/jacket5.jpg");
+const jacket6 = require("../../assets/images/jacket6.jpg");
+const jacket7 = require("../../assets/images/jacket7.jpg");
+const jacket8 =require ("../../assets/images/jacket8.jpg");
+const bag1 = require("../../assets/images/bag1.jpg");
+const bag2 = require("../../assets/images/bag2.jpg");
+const bag3 = require("../../assets/images/bag3.jpg");
+const bag4 = require("../../assets/images/bag4.jpg");
+const bag5 = require("../../assets/images/bag5.jpg");
+const bag6 = require("../../assets/images/bag6.jpg");
+const bag7 = require("../../assets/images/bag7.jpg");
+const bag8 = require("../../assets/images/bag8.jpg");
+const suit1 = require("../../assets/images/suit1.jpg");
+const suit2 = require("../../assets/images/suit2.jpg");
+const suit3 = require("../../assets/images/suit3.jpg");
+const suit4 = require("../../assets/images/suit4.jpg");
+const suit5 = require("../../assets/images/suit5.jpg");
+const suit6 = require("../../assets/images/suit6.jpg");
+const suit7 = require("../../assets/images/suit7.jpg");
+const suit8 = require("../../assets/images/suit8.jpg");
+
 
 export type Product = {
-    id: number | string;
-    image: any;  // Image type is 'any' for require() consts
-    price: string | number;
-    title: string;
+  //   id: number | string;
+  //   image: any;  // Image type is 'any' for require() consts
+  //   price: string | number;
+  // title: string;
+  // text?: string;
+   id: string;
+  image: string; // Assuming 'shirt2' is the URL or path to an image
+  name: string;
+  text: string;
+  type: string;
+  size?: string[]; // Array of available sizes
+  color: string[]; // Array of available colors
+  gender: "male" | "female" | "unisex"; // Gender can be male, female, or unisex
+  price: number;
 };
 
 // Export the DATA array
 export const DATA: Product[] = [
-  {
-    id: 1,
-    image: sweaterImage,
-    title: "Turtleneck Sweater",
-    price: "$ 39.99",
-  },
-  {
-    id: 2,
-    image: longDressImage,
-    title: "Long Sleeve Dress",
-    price: "$ 45",
-  },
-  {
-    id: 3,
-    image: denimImage,
-    title: "Denim Jeans",
-    price: "$ 25",
-  },
-  {
-    id: 4,
-    image: blackShirtImage,
-    title: "Black Cotton Shirt",
-    price: "$ 30",
-  },
-  {
-    id: 5,
-    image: whiteShirtImage,
-    title: "White Loose Shirt",
-    price: "$ 28.99",
-  },
-  {
-    id: 6,
-    image: blueSweaterImage,
-    title: "Blue Sweater",
-    price: "$ 50",
-  },
-   {
-    id: "0",
-    img: shoe1,
-    text: "Summers SALE up to 50% OFF what are you wating for",
-  },
+  // {
+  //   id: 1,
+  //   image: sweaterImage,
+  //   title: "Turtleneck Sweater",
+  //   price: "$ 39.99",
+  // },
+  // {
+  //   id: 2,
+  //   image: longDressImage,
+  //   title: "Long Sleeve Dress",
+  //   price: "$ 45",
+  // },
+  // {
+  //   id: 3,
+  //   image: denimImage,
+  //   title: "Denim Jeans",
+  //   price: "$ 25",
+  // },
+  // {
+  //   id: 4,
+  //   image: blackShirtImage,
+  //   title: "Black Cotton Shirt",
+  //   price: "$ 30",
+  // },
+  // {
+  //   id: 5,
+  //   image: whiteShirtImage,
+  //   title: "White Loose Shirt",
+  //   price: "$ 28.99",
+  // },
+  // {
+  //   id: 6,
+  //   image: blueSweaterImage,
+  //   title: "Blue Sweater",
+  //   price: "$ 50",
+  // },
   {
     id: "1",
-    img: shoe2,
-    text: "AUTUMN is coming, choose what suits you THE BEST",
-  },
-  {
-    id: "2",
-    img: shoe3,
-    text: "Make your feet as comfortable as walking on the beach",
-  },
-  {
-    id: "3",
-    img: shoe4,
-    text: "Choose between basketball and fashion or choose both",
-  },
-
-  {
-    id: "1",
-    img: shirt1,
+    image: shirt1,
     name: "Casual T-Shirt 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -153,7 +143,7 @@ export const DATA: Product[] = [
   },
   {
     id: "2",
-    img: shirt2,
+    image: shirt2,
     name: "Casual T-Shrit 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -164,7 +154,7 @@ export const DATA: Product[] = [
   },
   {
     id: "3",
-    img: shirt3,
+    image: shirt3,
     name: "Casual T-Shrit 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -175,7 +165,7 @@ export const DATA: Product[] = [
   },
   {
     id: "4",
-    img: shirt4,
+    image: shirt4,
     name: "Casual T-Shrit 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -186,7 +176,7 @@ export const DATA: Product[] = [
   },
   {
     id: "5",
-    img: shirt5,
+    image: shirt5,
     name: "Casual T-Shrit 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -197,7 +187,7 @@ export const DATA: Product[] = [
   },
   {
     id: "6",
-    img: shirt6,
+    image: shirt6,
     name: "Casual T-Shrit 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -208,7 +198,7 @@ export const DATA: Product[] = [
   },
   {
     id: "7",
-    img: shirt7,
+    image: shirt7,
     name: "Casual T-Shrit 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -219,7 +209,7 @@ export const DATA: Product[] = [
   },
   {
     id: "8",
-    img: shirt8,
+    image: shirt8,
     name: "Casual T-Shrit 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "T-Shirts",
@@ -231,7 +221,7 @@ export const DATA: Product[] = [
 
   {
     id: "9",
-    img: hoodie1,
+    image: hoodie1,
     name: "Casual Hoodie 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -242,7 +232,7 @@ export const DATA: Product[] = [
   },
   {
     id: "10",
-    img: hoodie2,
+    image: hoodie2,
     name: "Casual Hoodie 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -253,7 +243,7 @@ export const DATA: Product[] = [
   },
   {
     id: "11",
-    img: hoodie3,
+    image: hoodie3,
     name: "Casual Hoodie 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -264,7 +254,7 @@ export const DATA: Product[] = [
   },
   {
     id: "12",
-    img: hoodie4,
+    image: hoodie4,
     name: "Casual Hoodie 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -275,7 +265,7 @@ export const DATA: Product[] = [
   },
   {
     id: "13",
-    img: hoodie5,
+    image: hoodie5,
     name: "Casual Hoodie 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -286,7 +276,7 @@ export const DATA: Product[] = [
   },
   {
     id: "14",
-    img: hoodie6,
+    image: hoodie6,
     name: "Casual Hoodie 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -297,7 +287,7 @@ export const DATA: Product[] = [
   },
   {
     id: "15",
-    img: hoodie7,
+    image: hoodie7,
     name: "Casual Hoodie 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -308,7 +298,7 @@ export const DATA: Product[] = [
   },
   {
     id: "16",
-    img: hoodie8,
+    image: hoodie8,
     name: "Casual Hoodie 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Hoodies",
@@ -320,7 +310,7 @@ export const DATA: Product[] = [
 
   {
     id: "17",
-    img: shoe5,
+    image: shoe5,
     name: "Casual Shoes 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -331,7 +321,7 @@ export const DATA: Product[] = [
   },
   {
     id: "18",
-    img: shoe6,
+    image: shoe6,
     name: "Casual Shoes 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -342,7 +332,7 @@ export const DATA: Product[] = [
   },
   {
     id: "19",
-    img: shoe7,
+    image: shoe7,
     name: "Casual Shoes 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -353,7 +343,7 @@ export const DATA: Product[] = [
   },
   {
     id: "20",
-    img: shoe8,
+    image: shoe8,
     name: "Casual Shoes 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -364,7 +354,7 @@ export const DATA: Product[] = [
   },
   {
     id: "21",
-    img: shoe9,
+    image: shoe9,
     name: "Casual Shoes 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -375,7 +365,7 @@ export const DATA: Product[] = [
   },
   {
     id: "22",
-    img: shoe10,
+    image: shoe10,
     name: "Casual Shoes 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -386,7 +376,7 @@ export const DATA: Product[] = [
   },
   {
     id: "23",
-    img: shoe11,
+    image: shoe11,
     name: "Casual Shoes 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -397,7 +387,7 @@ export const DATA: Product[] = [
   },
   {
     id: "24",
-    img: shoe12,
+    image: shoe12,
     name: "Casual Shoes 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Shoes",
@@ -408,7 +398,7 @@ export const DATA: Product[] = [
   },
   {
     id: "25",
-    img: dress1,
+    image: dress1,
     name: "Casual Dress 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -419,7 +409,7 @@ export const DATA: Product[] = [
   },
   {
     id: "26",
-    img: dress2,
+    image: dress2,
     name: "Casual Dress 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -430,7 +420,7 @@ export const DATA: Product[] = [
   },
   {
     id: "27",
-    img: dress3,
+    image: dress3,
     name: "Casual Dress 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -441,7 +431,7 @@ export const DATA: Product[] = [
   },
   {
     id: "28",
-    img: dress4,
+    image: dress4,
     name: "Casual Dress 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -452,7 +442,7 @@ export const DATA: Product[] = [
   },
   {
     id: "29",
-    img: dress5,
+    image: dress5,
     name: "Casual Dress 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -463,7 +453,7 @@ export const DATA: Product[] = [
   },
   {
     id: "30",
-    img: dress6,
+    image: dress6,
     name: "Casual Dress 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -474,7 +464,7 @@ export const DATA: Product[] = [
   },
   {
     id: "31",
-    img: dress7,
+    image: dress7,
     name: "Casual Dress 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -485,7 +475,7 @@ export const DATA: Product[] = [
   },
   {
     id: "32",
-    img: dress8,
+    image: dress8,
     name: "Casual Dress 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Dresses",
@@ -496,7 +486,7 @@ export const DATA: Product[] = [
   },
   {
     id: "33",
-    img: jeans1,
+    image: jeans1,
     name: "Casual Jeans 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -507,7 +497,7 @@ export const DATA: Product[] = [
   },
   {
     id: "34",
-    img: jeans2,
+    image: jeans2,
     name: "Casual Jeans 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -518,7 +508,7 @@ export const DATA: Product[] = [
   },
   {
     id: "35",
-    img: jeans3,
+    image: jeans3,
     name: "Casual Jeans 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -529,7 +519,7 @@ export const DATA: Product[] = [
   },
   {
     id: "36",
-    img: jeans4,
+    image: jeans4,
     name: "Casual Jeans 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -540,7 +530,7 @@ export const DATA: Product[] = [
   },
   {
     id: "37",
-    img: jeans5,
+    image: jeans5,
     name: "Casual Jeans 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -551,7 +541,7 @@ export const DATA: Product[] = [
   },
   {
     id: "37",
-    img: jeans6,
+    image: jeans6,
     name: "Casual Jeans 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -562,7 +552,7 @@ export const DATA: Product[] = [
   },
   {
     id: "38",
-    img: jeans7,
+    image: jeans7,
     name: "Casual Jeans 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -573,7 +563,7 @@ export const DATA: Product[] = [
   },
   {
     id: "39",
-    img: jeans8,
+    image: jeans8,
     name: "Casual Jeans 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jeans",
@@ -584,7 +574,7 @@ export const DATA: Product[] = [
   },
   {
     id: "40",
-    img: jacket1,
+    image: jacket1,
     name: "Casual Jacket 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -595,7 +585,7 @@ export const DATA: Product[] = [
   },
   {
     id: "41",
-    img: jacket2,
+    image: jacket2,
     name: "Casual Jacket 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -606,7 +596,7 @@ export const DATA: Product[] = [
   },
   {
     id: "42",
-    img: jacket3,
+    image: jacket3,
     name: "Casual Jacket 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -617,7 +607,7 @@ export const DATA: Product[] = [
   },
   {
     id: "43",
-    img: jacket4,
+    image: jacket4,
     name: "Casual Jacket 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -628,7 +618,7 @@ export const DATA: Product[] = [
   },
   {
     id: "44",
-    img: jacket5,
+    image: jacket5,
     name: "Casual Jacket 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -639,7 +629,7 @@ export const DATA: Product[] = [
   },
   {
     id: "45",
-    img: jacket6,
+    image: jacket6,
     name: "Casual Jacket 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -650,7 +640,7 @@ export const DATA: Product[] = [
   },
   {
     id: "46",
-    img: jacket7,
+    image: jacket7,
     name: "Casual Jacket 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -661,7 +651,7 @@ export const DATA: Product[] = [
   },
   {
     id: "47",
-    img: jacket8,
+    image: jacket8,
     name: "Casual Jacket 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Jackets",
@@ -672,7 +662,7 @@ export const DATA: Product[] = [
   },
   {
     id: "48",
-    img: bag1,
+    image: bag1,
     name: "Casual Bag 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -682,7 +672,7 @@ export const DATA: Product[] = [
   },
   {
     id: "49",
-    img: bag2,
+    image: bag2,
     name: "Casual Bag 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -692,7 +682,7 @@ export const DATA: Product[] = [
   },
   {
     id: "50",
-    img: bag3,
+    image: bag3,
     name: "Casual Bag 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -702,7 +692,7 @@ export const DATA: Product[] = [
   },
   {
     id: "51",
-    img: bag4,
+    image: bag4,
     name: "Casual Bag 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -712,7 +702,7 @@ export const DATA: Product[] = [
   },
   {
     id: "52",
-    img: bag5,
+    image: bag5,
     name: "Casual Bag 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -722,7 +712,7 @@ export const DATA: Product[] = [
   },
   {
     id: "53",
-    img: bag6,
+    image: bag6,
     name: "Casual Bag 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -732,7 +722,7 @@ export const DATA: Product[] = [
   },
   {
     id: "54",
-    img: bag7,
+    image: bag7,
     name: "Casual Bag 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -742,7 +732,7 @@ export const DATA: Product[] = [
   },
   {
     id: "55",
-    img: bag8,
+    image: bag8,
     name: "Casual Bag 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Bags",
@@ -752,7 +742,7 @@ export const DATA: Product[] = [
   },
   {
     id: "56",
-    img: suit1,
+    image: suit1,
     name: "Casual Suit 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
@@ -763,7 +753,7 @@ export const DATA: Product[] = [
   },
   {
     id: "57",
-    img: suit2,
+    image: suit2,
     name: "Casual Suit 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
@@ -774,7 +764,7 @@ export const DATA: Product[] = [
   },
   {
     id: "58",
-    img: suit3,
+    image: suit3,
     name: "Casual Suit 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
@@ -785,7 +775,7 @@ export const DATA: Product[] = [
   },
   {
     id: "59",
-    img: suit4,
+    image: suit4,
     name: "Casual Suit 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
@@ -796,7 +786,7 @@ export const DATA: Product[] = [
   },
   {
     id: "60",
-    img: suit5,
+    image: suit5,
     name: "Casual Suit 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
@@ -807,7 +797,7 @@ export const DATA: Product[] = [
   },
   {
     id: "61",
-    img: suit6,
+    image: suit6,
     name: "Casual Suit 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
@@ -818,7 +808,7 @@ export const DATA: Product[] = [
   },
   {
     id: "62",
-    img: suit7,
+    image: suit7,
     name: "Casual Suit 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
@@ -829,7 +819,7 @@ export const DATA: Product[] = [
   },
   {
     id: "63",
-    img: suit8,
+    image: suit8,
     name: "Casual Suit 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The constant thing is to take your time and not get stressed. I just want to do what I do.",
     type: "Suits",
