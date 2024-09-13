@@ -43,12 +43,12 @@ const CartScreen = () =>
               color={isChecked ? '#508A7B' : "#8A8A8F"}
             />
           </View>
-          <Text style={[styles.textStyle, { lineHeight: 35, fontSize: 14 }]}>$ 80.00</Text>
+          <Text style={[styles.textStyle, { lineHeight: 35, fontSize: 14 }]}>$ 110.00</Text>
           <View style={styles.sizeContainer}>
             <Text style={[styles.textStyle, { color: "#8A8A8F", fontWeight: "400", fontSize: 12, lineHeight: 35 }]}>Size:L | Color:Cream</Text>
             <View style={styles.btn}>
               <TouchableOpacity><Text>-</Text></TouchableOpacity>
-              <Text>0</Text>
+              <Text>1</Text>
               <TouchableOpacity><Text>+</Text></TouchableOpacity>
             </View>
           </View>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     alignItems: "center",
     position: 'absolute',
-    bottom: 0,
+    bottom: 15,
     width: "100%"
   },
   bottomContainer: {

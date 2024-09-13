@@ -80,7 +80,8 @@ export default function CheckOutScreen2()
                     <TouchableOpacity style={styles.addNew}>
                         <Text style={styles.addNewText}>Add new+</Text>
                     </TouchableOpacity>
-                    <Image source={{ uri: 'https://via.placeholder.com/350x150' }} style={styles.cardImage} />
+                    <Image resizeMode='cover'
+                        source={require("../../../assets/images/card.png")} style={styles.cardImage} />
                     {/* Replace the above placeholder image with the card image */}
                 </View>
 
@@ -268,7 +269,7 @@ const styles = StyleSheet.create({
     },
     cardImage: {
         width: '100%',
-        height: 150,
+        height: 250,
         borderRadius: 10,
         marginTop: 10,
     },

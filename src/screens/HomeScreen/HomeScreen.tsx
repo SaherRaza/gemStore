@@ -191,8 +191,8 @@ const HomeScreen: React.FC = () =>
                   style={styles.cardImage}
                 />
                 <View style={{ marginTop: 10 }}>
-                  <Text style={{ fontWeight: "600" }}>{item.title}</Text>
-                  <Text style={{ fontWeight: "600" }}>{item.price}</Text>
+                  <Text style={{ fontWeight: "600" }}>{item.name}</Text>
+                  <Text style={{ fontWeight: "600" }}>{item.price}$</Text>
                 </View>
               </View>
             )}
@@ -247,7 +247,7 @@ const HomeScreen: React.FC = () =>
                   />
                 </View>
                 <View style={styles.textBlock}>
-                  <Text style={{ fontWeight: "600" }}>{item.title}</Text>
+                  <Text style={{ fontWeight: "600" }}>{item.name}</Text>
                   <Text style={{ fontWeight: "600" }}>{item.price}</Text>
                 </View>
               </View>

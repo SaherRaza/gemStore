@@ -4,6 +4,7 @@ import { Ionicons, AntDesign } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton';
 import { CartParamList } from '../BottomTab/MyTabs';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+
 const CheckOutScreen3 = () =>
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
@@ -77,13 +78,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        padding: 20
     },
     headerStyle: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between", // Make sure to use space-between
         paddingHorizontal: 20, // Adjust as needed for padding
-        marginTop: 60
+        marginTop: 40
     },
     iconStyle: {
         width: 32,
