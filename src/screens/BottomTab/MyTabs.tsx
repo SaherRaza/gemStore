@@ -19,6 +19,7 @@ import SelectedCategory from "../SearchScreen/SelectedCategory";
 import DetailScreen from "../SearchScreen/DetailScreen";
 import CheckOutScreen from "../CartScreen/CheckOutScreen";
 import OrderSummary from './../CartScreen/OrderSummary';
+import { Product } from "../../../assets/data/data";
 
 
 
@@ -46,9 +47,9 @@ const HomeStackScreen: React.FC = () =>
 export type SearchParamList = {
   SearchScreen: undefined;
   SelectedCategory: {
-    category: string;
+    category?: string;
   };
-  DetailScreen: undefined;
+  DetailScreen: { product: Product; };
 };
 
 const SearchStack = createNativeStackNavigator<SearchParamList>();

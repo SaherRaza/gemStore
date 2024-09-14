@@ -8,24 +8,47 @@ import
   FlatList,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SearchParamList } from "../BottomTab/MyTabs";
-import { useNavigation } from "@react-navigation/native";
 import { RootState } from "../../store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedProduct } from "../../store/productSlice";
 
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
 
-const SelectedCategory: React.FC<Props> = ({ route }) =>
+const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
 {
-  const navigation = useNavigation<NativeStackScreenProps<SearchParamList>>();
+  // const navigation = useNavigation<NativeStackScreenProps<SearchParamList>>(); // not needed
   // Access filtered products from Redux store
   const filteredProducts = useSelector((state: RootState) => state.products.filteredProducts);
+  const filteredCount = useSelector((state: RootState) => state.products.filteredCount);
+
+  const dispatch = useDispatch();
+
+  const selectedProduct = useSelector((state: RootState) => state.products.selectedProduct);
+
+  const handleProductSelect = (productId: string) =>
+  {
+    // Dispatch the action to select the product
+    dispatch(setSelectedProduct(productId));
+  };
+
+  useEffect(() =>
+  {
+    if (selectedProduct)
+    {
+      // Navigate to product details screen when product is selected
+      navigation.navigate('DetailScreen', { product: selectedProduct });
+    }
+  }, [selectedProduct, navigation]);
+
+
 
   const { category } = route.params;
+
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
@@ -52,7 +75,7 @@ const SelectedCategory: React.FC<Props> = ({ route }) =>
       <View style={styles.filterIconContainer}>
         <View>
           <Text style={styles.textStyle}>Found</Text>
-          <Text style={styles.textStyle}>124 results</Text>
+          <Text style={styles.textStyle}>{filteredCount} results</Text>
         </View>
         <TouchableOpacity style={styles.filterIcon}>
           <Text>Filter</Text>
@@ -95,8 +118,7 @@ const SelectedCategory: React.FC<Props> = ({ route }) =>
             };
             return (
               <TouchableWithoutFeedback
-                onPress={() =>
-                  navigation.navigate("DetailScreen")}
+                onPress={() => handleProductSelect(item.id)}
               >
                 <View style={styles.card}>
                   <View>

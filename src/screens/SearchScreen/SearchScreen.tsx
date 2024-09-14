@@ -71,7 +71,7 @@ const SearchScreen: React.FC<Props> = ({ navigation }) =>
   {
     dispatch(setSelectedCategory(category));
     // Navigate to the next screen to display products
-    navigation.navigate('SelectedCategory', category);  // Adjust to your actual product list screen name
+    navigation.navigate('SelectedCategory', { category });  // Adjust to your actual product list screen name
 
   };
 

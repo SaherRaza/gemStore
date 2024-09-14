@@ -8,11 +8,15 @@ import { useState } from 'react';
 
 type Props = NativeStackScreenProps<SearchParamList, "DetailScreen">;
 
-const DetailScreen: React.FC<Props> = () =>
+const DetailScreen: React.FC<Props> = ({ route, navigation }) =>
 {
   const [favorite, setFavorite] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [review, setReviews] = useState(false);
+
+  const { product } = route.params;
+  console.log(product);
+
 
   const reviewDropdown = () =>
   {
@@ -35,12 +39,12 @@ const DetailScreen: React.FC<Props> = () =>
         <View>
           <Image
             resizeMode='cover'
-            source={require("../../../assets/images/blackShirt.jpg")}
+            source={product.image}
             style={{ width: "100%", height: 400 }} />
         </View>
         <View style={styles.headerStyle}>
           <TouchableOpacity
-            //onPress={() => navigation.goBack()}
+            onPress={() => navigation.goBack()}
             style={styles.iconStyle}
           >
             <AntDesign name="left" size={18} color="#1E3354" />
@@ -58,11 +62,11 @@ const DetailScreen: React.FC<Props> = () =>
       <View style={styles.midSection}>
         <View style={styles.detailSection}>
           <View>
-            <Text style={styles.textStyle}>Sportwear set</Text>
+            <Text style={styles.textStyle}>{product.name}</Text>
             <Text>Reviews (83)</Text>
           </View>
           <View>
-            <Text style={styles.textStyle}>$ 90.00</Text>
+            <Text style={styles.textStyle}>{product.price}$</Text>
           </View>
         </View>
         <View style={styles.lineBreak} />
@@ -95,9 +99,7 @@ const DetailScreen: React.FC<Props> = () =>
         {isDropdownOpen && (
           <View>
 
-            <Text style={styles.descriptionText}>
-              Sportswear is no longer under culture, it is no longer indie or cobbled together as it once was.
-              Sport is fashion today. The top is oversized in fit and style, may need to size down.
+            <Text style={styles.descriptionText}>{product.text}
             </Text>
           </View>
         )}

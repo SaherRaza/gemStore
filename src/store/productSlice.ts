@@ -5,13 +5,15 @@ import { Product, DATA } from "../../assets/data/data";
 interface ProductState {
     products: Product[];
     selectedProduct: Product | null;      // selectedProduct:  null;
-     filteredProducts: Product[];  // New state to store filtered products by category
+    filteredProducts: Product[];  // New state to store filtered products by category
+    filteredCount: number
 }
 
 const initialState: ProductState = {
     products: DATA,
     selectedProduct: null,
-    filteredProducts:[] // initially empty
+    filteredProducts: [],// initially empty
+    filteredCount: 0
 };
 
 export const productSlice = createSlice({
@@ -30,6 +32,8 @@ export const productSlice = createSlice({
             state.filteredProducts = state.products.filter(
                 (product) => product.category === category
             )
+            //update the count of filtered products
+            state.filteredCount = state.filteredProducts.length;
         }
     }
 });
