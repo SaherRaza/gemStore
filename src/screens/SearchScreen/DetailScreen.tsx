@@ -4,23 +4,28 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SearchParamList } from '../BottomTab/MyTabs';
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useState } from 'react';
+import { cartSlice } from '../../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import CustomButton from '../../components/CustomButton';
+import { RootState } from '../../store';
 
 
 type Props = NativeStackScreenProps<SearchParamList, "DetailScreen">;
 
 const DetailScreen: React.FC<Props> = ({ route, navigation }) =>
 {
+  const dispatch = useDispatch();
+
   const [favorite, setFavorite] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [review, setReviews] = useState(false);
 
   const { product } = route.params;
-  console.log(product);
+  console.log("selected product to add into cart", product.image);
 
 
-  const reviewDropdown = () =>
+  const addToCart = () =>
   {
-    setReviews(!review);
+    dispatch(cartSlice.actions.addCartItem({ product }));
   };
 
   const toggleDropdown = () =>
@@ -103,23 +108,11 @@ const DetailScreen: React.FC<Props> = ({ route, navigation }) =>
             </Text>
           </View>
         )}
-        <View style={styles.descriptionSection}>
-          <View>
-            <Text>Reviews</Text>
-          </View>
-          <TouchableOpacity onPress={reviewDropdown}>
-            <AntDesign name={review ? "up" : "down"} size={20} color="black" />
-          </TouchableOpacity>
+
+        <View style={styles.btnContainer}>
+          <CustomButton onPress={addToCart} title='Add to Cart' Width={380} />
         </View>
-        <View style={styles.lineBreak} />
-        {review && (
-          <View>
-            <Text style={styles.descriptionText}>
-              Sportswear is no longer under culture, it is no longer indie or cobbled together as it once was.
-              Sport is fashion today. The top is oversized in fit and style, may need to size down.
-            </Text>
-          </View>
-        )}
+
       </View>
     </SafeAreaView>
   );
@@ -202,6 +195,11 @@ const styles = StyleSheet.create({
     margin: 25,
     textAlign: "justify",
     fontSize: 16
+  },
+  btnContainer: {
+    alignSelf: "center",
+    position: "absolute",
+    bottom: 15,
   }
 });
 

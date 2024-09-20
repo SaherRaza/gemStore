@@ -1,6 +1,8 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product, DATA } from "../../assets/data/data";
 
+
+
 interface CartItem
 {
     product: Product;
@@ -13,7 +15,7 @@ interface CartState
     deliveryFee: number;
     freeDeliveryFrom: number;
 }
-
+//state variables
 const initialState: CartState = {
     items: [],
     deliveryFee: 15,

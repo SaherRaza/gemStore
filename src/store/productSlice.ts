@@ -4,7 +4,7 @@ import { Product, DATA } from "../../assets/data/data";
 // define initial state type
 interface ProductState {
     products: Product[];
-    selectedProduct: Product | null;      // selectedProduct:  null;
+    selectedProduct: Product | null;  
     filteredProducts: Product[];  // New state to store filtered products by category
     filteredCount: number
 }
@@ -12,7 +12,7 @@ interface ProductState {
 const initialState: ProductState = {
     products: DATA,
     selectedProduct: null,
-    filteredProducts: [],// initially empty
+    filteredProducts: [],  // initially empty
     filteredCount: 0
 };
 

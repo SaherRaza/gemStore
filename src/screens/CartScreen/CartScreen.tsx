@@ -1,15 +1,29 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from "react-native";
+import React, { FC, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import CustomButton from './../../components/CustomButton';
 import Checkbox from 'expo-checkbox';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { CartParamList } from "../BottomTab/MyTabs";
+import CartListItem from "../../components/CartListItem";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { selectDeliveryPrice, selectSubtotal, selectTotal } from "../../store/cartSlice";
 
-const CartScreen = () =>
+interface Props { }
+
+const CartScreen: FC<Props> = () =>
 {
   const navigation = useNavigation<NavigationProp<CartParamList>>();
-  const [isChecked, setChecked] = useState(false);
+
+  const cart = useSelector((state: RootState) => state.cart.items);
+
+  console.log("cart addedd+++++++++++++", cart);
+
+  const subTotal = useSelector(selectSubtotal);
+  const deliveryFee = useSelector(selectDeliveryPrice);
+  const total = useSelector(selectTotal);
+
   return (
     <View style={styles.container}>
       <View style={styles.headerStyle}>
@@ -29,49 +43,29 @@ const CartScreen = () =>
         <View style={styles.emptyView} />
       </View>
 
-      <View style={styles.cartListStyle}>
-        <View style={styles.imageSection}>
-          <Image style={styles.image} resizeMode="cover" source={require("../../../assets/images/blueSweater.jpg")} />
-        </View>
-        <View style={styles.textSection}>
-          <View style={styles.checkboxContainer}>
-            <Text style={[styles.textStyle, { lineHeight: 35, fontSize: 14 }]}>SportWear Set</Text>
-            <Checkbox
-              // style={styles.checkbox}
-              value={isChecked}
-              onValueChange={setChecked}
-              color={isChecked ? '#508A7B' : "#8A8A8F"}
-            />
-          </View>
-          <Text style={[styles.textStyle, { lineHeight: 35, fontSize: 14 }]}>$ 110.00</Text>
-          <View style={styles.sizeContainer}>
-            <Text style={[styles.textStyle, { color: "#8A8A8F", fontWeight: "400", fontSize: 12, lineHeight: 35 }]}>Size:L | Color:Cream</Text>
-            <View style={styles.btn}>
-              <TouchableOpacity><Text>-</Text></TouchableOpacity>
-              <Text>1</Text>
-              <TouchableOpacity><Text>+</Text></TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </View>
-
+      <FlatList style={{ flex: 1, backgroundColor: "red" }}
+        data={cart}
+        renderItem={({ item, index }) => <CartListItem key={index} cartItem={item} />}
+      />
       <View style={styles.bottomContainer}>
         <View style={styles.title}>
-          <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>Product Price</Text>
-          <Text style={[styles.textStyle, { fontWeight: "400" }]}>$110</Text>
+          <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>SubTotal</Text>
+          <Text style={[styles.textStyle, { fontWeight: "400" }]}>{subTotal}$</Text>
         </View>
         <View style={styles.lineBreak} />
         <View style={styles.title}>
-          <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>Shipping</Text>
-          <Text style={[styles.textStyle, { fontWeight: "400" }]}>Freeship</Text>
+          <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>Delivery</Text>
+          <Text style={[styles.textStyle, { fontWeight: "400" }]}>{deliveryFee} A$</Text>
         </View>
         <View style={styles.lineBreak} />
         <View style={styles.title}>
-          <Text style={[styles.textStyle, { fontWeight: "500" }]}>Subtotal</Text>
-          <Text style={[styles.textStyle, { fontWeight: "500" }]}>$110</Text>
+          <Text style={[styles.textStyle, { fontWeight: "500" }]}>Total</Text>
+          <Text style={[styles.textStyle, { fontWeight: "500" }]}>{total}A$</Text>
         </View>
         <View style={styles.btnContainer}>
-          <CustomButton onPress={() => navigation.navigate("CheckOutScreen")} title="Proceed to Checkout" Width={300} />
+          <CustomButton
+            onPress={() => navigation.navigate("CheckOutScreen")}
+            title="Proceed to Checkout" Width={300} />
         </View>
       </View>
     </View>
@@ -110,15 +104,6 @@ const styles = StyleSheet.create({
   },
   emptyView: {
     width: 32, // This view will be the same size as the iconStyle view
-  },
-  cartListStyle: {
-    width: "90%",
-    height: "15%",
-    alignSelf: "center",
-    borderRadius: 20,
-    marginTop: 40,
-    backgroundColor: "#F1F1F1",
-    flexDirection: "row"
   },
   imageSection: {
     borderTopLeftRadius: 20,
@@ -164,24 +149,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#8A8A8F',
     alignSelf: "center"
   },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
+  //
+  totalsContainer: {
+    margin: 20,
+    borderColor: "gainsboro",
+    borderTopWidth: 1,
+    paddingTop: 10,
   },
-  btn: {
-    flexDirection: "row",
-    width: 90,
-    borderRadius: 40,
-    borderWidth: 1.2,
-    padding: 5,
-    justifyContent: "space-evenly",
-    borderColor: "#8A8A8F",
-    alignItems: "center"
-  },
-  sizeContainer: {
+  row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
-  }
+    marginVertical: 2,
+  },
+  text: {
+    fontSize: 16,
+    color: "gray",
+  },
+  textBold: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  button: {
+    position: "absolute",
+    bottom: 30,
+    backgroundColor: "black",
+    alignSelf: "center",
+    width: "90%",
+    padding: 20,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "500",
+    fontSize: 16,
+  },
+
 });
