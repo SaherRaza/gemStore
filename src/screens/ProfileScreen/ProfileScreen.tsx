@@ -66,7 +66,8 @@ const ProfileScreen: React.FC = () =>
         </TouchableOpacity>
         <View style={styles.lineBreak} />
 
-        <TouchableOpacity style={styles.option}>
+        <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}
+          style={styles.option}>
           <FontAwesome5 name="sign-out-alt" size={24} color="#B1B5C3" />
           <Text style={styles.optionText}>Log out</Text>
         </TouchableOpacity>
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: 20,
     margin: 18,
-    backgroundColor: '#F3F3F6',
+    // backgroundColor: '#F3F3F6',
   },
   option: {
     flexDirection: 'row',
@@ -104,7 +105,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 1,
   },
   optionText: {
     fontSize: 18,

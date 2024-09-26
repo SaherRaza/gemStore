@@ -184,10 +184,11 @@ const CartListItem: FC<Props> = ({ cartItem }) =>
 
     return (
         <View style={styles.container}>
-            <Image source={{ uri: cartItem.product.image }} style={styles.image} />
+            <Image resizeMode="contain"
+                source={cartItem.product.image} style={styles.image} />
             <View style={styles.contentContainer}>
-                <Text style={styles.name}>{cartItem.name}</Text>
-                <Text style={styles.size}>Size {cartItem.size}</Text>
+                <Text style={styles.name}>{cartItem.product.name}</Text>
+                <Text style={styles.size}>Size {cartItem.product.size}</Text>
 
                 <View style={styles.footer}>
                     <Feather
@@ -196,7 +197,7 @@ const CartListItem: FC<Props> = ({ cartItem }) =>
                         size={24}
                         color="gray"
                     />
-                    <Text style={styles.quantity}>{cartItem.quantity}</Text>
+                    <Text style={styles.quantity}>{cartItem.product.quantity}</Text>
                     <Feather
                         onPress={increaseQuantity}
                         name="plus-circle"
@@ -204,7 +205,7 @@ const CartListItem: FC<Props> = ({ cartItem }) =>
                         color="gray"
                     />
                     <Text style={styles.itemTotal}>
-                        ${cartItem.price * cartItem.quantity}
+                        ${cartItem.product.price * cartItem.product.quantity}
                     </Text>
                 </View>
             </View>
@@ -217,14 +218,16 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingHorizontal: 20,
         flexDirection: "row",
+        backgroundColor: "red"
     },
     contentContainer: {
         flex: 1,
         marginLeft: 10,
     },
     image: {
-        width: "40%",
-        aspectRatio: 1,
+        height: 100,
+        width: 100,
+        borderRadius: 20
     },
     name: {
         fontWeight: "500",

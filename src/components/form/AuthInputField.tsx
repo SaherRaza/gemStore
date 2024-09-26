@@ -46,7 +46,6 @@ const AuthInputField: FC<Props> = props =>
         onRightIconPress
     } = props;
 
-    console.log(secureTextEntry);
     const errorMsg = touched[name] && errors[name] ? errors[name] : '';
 
     const shakeUI = () =>

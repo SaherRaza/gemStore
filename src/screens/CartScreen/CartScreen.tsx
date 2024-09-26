@@ -18,7 +18,7 @@ const CartScreen: FC<Props> = () =>
 
   const cart = useSelector((state: RootState) => state.cart.items);
 
-  console.log("cart addedd+++++++++++++", cart);
+  console.log("cart", cart);
 
   const subTotal = useSelector(selectSubtotal);
   const deliveryFee = useSelector(selectDeliveryPrice);
@@ -43,9 +43,10 @@ const CartScreen: FC<Props> = () =>
         <View style={styles.emptyView} />
       </View>
 
-      <FlatList style={{ flex: 1, backgroundColor: "red" }}
+      <FlatList style={{ flex: 1, }}
         data={cart}
-        renderItem={({ item, index }) => <CartListItem key={index} cartItem={item} />}
+        keyExtractor={(item) => item.product.id.toString()}
+        renderItem={({ item, index }) => <CartListItem cartItem={item} />}
       />
       <View style={styles.bottomContainer}>
         <View style={styles.title}>
@@ -141,11 +142,11 @@ const styles = StyleSheet.create({
   title: {
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: 35
+    margin: 25
   },
   lineBreak: {
     height: 1,
-    width: '85%',
+    width: '90%',
     backgroundColor: '#8A8A8F',
     alignSelf: "center"
   },

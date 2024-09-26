@@ -37,6 +37,7 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
     dispatch(setSelectedProduct(productId));
   };
 
+
   useEffect(() =>
   {
     if (selectedProduct)
@@ -46,11 +47,9 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
     }
   }, [selectedProduct, navigation]);
 
-  console.log("selected product=========", selectedProduct);
-
-
 
   const { category } = route.params;
+  console.log(category);
 
   return (
     <View style={styles.container}>

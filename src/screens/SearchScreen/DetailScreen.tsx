@@ -20,11 +20,11 @@ const DetailScreen: React.FC<Props> = ({ route, navigation }) =>
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { product } = route.params;
-  console.log("selected product to add into cart", product.image);
 
 
   const addToCart = () =>
   {
+    console.log("Adding to cart: ", product);
     dispatch(cartSlice.actions.addCartItem({ product }));
   };
 

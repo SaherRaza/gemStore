@@ -40,7 +40,7 @@ export default function MyOrdersScreen()
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Ionicons name="arrow-back-circle" size={24} color="gray" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>My Orders</Text>
