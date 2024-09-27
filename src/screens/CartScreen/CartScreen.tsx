@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, TouchableWithoutFeedback } from "react-native";
 import React, { FC, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import CustomButton from './../../components/CustomButton';
@@ -9,6 +9,7 @@ import CartListItem from "../../components/CartListItem";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { selectDeliveryPrice, selectSubtotal, selectTotal } from "../../store/cartSlice";
+import ScreenHeader from "../../components/ScreenHeader";
 
 interface Props { }
 
@@ -25,52 +26,38 @@ const CartScreen: FC<Props> = () =>
   const total = useSelector(selectTotal);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerStyle}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.iconStyle}
-        >
-          <AntDesign name="left" size={18} color="#1E3354" />
-        </TouchableOpacity>
-
-        {/* Centering the text "Your Cart" */}
-        <View style={styles.titleContainer}>
-          <Text style={styles.textStyle}>Your Cart</Text>
-        </View>
-
-        {/* Empty View to balance the layout */}
-        <View style={styles.emptyView} />
-      </View>
-
-      <FlatList
-        data={cart}
-        contentContainerStyle={{ flex: 1, paddingBottom: 30 }}
-        keyExtractor={(item) => item.product.id.toString()}
-        renderItem={({ item, index }) => <CartListItem cartItem={item} />}
-      />
-      <View style={styles.bottomContainer}>
-        <View style={styles.title}>
-          <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>SubTotal</Text>
-          <Text style={[styles.textStyle, { fontWeight: "400" }]}>{subTotal}$</Text>
-        </View>
-        <View style={styles.lineBreak} />
-        <View style={styles.title}>
-          <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>Delivery</Text>
-          <Text style={[styles.textStyle, { fontWeight: "400" }]}>{deliveryFee}$</Text>
-        </View>
-        <View style={styles.lineBreak} />
-        <View style={styles.title}>
-          <Text style={[styles.textStyle, { fontWeight: "500" }]}>Total</Text>
-          <Text style={[styles.textStyle, { fontWeight: "500" }]}>{total}$</Text>
-        </View>
-        <View style={styles.btnContainer}>
-          <CustomButton
-            onPress={() => navigation.navigate("CheckOutScreen")}
-            title="Proceed to Checkout" Width={300} />
+    <TouchableWithoutFeedback>
+      <View style={styles.container}>
+        <ScreenHeader onPress={() => navigation.goBack()} title="Your Cart" />
+        <FlatList
+          data={cart}
+          contentContainerStyle={{ flex: 1, paddingBottom: 30 }}
+          keyExtractor={(item) => item.product.id.toString()}
+          renderItem={({ item, index }) => <CartListItem cartItem={item} />}
+        />
+        <View style={styles.bottomContainer}>
+          <View style={styles.title}>
+            <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>SubTotal</Text>
+            <Text style={[styles.textStyle, { fontWeight: "400" }]}>{subTotal}$</Text>
+          </View>
+          <View style={styles.lineBreak} />
+          <View style={styles.title}>
+            <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>Delivery</Text>
+            <Text style={[styles.textStyle, { fontWeight: "400" }]}>{deliveryFee}$</Text>
+          </View>
+          <View style={styles.lineBreak} />
+          <View style={styles.title}>
+            <Text style={[styles.textStyle, { fontWeight: "500" }]}>Total</Text>
+            <Text style={[styles.textStyle, { fontWeight: "500" }]}>{total}$</Text>
+          </View>
+          <View style={styles.btnContainer}>
+            <CustomButton
+              onPress={() => navigation.navigate("CheckOutScreen")}
+              title="Proceed to Checkout" Width={300} />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -79,34 +66,13 @@ export default CartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E5E5E5",
+    backgroundColor: "#f1f1f1"
+    //  "#E5E5E5",
   },
-  headerStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between", // Make sure to use space-between
-    marginTop: 60,
-    margin: 10,
-    paddingHorizontal: 20, // Adjust as needed for padding
-  },
-  iconStyle: {
-    width: 32,
-    height: 32,
-    borderRadius: 360,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   textStyle: {
     fontWeight: "bold",
     fontSize: 16,
-  },
-  titleContainer: {
-    flex: 1,
-    alignItems: 'center', // Center the text horizontally
-  },
-  emptyView: {
-    width: 32, // This view will be the same size as the iconStyle view
   },
   imageSection: {
     borderTopLeftRadius: 20,

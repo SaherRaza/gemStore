@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import ScreenHeader from '../../components/ScreenHeader';
 
 const orders = [
     {
@@ -39,19 +40,9 @@ export default function MyOrdersScreen()
     return (
         <View style={styles.container}>
             {/* Header */}
-            <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Ionicons name="arrow-back-circle" size={24} color="gray" />
-                </TouchableOpacity>
-                <Text style={styles.headerTitle}>My Orders</Text>
-                <TouchableOpacity>
-                    <MaterialIcons name="notifications-none" size={24} color="black" />
-                </TouchableOpacity>
-            </View>
-
+            <ScreenHeader onPress={() => navigation.goBack()} title="My Orders" />
 
             <View style={{ paddingTop: 30, flex: 1, }}>
-
 
                 {/* Order List */}
                 <FlatList
@@ -82,20 +73,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingTop: 20,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        paddingBottom: 10,
-        borderBottomColor: '#E5E5E5',
-        marginTop: 50
-    },
-    headerTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
     },
 
     orderCard: {

@@ -4,27 +4,15 @@ import { Ionicons, AntDesign } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton';
 import { CartParamList } from '../BottomTab/MyTabs';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import ScreenHeader from '../../components/ScreenHeader';
 
 const CheckOutScreen3 = () =>
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
     return (
         <View style={styles.container}>
-            <View style={styles.headerStyle}>
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}
-                    style={styles.iconStyle}
-                >
-                    <AntDesign name="left" size={18} color="#1E3354" />
-                </TouchableOpacity>
 
-                <View style={styles.titleContainer}>
-                    <Text style={styles.textStyle}>CheckOut</Text>
-                </View>
-
-                {/* Empty View to balance the layout */}
-                <View style={styles.emptyView} />
-            </View>
+            <ScreenHeader onPress={() => navigation.goBack()} title="Check out" />
 
             <View style={styles.headerContainer}>
                 <View style={styles.progressContainer}>
@@ -77,34 +65,11 @@ export default CheckOutScreen3;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        padding: 20
-    },
-    headerStyle: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between", // Make sure to use space-between
-        paddingHorizontal: 20, // Adjust as needed for padding
-        marginTop: 40
-    },
-    iconStyle: {
-        width: 32,
-        height: 32,
-        borderRadius: 360,
-        backgroundColor: "#E1E1E1",
-        alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: "#f1f1f1",
     },
     textStyle: {
         fontWeight: "bold",
         fontSize: 16,
-    },
-    titleContainer: {
-        flex: 1,
-        alignItems: 'center', // Center the text horizontally
-    },
-    emptyView: {
-        width: 32, // This view will be the same size as the iconStyle view
     },
     headerContainer: {
         alignItems: 'center',

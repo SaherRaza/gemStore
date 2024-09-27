@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { CartParamList } from '../BottomTab/MyTabs';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import ScreenHeader from '../../components/ScreenHeader';
 
 const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('Field is required'),
@@ -36,21 +37,7 @@ const CheckOutScreen = () =>
             contentContainerStyle={{ paddingBottom: 80 }}
             style={styles.container}>
 
-            <View style={styles.headerStyle}>
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}
-                    style={styles.iconStyle}
-                >
-                    <AntDesign name="left" size={18} color="#1E3354" />
-                </TouchableOpacity>
-
-                <View style={styles.titleContainer}>
-                    <Text style={styles.textStyle}>CheckOut</Text>
-                </View>
-
-                {/* Empty View to balance the layout */}
-                <View style={styles.emptyView} />
-            </View>
+            <ScreenHeader onPress={() => navigation.goBack()} title="Check out" />
 
             <View style={styles.headerContainer}>
                 <View style={styles.progressContainer}>
@@ -291,34 +278,11 @@ const CheckOutScreen = () =>
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    },
-    headerStyle: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between", // Make sure to use space-between
-        marginTop: 35,
-        paddingHorizontal: 20, // Adjust as needed for padding
-    },
-    iconStyle: {
-        width: 32,
-        height: 32,
-        borderRadius: 360,
-        backgroundColor: "#E1E1E1",
-        alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: "#f1f1f1"
     },
     textStyle: {
         fontWeight: "bold",
         fontSize: 16,
-    },
-    titleContainer: {
-        flex: 1,
-        alignItems: 'center', // Center the text horizontally
-    },
-    emptyView: {
-        width: 32, // This view will be the same size as the iconStyle view
     },
     headerContainer: {
         alignItems: 'center',

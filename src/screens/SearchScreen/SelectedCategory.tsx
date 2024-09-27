@@ -15,6 +15,7 @@ import { SearchParamList } from "../BottomTab/MyTabs";
 import { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProduct } from "../../store/productSlice";
+import ScreenHeader from "../../components/ScreenHeader";
 
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
@@ -53,26 +54,8 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerStyle}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.iconStyle}
-        >
-          <AntDesign name="left" size={18} color="#1E3354" />
-        </TouchableOpacity>
-        <View>
-          <Text
-            style={[
-              styles.textStyle,
-              {
-                marginLeft: 26,
-              },
-            ]}
-          >
-            {category}
-          </Text>
-        </View>
-      </View>
+      <ScreenHeader onPress={() => navigation.goBack()} title={category} />
+
 
       <View style={styles.filterIconContainer}>
         <View>
@@ -157,21 +140,7 @@ export default SelectedCategory;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-  },
-  headerStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 60,
-    marginLeft: 40,
-  },
-  iconStyle: {
-    width: 32,
-    height: 32,
-    borderRadius: 360,
-    backgroundColor: "#E5E5E5",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#f1f1f1"
   },
   textStyle: {
     fontWeight: "bold",
@@ -193,19 +162,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 20,
   },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    padding: 20,
-    backgroundColor: "white",
-  },
   row: {
     flex: 1,
     justifyContent: "space-around",
     marginBottom: 15,
   },
   card: {
-    backgroundColor: "white",
+    backgroundColor: "#f1f1f1",
     borderRadius: 10,
     padding: 10,
     width: "45%", // Approximately 45% for each item to fit two in a row with some space in between
