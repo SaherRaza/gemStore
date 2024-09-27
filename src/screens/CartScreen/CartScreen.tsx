@@ -43,8 +43,9 @@ const CartScreen: FC<Props> = () =>
         <View style={styles.emptyView} />
       </View>
 
-      <FlatList style={{ flex: 1, }}
+      <FlatList
         data={cart}
+        contentContainerStyle={{ flex: 1, paddingBottom: 30 }}
         keyExtractor={(item) => item.product.id.toString()}
         renderItem={({ item, index }) => <CartListItem cartItem={item} />}
       />
@@ -56,12 +57,12 @@ const CartScreen: FC<Props> = () =>
         <View style={styles.lineBreak} />
         <View style={styles.title}>
           <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>Delivery</Text>
-          <Text style={[styles.textStyle, { fontWeight: "400" }]}>{deliveryFee} A$</Text>
+          <Text style={[styles.textStyle, { fontWeight: "400" }]}>{deliveryFee}$</Text>
         </View>
         <View style={styles.lineBreak} />
         <View style={styles.title}>
           <Text style={[styles.textStyle, { fontWeight: "500" }]}>Total</Text>
-          <Text style={[styles.textStyle, { fontWeight: "500" }]}>{total}A$</Text>
+          <Text style={[styles.textStyle, { fontWeight: "500" }]}>{total}$</Text>
         </View>
         <View style={styles.btnContainer}>
           <CustomButton
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between", // Make sure to use space-between
     marginTop: 60,
+    margin: 10,
     paddingHorizontal: 20, // Adjust as needed for padding
   },
   iconStyle: {
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     backgroundColor: "#F1F1F1",
-    height: "40%",
+    height: "30%",
     position: 'absolute',
     bottom: 0,
     width: "100%",
@@ -142,7 +144,9 @@ const styles = StyleSheet.create({
   title: {
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: 25
+    padding: 20,
+    marginLeft: 20,
+    marginRight: 20
   },
   lineBreak: {
     height: 1,
