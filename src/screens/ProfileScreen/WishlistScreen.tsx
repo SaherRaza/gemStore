@@ -1,36 +1,25 @@
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableWithoutFeedback, Image } from 'react-native';
 import React, { FC } from 'react';
 import ScreenHeader from '../../components/ScreenHeader';
 import { RootState } from '../../store';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromFavorites } from '../../store/favoriteSlice';
 
 interface Props { }
 
 const WishlistScreen: FC<Props> = () =>
 {
-    const selectFavoriteItems = (state: RootState) => state.favorites.items;
+
+    const dispatch = useDispatch();
+    const favorites = useSelector((state: RootState) => state.favorites.items);
     return (
         <View style={styles.container}>
             <ScreenHeader onPress={() => ""} title="My WishList" />
-
-
-            <View style={styles.filterIconContainer}>
-                <TouchableOpacity style={styles.filterIcon}>
-                    <Text>Filter</Text>
-                    <AntDesign
-                        style={{ marginLeft: 8 }}
-                        name="caretdown"
-                        size={12}
-                        color="black"
-                    />
-                </TouchableOpacity>
-            </View>
-
-            <View style={{ flex: 1 }}>
+            <View style={{ marginTop: 15 }}>
                 <FlatList
-                    data={selectFavoriteItems}
+                    data={favorites}
                     showsVerticalScrollIndicator={false}
-                    inverted
                     keyExtractor={(item) => item.id}
                     numColumns={2} // To display two columns
                     columnWrapperStyle={styles.row} // Styles for the row wrapper
@@ -59,13 +48,15 @@ const WishlistScreen: FC<Props> = () =>
                             >
                                 <View style={styles.card}>
                                     <View>
-                                        {/* <Image
+                                        <Image
                                             resizeMode="cover"
-                                            // source={item.image}
+                                            source={item.image}
                                             style={styles.image}
-                                        /> */}
-                                        <TouchableOpacity style={styles.iconPosition}>
-                                            <AntDesign name="heart" size={16} color="grey" />
+                                        />
+                                        <TouchableOpacity
+                                            onPress={() => dispatch(removeFromFavorites(item))}
+                                            style={styles.iconPosition}>
+                                            <AntDesign name="heart" size={16} color="red" />
                                         </TouchableOpacity>
                                     </View>
                                     <Text style={styles.type}>{item.name}</Text>
@@ -94,26 +85,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#f1f1f1"
     },
-    textStyle: {
-        fontWeight: "bold",
-        fontSize: 16,
-    },
-    filterIconContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        margin: 40,
-    },
-    filterIcon: {
-        flexDirection: "row",
-        borderWidth: 1.5,
-        borderColor: "grey",
-        width: 97,
-        height: 40,
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 20,
-    },
     row: {
         flex: 1,
         justifyContent: "space-around",
@@ -125,6 +96,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: "45%", // Approximately 45% for each item to fit two in a row with some space in between
         // alignItems: "center",
+        justifyContent: "center",
     },
     image: {
         width: "100%",

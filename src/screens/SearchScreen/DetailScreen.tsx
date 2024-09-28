@@ -8,6 +8,7 @@ import { cartSlice } from '../../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomButton from '../../components/CustomButton';
 import { RootState } from '../../store';
+import { addToFavorites } from '../../store/favoriteSlice';
 
 
 type Props = NativeStackScreenProps<SearchParamList, "DetailScreen">;
@@ -35,7 +36,8 @@ const DetailScreen: React.FC<Props> = ({ route, navigation }) =>
 
   const toggleFavorite = () =>
   {
-    setFavorite(!favorite);
+    dispatch(addToFavorites(product));  // Dispatch the product item
+    setFavorite(!favorite);  // Toggle the local favorite state
   };
   return (
     <SafeAreaView style={styles.container}>
