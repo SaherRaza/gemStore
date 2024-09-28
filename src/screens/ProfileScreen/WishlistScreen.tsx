@@ -1,21 +1,20 @@
 import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import React, { FC } from 'react';
 import ScreenHeader from '../../components/ScreenHeader';
+import { RootState } from '../../store';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
 interface Props { }
 
 const WishlistScreen: FC<Props> = () =>
 {
+    const selectFavoriteItems = (state: RootState) => state.favorites.items;
     return (
         <View style={styles.container}>
             <ScreenHeader onPress={() => ""} title="My WishList" />
 
 
             <View style={styles.filterIconContainer}>
-                <View>
-                    <Text style={styles.textStyle}>Found</Text>
-                    <Text style={styles.textStyle}>{filteredCount} results</Text>
-                </View>
                 <TouchableOpacity style={styles.filterIcon}>
                     <Text>Filter</Text>
                     <AntDesign
@@ -29,7 +28,7 @@ const WishlistScreen: FC<Props> = () =>
 
             <View style={{ flex: 1 }}>
                 <FlatList
-                    data={filteredProducts}
+                    data={selectFavoriteItems}
                     showsVerticalScrollIndicator={false}
                     inverted
                     keyExtractor={(item) => item.id}
@@ -57,15 +56,14 @@ const WishlistScreen: FC<Props> = () =>
                         };
                         return (
                             <TouchableWithoutFeedback
-                                onPress={() => handleProductSelect(item.id)}
                             >
                                 <View style={styles.card}>
                                     <View>
-                                        <Image
+                                        {/* <Image
                                             resizeMode="cover"
-                                            source={item.image}
+                                            // source={item.image}
                                             style={styles.image}
-                                        />
+                                        /> */}
                                         <TouchableOpacity style={styles.iconPosition}>
                                             <AntDesign name="heart" size={16} color="grey" />
                                         </TouchableOpacity>

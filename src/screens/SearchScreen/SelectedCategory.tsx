@@ -16,6 +16,7 @@ import { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProduct } from "../../store/productSlice";
 import ScreenHeader from "../../components/ScreenHeader";
+import { addToFavorites } from "../../store/favoriteSlice";
 
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
@@ -112,7 +113,7 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
                       source={item.image}
                       style={styles.image}
                     />
-                    <TouchableOpacity style={styles.iconPosition}>
+                    <TouchableOpacity onPress={() => dispatch(addToFavorites(item))} style={styles.iconPosition}>
                       <AntDesign name="heart" size={16} color="grey" />
                     </TouchableOpacity>
                   </View>
