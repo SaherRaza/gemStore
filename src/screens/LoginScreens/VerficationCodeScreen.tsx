@@ -1,7 +1,13 @@
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Keyboard, TextInput, } from 'react-native';
 import React from 'react';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
+
+import { FC, useEffect, useRef, useState } from 'react';
+import AuthFormContainer from '../../components/form/AuthFormContainer';
+import AppButton from '../../ui/AppButton';
+import AppLink from '../../ui/AppLink';
+import OTPField from '../../ui/OTPField';
 
 type RootStackParamList = {
     LoginScreen: undefined;
@@ -9,53 +15,100 @@ type RootStackParamList = {
     MyTabs: undefined;
 };
 
-const VerificationCodeScreen = () =>
-{
+interface Props { }
 
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+const otpFields = new Array(6).fill('');
+
+const VerificationCodeScreen: FC<Props> = props =>
+{
+    const [otp, setOtp] = useState([...otpFields]);
+    const [activeOtpIndex, setActiveOtpIndex] = useState(0);
+
+    const inputRef = useRef<TextInput>(null);
+
+    const handleChange = (value: string, index: number) =>
+    {
+        const newOtp = [...otp];
+
+        if (value === 'Backspace')
+        {
+            // moves to the previous only if the field is empty
+            if (!newOtp[index]) setActiveOtpIndex(index - 1);
+            newOtp[index] = '';
+        } else
+        {
+            // update otp and move to the next
+            setActiveOtpIndex(index + 1);
+            newOtp[index] = value;
+        }
+
+        setOtp([...newOtp]);
+    };
+
+    const handlePaste = (value: string) =>
+    {
+        if (value.length === 6)
+        {
+            Keyboard.dismiss();
+            const newOtp = value.split('');
+            setOtp([...newOtp]);
+        }
+    };
+
+    const handleSubmit = () =>
+    {
+        console.log(otp);
+    };
+
+    useEffect(() =>
+    {
+        inputRef.current?.focus();
+    }, [activeOtpIndex]);
+
     return (
-        <SafeAreaView style={styles.container}>
-            <TouchableOpacity
-                // onPress={() => navigation.goBack()}
-                style={styles.iconStyle}
-            >
-                <AntDesign name="left" size={18} color="#1E3354" />
-            </TouchableOpacity>
-            <View style={styles.textContainer}>
-                <Text style={styles.forgotText}>Verification code</Text>
-                <Text style={styles.smallText}>Please enter the verification code we sent to your email address</Text>
+        <AuthFormContainer heading="Please look at your email.">
+            <View style={styles.inputContainer}>
+                {otpFields.map((_, index) =>
+                {
+                    return (
+                        <OTPField
+                            ref={activeOtpIndex === index ? inputRef : null}
+                            key={index}
+                            placeholder="*"
+                            onKeyPress={({ nativeEvent }) =>
+                            {
+                                handleChange(nativeEvent.key, index);
+                            }}
+                            onChangeText={handlePaste}
+                            keyboardType="numeric"
+                            value={otp[index] || ''}
+                        />
+                    );
+                })}
             </View>
-        </SafeAreaView>
+
+            <AppButton title="Submit" onPress={handleSubmit} />
+
+            <View style={styles.linkContainer}>
+                <AppLink title="Re-send OTP" />
+            </View>
+        </AuthFormContainer>
     );
 };
 
-export default VerificationCodeScreen;
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
+    inputContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 20,
     },
-    iconStyle: {
-        width: 32,
-        height: 32,
-        borderRadius: 360,
-        backgroundColor: "#E1E1E1",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: 25
+    linkContainer: {
+        marginTop: 20,
+        width: '100%',
+        alignItems: 'flex-end',
     },
-    textContainer: {
-        margin: 25,
-    },
-    forgotText: {
-        fontSize: 30,
-        fontWeight: "400"
-    },
-    smallText: {
-        fontSize: 15,
-        textAlign: "left",
-        lineHeight: 25,
-        marginVertical: 15,
-        color: "#838383",
-    }
 });
+
+export default VerificationCodeScreen;

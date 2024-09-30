@@ -1,5 +1,3 @@
-import AppInput from '@ui/AppInput';
-import colors from '@utils/color';
 import { useFormikContext } from 'formik';
 import { FC, ReactNode, useEffect } from 'react';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
@@ -13,6 +11,8 @@ import
     ViewStyle,
     Pressable,
 } from 'react-native';
+import colors from '../../@utils/colors';
+import AppInput from '../../ui/AppInput';
 
 interface Props
 {

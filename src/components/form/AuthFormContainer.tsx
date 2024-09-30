@@ -1,8 +1,9 @@
-import CircleUi from '@ui/CircleUi';
-import colors from '@utils/color';
+
 
 import { FC, ReactNode } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
+import colors from '../../@utils/colors';
+import CircleUi from '../../ui/CircleUi';
 
 interface Props
 {
@@ -21,7 +22,7 @@ const AuthFormContainer: FC<Props> = ({ children, heading, subHeading }) =>
       <CircleUi position="bottom-right" size={200} />
 
       <View style={styles.headerContainer}>
-        <Image source={require('../../assets/logo.png')} />
+        {/* <Image source={require('../../assets/logo.png')} /> */}
         <Text style={styles.heading}>{heading}</Text>
         <Text style={styles.subHeading}>{subHeading}</Text>
       </View>

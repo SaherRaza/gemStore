@@ -11,9 +11,10 @@ export interface UserDocument {
   avatar?: { url: string; publicId: string };
   tokens: string[];
   favorites: ObjectId[];
-  followers: ObjectId[];
-  followings: ObjectId[];
+  // followers: ObjectId[];
+  // followings: ObjectId[];
 }
+
 interface Methods {
   comparePassword(password: string): Promise<boolean>;
 }
@@ -48,20 +49,21 @@ const userSchema = new Schema<UserDocument, {}, Methods>(
       {
         type: Schema.Types.ObjectId,
         ref: "Audio",
+        //ref:"Product"
       },
     ],
-    followers: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    followings: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    // followers: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "User",
+    //   },
+    // ],
+    // followings: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "User",
+    //   },
+    // ],
     tokens: [String],
   },
   { timestamps: true }

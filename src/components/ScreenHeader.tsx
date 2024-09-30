@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 interface Props
 {
-    title: string;
+    title?: string;
     onPress: () => void;
 }
 const ScreenHeader: FC<Props> = ({ onPress, title }) =>

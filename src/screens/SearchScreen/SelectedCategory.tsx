@@ -77,7 +77,6 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
         <FlatList
           data={filteredProducts}
           showsVerticalScrollIndicator={false}
-          inverted
           keyExtractor={(item) => item.id}
           numColumns={2} // To display two columns
           columnWrapperStyle={styles.row} // Styles for the row wrapper
