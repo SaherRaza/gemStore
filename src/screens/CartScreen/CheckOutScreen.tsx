@@ -184,8 +184,7 @@ const CheckOutScreen = () =>
 
 
             <Text style={styles.subTitle}>Shipping method</Text>
-            <RadioButton deliveryType={"Delivery to home"}
-                deliveryDays={"Delivery from 3 to 7 business days"} />
+            <RadioButton />
 
 
             <View style={{ marginTop: 30 }}>

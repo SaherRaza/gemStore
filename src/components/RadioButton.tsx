@@ -1,49 +1,54 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import RadioButtonGroup, { RadioButtonItem } from "expo-radio-button";
 
-
 type Props = {
-    deliveryType: String;
-    deliveryDays: String;
 };
 
-const RadioButton: React.FC<Props> = ({ deliveryType, deliveryDays }) =>
+
+const RadioButton: React.FC<Props> = memo(({ }) =>
 {
-    const [current, setCurrent] = useState({
-        'option1': "Free",
-        'option2': "$ 9.90",
-        'option3': "$ 9.90"
-    });
+    const [current, setCurrent] = useState("option1"); // Initialize selected option
+
+    const options = [
+        { id: "option1", price: "Free", deliveryType: "Delivery to home", deliveryDays: "Delivery from 3 to 7 business days" },
+        { id: "option2", price: "$ 9.90", deliveryType: "Delivery to home", deliveryDays: "Delivery from 4 to 6 business days" },
+        { id: "option3", price: "$ 10.90", deliveryType: "Fast Delivery", deliveryDays: "Delivery from 2 to 3 business days" },
+    ];
+
     return (
         <View style={styles.container}>
             <RadioButtonGroup
-                containerStyle={{ marginBottom: 10, }}
-                selected={current}
-                onSelected={(value) => setCurrent(value)}
+                containerStyle={{ marginBottom: 10 }}
+                selected={current} // Set the currently selected value
+                onSelected={(value) => setCurrent(value)} // Update selected value
                 radioBackground="green"
             >
-                <RadioButtonItem
-                    label={
-                        <View style={{}}>
-                            <View style={{ flexDirection: "row", gap: 10 }}>
-                                <Text style={{ color: "red" }}>{current.option1}</Text>
-                                <Text>{deliveryType}</Text>
+                {options.map((option) => (
+                    <RadioButtonItem
+                        key={option.id} // Unique key for each radio button
+                        value={option.id} // Set the unique value for the item
+                        label={
+                            <View style={{ padding: 10, flex: 1, gap: 8 }}>
+                                <View style={{ flexDirection: "row", gap: 10 }}>
+                                    <Text style={{ fontSize: 16 }}>{option.price}</Text>
+                                    <Text style={{ fontSize: 16, fontWeight: "500", color: "grey" }}>{option.deliveryType}</Text>
+                                </View>
+                                <Text style={{ color: "#898989" }}>{option.deliveryDays}</Text>
                             </View>
-                            <Text>{deliveryDays}</Text>
-                        </View>
-                    }
-                />
+                        }
+                    />
+
+                ))}
             </RadioButtonGroup>
-            <Text></Text>
         </View>
     );
-};
+});
 
 export default RadioButton;
 
 const styles = StyleSheet.create({
     container: {
         padding: 15,
-    }
+    },
 });
