@@ -6,8 +6,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { CartParamList } from '../BottomTab/MyTabs';
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import ScreenHeader from '../../components/ScreenHeader';
+import RadioButton from '../../components/RadioButton';
 
 const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('Field is required'),
@@ -22,16 +22,8 @@ const validationSchema = Yup.object().shape({
 const CheckOutScreen = () =>
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
-    const [shippingMethod, setShippingMethod] = useState('free');
     const [couponCode, setCouponCode] = useState('');
     const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
-    const [value, setValue] = useState(0);
-
-    const items = [
-        { label: 'Delivery to home', value: 0 },
-        { label: 'Delivery to home', value: 1 },
-        { label: 'Fast Delivery', value: 2 }
-    ];
     return (
         <ScrollView showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 80 }}
@@ -192,55 +184,8 @@ const CheckOutScreen = () =>
 
 
             <Text style={styles.subTitle}>Shipping method</Text>
-
-
-            <TouchableOpacity onPress={() => setShippingMethod('free')}
-                style={[
-                    styles.radioContainer,
-                    shippingMethod === 'free' && styles.selectedContainer,
-                ]}>
-                {/* <View style={styles.radioCircle}>
-                    {shippingMethod === 'free' && <View style={styles.selectedRb} />}
-                </View> */}
-                <RadioForm radio_props={items}
-                    buttonColor='#508A7B'
-                    selectedButtonColor='#508A7B'
-                    initial={value} onPress={(value) => setValue(value)} />
-                <View>
-                    <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
-                        <Text style={styles.radioText}>Free </Text>
-                        <Text style={styles.radioText}>Delivery to home</Text>
-                    </View>
-                    <Text style={styles.radioTextSmall}>Delivery from 3 to 7 business days</Text>
-                </View>
-            </TouchableOpacity>
-
-
-            <TouchableOpacity onPress={() => setShippingMethod('standard')} style={styles.radioContainer}>
-                {/* <View style={styles.radioCircle}>
-                    {shippingMethod === 'standard' && <View style={styles.selectedRb} />}
-                </View> */}
-                <View>
-                    <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
-                        <Text style={styles.radioText}>$9.90 </Text>
-                        <Text style={styles.radioText}>Delivery to home</Text>
-                    </View>
-                    <Text style={styles.radioTextSmall}>Delivery from 4 to 6 business days</Text>
-                </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => setShippingMethod('fast')} style={styles.radioContainer}>
-                {/* <View style={styles.radioCircle}>
-                    {shippingMethod === 'fast' && <View style={styles.selectedRb} />}
-                </View> */}
-                <View>
-                    <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
-                        <Text style={styles.radioText}>$9.90 </Text>
-                        <Text style={styles.radioText}>Fast Delivery</Text>
-                    </View>
-                    <Text style={styles.radioTextSmall}>Delivery from 2 to 3 business days</Text>
-                </View>
-            </TouchableOpacity>
+            <RadioButton deliveryType={"Delivery to home"}
+                deliveryDays={"Delivery from 3 to 7 business days"} />
 
 
             <View style={{ marginTop: 30 }}>
@@ -339,13 +284,7 @@ const styles = StyleSheet.create({
         marginTop: 50
 
     },
-    radioContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-        padding: 12,
-        gap: 8,
-    },
+
     selectedContainer: {
         backgroundColor: '#D3D3D3', // Light gray background when selected
         borderTopColor: 'gray', // Top border color when selected
@@ -369,14 +308,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: '#508A7B',
     },
-    radioText: {
-        fontSize: 16,
-    },
-    radioTextSmall: {
-        fontSize: 13,
-        color: '#666',
-        marginTop: 9
-    },
+
     validateButton: {
         alignSelf: 'flex-end',
     },
