@@ -4,7 +4,7 @@ import React from 'react';
 interface CustomButtonProps
 {
   title: string;
-  Width: number;
+  Width?: number;
   onPress: () => void;
 }
 

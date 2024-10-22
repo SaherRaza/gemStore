@@ -21,15 +21,15 @@ const RadioButton: React.FC<Props> = memo(({ }) =>
             <RadioButtonGroup
                 containerStyle={{ marginBottom: 10 }}
                 selected={current} // Set the currently selected value
-                onSelected={(value) => setCurrent(value)} // Update selected value
-                radioBackground="green"
+                onSelected={(value: string) => setCurrent(value)} // Update selected value
+                radioBackground='#508A7B'
             >
                 {options.map((option) => (
                     <RadioButtonItem
                         key={option.id} // Unique key for each radio button
                         value={option.id} // Set the unique value for the item
                         label={
-                            <View style={{ padding: 10, flex: 1, gap: 8 }}>
+                            <View key={option.id} style={styles.radioOption}>
                                 <View style={{ flexDirection: "row", gap: 10 }}>
                                     <Text style={{ fontSize: 16 }}>{option.price}</Text>
                                     <Text style={{ fontSize: 16, fontWeight: "500", color: "grey" }}>{option.deliveryType}</Text>
@@ -51,4 +51,47 @@ const styles = StyleSheet.create({
     container: {
         padding: 15,
     },
+    radioOption: {
+        padding: 10,
+        flex: 1,
+        gap: 8,
+    },
+    selectedOption: {
+        backgroundColor: "#898989", // Change to selected background color
+    }
 });
+
+
+// import React, { useState, useEffect } from 'react';
+// import { View, TextInput } from 'react-native';
+// import { debounce } from 'lodash';
+
+// const DebouncedInput = () =>
+// {
+//     const [inputValue, setInputValue] = useState('');
+//     const [debouncedValue, setDebouncedValue] = useState('');
+
+//     // Debounce the state update
+//     const updateValue = debounce((value) =>
+//     {
+//         setDebouncedValue(value);
+//     }, 300); // Wait for 300ms
+
+//     useEffect(() =>
+//     {
+//         updateValue(inputValue);
+//         return () =>
+//         {
+//             updateValue.cancel(); // Cleanup on unmount
+//         };
+//     }, [inputValue]);
+
+//     return (
+//         <View>
+//             <TextInput
+//                 value={inputValue}
+//                 onChangeText={setInputValue} // Fewer state updates
+//             />
+//         </View>
+//     );
+// };
