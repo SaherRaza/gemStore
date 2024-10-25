@@ -61,7 +61,7 @@ const ProfileScreen: React.FC = () =>
 
         <View style={styles.lineBreak} />
 
-        <TouchableOpacity style={styles.option}>
+        <TouchableOpacity onPress={() => navigation.navigate("RateAppScreen")} style={styles.option}>
           <FontAwesome5 name="star" size={24} color="#B1B5C3" />
           <Text style={styles.optionText}>Rate this app</Text>
           <Entypo style={styles.arrowIcon} name="chevron-right" size={24} color="black" />

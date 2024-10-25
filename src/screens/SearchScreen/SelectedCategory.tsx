@@ -16,6 +16,7 @@ import { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProduct } from "../../store/productSlice";
 import ScreenHeader from "../../components/ScreenHeader";
+import CustomStarRating from "../../components/CustomStarRating";
 
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
@@ -118,8 +119,10 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
                     {/* <Text style={styles.rating}>
                     {"⭐️".repeat(Math.floor(item.rating))}
                   </Text> */}
+                    console.log("Rendering stars");
                     {renderStars()}
-                    <Text style={styles.reviewCount}>10</Text>
+
+                    <Text style={styles.reviewCount}>{renderStars().length}</Text>
                   </View>
                 </View>
               </TouchableWithoutFeedback>
