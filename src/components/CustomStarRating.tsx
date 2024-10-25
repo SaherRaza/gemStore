@@ -38,9 +38,9 @@ const CustomStarRating = () =>
     return (
         <View>
             <CustomRatingBar />
-            <Text>
+            {/* <Text style={styles.rating}>
                 {defaultRating + "/" + maxRating.length}
-            </Text>
+            </Text> */}
         </View>
     );
 };
@@ -58,5 +58,13 @@ const styles = StyleSheet.create({
     starImageStyle: {
         width: 40,
         height: 40,
-    }
+    },
+    rating: {
+        padding: 10,
+        right: 0,
+        position: "absolute",
+        marginTop: 25,
+        fontWeight: "600",
+        fontSize: 18
+    },
 });
