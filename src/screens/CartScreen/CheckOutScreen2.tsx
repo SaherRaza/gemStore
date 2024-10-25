@@ -21,7 +21,7 @@ export default function CheckOutScreen2()
 
                 <View style={styles.headerContainer}>
                     <View style={styles.progressContainer}>
-                        <Ionicons name="location-sharp" size={24} color="grey" />
+                        <Ionicons name="location-sharp" size={24} color="black" />
                         <View style={styles.dotsContainer}>
                             <View style={styles.dot} />
                             <View style={styles.dot} />

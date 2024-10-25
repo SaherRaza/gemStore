@@ -119,7 +119,6 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
                     {/* <Text style={styles.rating}>
                     {"⭐️".repeat(Math.floor(item.rating))}
                   </Text> */}
-                    console.log("Rendering stars");
                     {renderStars()}
 
                     <Text style={styles.reviewCount}>{renderStars().length}</Text>
