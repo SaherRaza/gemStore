@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   bottomContainer: {
-    backgroundColor: "#F1F1F1",
+    backgroundColor: "white",
     height: "30%",  // 30% of the screen height
     width: "100%",
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
     paddingVertical: 30,
     paddingHorizontal: 30,
   },

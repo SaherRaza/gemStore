@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const CustomStarRating = () =>
 {
-    const [defaultRating, setDefaultRating] = useState(1);
+    const [defaultRating, setDefaultRating] = useState(2);
     const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
 
     const starImgCorner = require('../../assets/images/star_corner.png');

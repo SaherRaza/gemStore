@@ -3,28 +3,40 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Button
 import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { CartParamList } from '../BottomTab/MyTabs';
 import ScreenHeader from '../../components/ScreenHeader';
 import RadioButton from '../../components/RadioButton';
 import CustomButton from '../../components/CustomButton';
+import
+{
+    validationSchema, setCity, setCountry, setName, resetCheckout, setLastName
+    , setPhoneNumber, setStreetName, setState, setZipCode
+} from '../../store/checkoutSlice';
+import { useDispatch } from 'react-redux';
 
-const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('Field is required'),
-    lastName: Yup.string().required('Field is required'),
-    country: Yup.string().required('Field is required'),
-    streetName: Yup.string().required('Field is required'),
-    city: Yup.string().required('Field is required'),
-    state: Yup.string(),
-    zipCode: Yup.string().required('Field is required'),
-    phoneNumber: Yup.string().required('Field is required'),
-});
+
 const CheckOutScreen = () =>
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
     const [couponCode, setCouponCode] = useState('');
     const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const handleFormSubmit = (values) =>
+    {
+        dispatch(setName(values.name));
+        dispatch(setLastName(values.lastName));
+        dispatch(setPhoneNumber(values.phoneNumber));
+        dispatch(setStreetName(values.streetName));
+        dispatch(setCity(values.city));
+        dispatch(setCountry(values.country));
+        dispatch(setState(values.state));
+        dispatch(setZipCode(values.zipCode));
+        dispatch(resetCheckout());
+
+    };
     return (
         <ScrollView
             keyboardDismissMode={'on-drag'}
@@ -64,7 +76,7 @@ const CheckOutScreen = () =>
                 <Formik
                     initialValues={{ firstName: '', lastName: '', country: '', streetName: '', city: '', state: '', zipCode: '', phoneNumber: '' }}
                     validationSchema={validationSchema}
-                    onSubmit={values => console.log(values)}
+                    onSubmit={handleFormSubmit}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                         <View>
