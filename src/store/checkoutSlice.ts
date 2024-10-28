@@ -12,16 +12,16 @@ interface checkoutState
     zipCode: string;
     phoneNumber: string;
 }
-
+//name: yup.string().trim('Name is missing').min(3, 'Invalid Name!').required('Name is required'),
 export const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('Field is required'),
-    lastName: Yup.string().required('Field is required'),
-    country: Yup.string().required('Field is required'),
-    streetName: Yup.string().required('Field is required'),
-    city: Yup.string().required('Field is required'),
+    firstName: Yup.string().trim('Name is missing').min(3, 'Invalid Name!').required('Field is required'),
+    lastName: Yup.string().trim('Name is missing').min(3, 'Invalid Name!').required('Field is required'),
+    country: Yup.string().trim('Country is missing').required('Field is required'),
+    streetName: Yup.string().trim('Street Name is missing').required('Field is required'),
+    city: Yup.string().trim('City Name is missing').required('Field is required'),
     state: Yup.string(),
-    zipCode: Yup.string().required('Field is required'),
-    phoneNumber: Yup.string().required('Field is required'),
+    zipCode: Yup.string().trim('Zip Code is missing').required('Field is required'),
+    phoneNumber: Yup.string().trim('Phone Number is missing').required('Field is required'),
 });
 
 const initialState: checkoutState = {

@@ -168,3 +168,24 @@ const styles = StyleSheet.create({
 });
 
 export default OrderDetailScreen;
+
+
+// OrderDetailsScreen.js
+// import React from 'react';
+// import { View, Text } from 'react-native';
+// import { useSelector } from 'react-redux';
+
+// const OrderDetailsScreen = () =>
+// {
+//     const checkoutData = useSelector((state) => state.checkout);
+
+//     return (
+//         <View>
+//             <Text>Name: {checkoutData.name}</Text>
+//             <Text>Address: {checkoutData.address}</Text>
+//             <Text>Payment Method: {checkoutData.paymentMethod}</Text>
+//         </View>
+//     );
+// };
+
+// export default OrderDetailsScreen;
