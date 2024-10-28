@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 const OrderDetailScreen: React.FC = () =>
 {
+    const checkoutData = useSelector((state: any) => state.checkout);
+
     return (
         <SafeAreaView style={styles.container}>
             {/* Header */}
@@ -26,7 +29,7 @@ const OrderDetailScreen: React.FC = () =>
                 </View>
                 <View style={styles.infoRow}>
                     <Text style={styles.infoLabel}>Delivery address</Text>
-                    <Text style={styles.infoValue}>SBI Building, Software Park</Text>
+                    <Text style={styles.infoValue}> {checkoutData.address}</Text>
                 </View>
             </View>
 

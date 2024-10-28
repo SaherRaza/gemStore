@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { Formik } from 'formik';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { CartParamList } from '../BottomTab/MyTabs';
+import { useNavigation, NavigationProp, CompositeNavigationProp } from '@react-navigation/native';
+import { CartParamList, HomeParamList } from '../BottomTab/MyTabs';
 import ScreenHeader from '../../components/ScreenHeader';
 import RadioButton from '../../components/RadioButton';
 import CustomButton from '../../components/CustomButton';
@@ -15,12 +15,25 @@ import
 } from '../../store/checkoutSlice';
 import { useDispatch } from 'react-redux';
 
+type combinedNavigation = CompositeNavigationProp<
+    NavigationProp<CartParamList>,
+    NavigationProp<HomeParamList>
+>;
+
 
 const CheckOutScreen = () =>
 {
-    const navigation = useNavigation<NavigationProp<CartParamList>>();
+    const navigation = useNavigation<combinedNavigation>();
     const [couponCode, setCouponCode] = useState('');
     const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
+
+    const handleNext = () =>
+    {
+        if (billingSameAsShipping)
+        {
+            navigation.navigate("CheckOutScreen2");
+        }
+    };
 
     const dispatch = useDispatch();
 
@@ -35,6 +48,7 @@ const CheckOutScreen = () =>
         dispatch(setState(values.state));
         dispatch(setZipCode(values.zipCode));
         dispatch(resetCheckout());
+        console.log(handleFormSubmit(values));
 
     };
     return (
@@ -233,7 +247,9 @@ const CheckOutScreen = () =>
 
                 <View style={{ marginTop: 20 }}>
                     <CustomButton
-                        title='Continue to payment' onPress={() => navigation.navigate("CheckOutScreen2")} />
+                        color={!billingSameAsShipping ? "#2D201C" : "#508A7B"}
+                        disabled={!billingSameAsShipping} // Disable if checkbox is not selected
+                        title='Continue to payment' onPress={handleNext} />
                 </View>
             </View>
         </ScrollView>

@@ -6,12 +6,14 @@ interface CustomButtonProps
   title: string;
   Width?: number;
   onPress: () => void;
+  disabled?: boolean;
+  color?: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ title, Width, onPress }) =>
+const CustomButton: React.FC<CustomButtonProps> = ({ title, Width, onPress, disabled, color }) =>
 {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.container, { width: Width }]}>
+    <TouchableOpacity disabled={disabled} onPress={onPress} style={[styles.container, { width: Width, backgroundColor: color || '#2D201C' }]}>
       <Text style={styles.textStyle}>{title}</Text>
     </TouchableOpacity>
   );

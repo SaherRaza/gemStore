@@ -11,6 +11,14 @@ export default function CheckOutScreen2()
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
     const [isAgreed, setIsAgreed] = useState(false);
+
+    const handleNext = () =>
+    {
+        if (isAgreed)
+        {
+            navigation.navigate('CheckOutScreen3');
+        }
+    };
     return (
         <ScrollView showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 60 }}
@@ -120,8 +128,10 @@ export default function CheckOutScreen2()
 
                 {/* Terms and Conditions */}
                 <View style={styles.terms}>
-                    <Checkbox color={"#5ECE7B"}
-                        value={isAgreed} onValueChange={setIsAgreed} />
+                    <Checkbox
+                        color={"#508A7B"}
+                        value={isAgreed}
+                        onValueChange={setIsAgreed} />
                     <Text style={styles.termsText}>I agree to</Text>
                     <TouchableOpacity>
                         <Text style={styles.termsLink}>Terms and Conditions</Text>
@@ -129,7 +139,10 @@ export default function CheckOutScreen2()
                 </View>
 
                 <View style={styles.btnContainer}>
-                    <CustomButton title='Place my order' onPress={() => navigation.navigate("CheckOutScreen3")} Width={380} />
+                    <CustomButton
+                        color={!isAgreed ? "#2D201C" : "#508A7B"}
+                        disabled={!isAgreed}
+                        title='Place my order' onPress={handleNext} Width={380} />
                 </View>
 
             </View>

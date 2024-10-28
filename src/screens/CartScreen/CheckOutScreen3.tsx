@@ -2,13 +2,19 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton';
-import { CartParamList } from '../BottomTab/MyTabs';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { CartParamList, HomeParamList } from '../BottomTab/MyTabs';
+import { CompositeNavigationProp, NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenHeader from '../../components/ScreenHeader';
+
+type combinedNavigation = CompositeNavigationProp<
+    NavigationProp<CartParamList>,
+    NavigationProp<HomeParamList>
+>;
+
 
 const CheckOutScreen3 = () =>
 {
-    const navigation = useNavigation<NavigationProp<CartParamList>>();
+    const navigation = useNavigation<combinedNavigation>();
     return (
         <View style={styles.container}>
 
@@ -53,7 +59,7 @@ const CheckOutScreen3 = () =>
                 </View>
 
                 <View style={styles.btnContainer}>
-                    <CustomButton onPress={() => ""} title='Continue Shopping' Width={380} />
+                    <CustomButton onPress={() => navigation.navigate("HomeScreen")} title='Continue Shopping' Width={380} />
                 </View>
             </View>
         </View>
