@@ -6,11 +6,14 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { CartParamList } from '../BottomTab/MyTabs';
 import CustomButton from '../../components/CustomButton';
 import ScreenHeader from '../../components/ScreenHeader';
+import { useSelector } from 'react-redux';
+import { selectSubtotal } from '../../store/cartSlice';
 
 export default function CheckOutScreen2()
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
     const [isAgreed, setIsAgreed] = useState(false);
+    const subTotal = useSelector(selectSubtotal);
 
     const handleNext = () =>
     {
@@ -112,7 +115,7 @@ export default function CheckOutScreen2()
             <View style={styles.orderSummary}>
                 <View style={styles.summaryRow}>
                     <Text style={styles.summaryLabel}>Product price</Text>
-                    <Text style={styles.summaryValue}>$110</Text>
+                    <Text style={styles.summaryValue}>${subTotal}</Text>
                 </View>
                 <View style={styles.lineBreak} />
                 <View style={styles.summaryRow}>
@@ -122,7 +125,7 @@ export default function CheckOutScreen2()
                 <View style={styles.lineBreak} />
                 <View style={styles.summaryRow}>
                     <Text style={[styles.summaryLabel, { fontWeight: "500", color: "black" }]}>Subtotal</Text>
-                    <Text style={styles.subtotalValue}>$110</Text>
+                    <Text style={styles.subtotalValue}>${subTotal}</Text>
                 </View>
 
 

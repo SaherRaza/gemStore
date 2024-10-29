@@ -5,6 +5,8 @@ import CustomButton from '../../components/CustomButton';
 import { CartParamList, HomeParamList } from '../BottomTab/MyTabs';
 import { CompositeNavigationProp, NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenHeader from '../../components/ScreenHeader';
+import { useDispatch } from 'react-redux';
+import { emptyCart } from "../../store/cartSlice";
 
 type combinedNavigation = CompositeNavigationProp<
     NavigationProp<CartParamList>,
@@ -15,6 +17,13 @@ type combinedNavigation = CompositeNavigationProp<
 const CheckOutScreen3 = () =>
 {
     const navigation = useNavigation<combinedNavigation>();
+    const dispatch = useDispatch();
+
+    const handleContinueShopping = () =>
+    {
+        dispatch(emptyCart());  // Reset the cart
+        navigation.navigate("HomeScreen");
+    };
     return (
         <View style={styles.container}>
 
@@ -59,7 +68,7 @@ const CheckOutScreen3 = () =>
                 </View>
 
                 <View style={styles.btnContainer}>
-                    <CustomButton onPress={() => navigation.navigate("HomeScreen")} title='Continue Shopping' Width={380} />
+                    <CustomButton onPress={handleContinueShopping} title='Continue Shopping' Width={380} />
                 </View>
             </View>
         </View>
@@ -117,3 +126,4 @@ const styles = StyleSheet.create({
         marginTop: 100
     }
 });
+

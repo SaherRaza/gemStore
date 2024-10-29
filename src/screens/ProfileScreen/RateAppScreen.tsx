@@ -56,7 +56,9 @@ const RateAppScreen = () =>
                     </Text>
                 </View>
                 <View style={{ margin: 30 }}>
-                    <CustomButton title='Send feedback' onPress={handleSendFeedback} />
+                    <CustomButton
+                        disabled={inputValue ? false : true} // false if inputValue is empty
+                        title='Send feedback' onPress={handleSendFeedback} />
                 </View>
 
                 {/* Modal */}

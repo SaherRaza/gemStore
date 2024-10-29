@@ -42,7 +42,7 @@ const CheckOutScreen = () =>
         dispatch(setState(values.state));
         dispatch(setZipCode(values.zipCode));
         dispatch(resetCheckout());
-        //console.log("Form submitted:", values);
+        console.log("Form submitted:", values);
 
     };
     const handleNext = () =>

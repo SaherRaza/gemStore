@@ -54,8 +54,14 @@ export const cartSlice = createSlice({
                 state.items = state.items.filter((item) => item !== cartItem);
             }
         },
+        emptyCart: (state, action: PayloadAction) =>
+        {
+            state.items = [];
+        }
     },
 });
+export const { addCartItem, changeQuantity, emptyCart } = cartSlice.actions;
+export default cartSlice.reducer;
 
 // Selectors
 export const selectNumberOfItems = (state: { cart: CartState }) =>
