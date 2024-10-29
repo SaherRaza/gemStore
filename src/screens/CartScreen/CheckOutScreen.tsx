@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { Formik } from 'formik';
@@ -27,13 +27,7 @@ const CheckOutScreen = () =>
     const [couponCode, setCouponCode] = useState('');
     const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
 
-    const handleNext = () =>
-    {
-        if (billingSameAsShipping)
-        {
-            navigation.navigate("CheckOutScreen2");
-        }
-    };
+
 
     const dispatch = useDispatch();
 
@@ -48,8 +42,17 @@ const CheckOutScreen = () =>
         dispatch(setState(values.state));
         dispatch(setZipCode(values.zipCode));
         dispatch(resetCheckout());
-        console.log(handleFormSubmit(values));
+        //console.log("Form submitted:", values);
 
+    };
+    const handleNext = () =>
+    {
+
+        if (!billingSameAsShipping)
+        {
+            Alert.alert('Error', 'Please check the box to copy the address data from shipping.');
+            return;
+        }
     };
     return (
         <ScrollView
@@ -90,167 +93,188 @@ const CheckOutScreen = () =>
                 <Formik
                     initialValues={{ firstName: '', lastName: '', country: '', streetName: '', city: '', state: '', zipCode: '', phoneNumber: '' }}
                     validationSchema={validationSchema}
-                    onSubmit={handleFormSubmit}
+                    onSubmit={(values) =>
+                    {
+                        // Check if any field is empty
+                        const isFormValid = Object.values(values).every(value => value.trim() !== '');
+
+                        if (!isFormValid)
+                        {
+                            Alert.alert('Error', 'Please fill all the required fields.');
+                            return;
+                        }
+
+                        handleNext();
+                        // If all checks pass, dispatch the values and navigate to the next screen
+                        handleFormSubmit(values);
+                        navigation.navigate("CheckOutScreen2");
+                    }
+                    }
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-                        <View>
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.firstName && errors.firstName ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="First Name*"
-                                onChangeText={handleChange('firstName')}
-                                onBlur={handleBlur('firstName')}
-                                value={values.firstName}
-                            />
-                            {touched.firstName && errors.firstName && <Text style={styles.error}>{errors.firstName}</Text>}
+                        <>
+                            <View>
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.firstName && errors.firstName ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="First Name*"
+                                    onChangeText={handleChange('firstName')}
+                                    onBlur={handleBlur('firstName')}
+                                    value={values.firstName}
+                                />
+                                {touched.firstName && errors.firstName && <Text style={styles.error}>{errors.firstName}</Text>}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.lastName && errors.lastName ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="Last Name*"
-                                onChangeText={handleChange('lastName')}
-                                onBlur={handleBlur('lastName')}
-                                value={values.lastName}
-                            />
-                            {touched.lastName && errors.lastName && <Text style={styles.error}>{errors.lastName}</Text>}
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.lastName && errors.lastName ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="Last Name*"
+                                    onChangeText={handleChange('lastName')}
+                                    onBlur={handleBlur('lastName')}
+                                    value={values.lastName}
+                                />
+                                {touched.lastName && errors.lastName && <Text style={styles.error}>{errors.lastName}</Text>}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.country && errors.country ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="Country*"
-                                onChangeText={handleChange('country')}
-                                onBlur={handleBlur('country')}
-                                value={values.country}
-                            />
-                            {touched.country && errors.country && <Text style={styles.error}>{errors.country}</Text>}
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.country && errors.country ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="Country*"
+                                    onChangeText={handleChange('country')}
+                                    onBlur={handleBlur('country')}
+                                    value={values.country}
+                                />
+                                {touched.country && errors.country && <Text style={styles.error}>{errors.country}</Text>}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.streetName && errors.streetName ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="Street Name*"
-                                onChangeText={handleChange('streetName')}
-                                onBlur={handleBlur('streetName')}
-                                value={values.streetName}
-                            />
-                            {touched.streetName && errors.streetName && <Text style={styles.error}>{errors.streetName}</Text>}
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.streetName && errors.streetName ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="Street Name*"
+                                    onChangeText={handleChange('streetName')}
+                                    onBlur={handleBlur('streetName')}
+                                    value={values.streetName}
+                                />
+                                {touched.streetName && errors.streetName && <Text style={styles.error}>{errors.streetName}</Text>}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.city && errors.city ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="City*"
-                                onChangeText={handleChange('city')}
-                                onBlur={handleBlur('city')}
-                                value={values.city}
-                            />
-                            {touched.city && errors.city && <Text style={styles.error}>{errors.city}</Text>}
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.city && errors.city ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="City*"
+                                    onChangeText={handleChange('city')}
+                                    onBlur={handleBlur('city')}
+                                    value={values.city}
+                                />
+                                {touched.city && errors.city && <Text style={styles.error}>{errors.city}</Text>}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.state && errors.state ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="State/Province"
-                                onChangeText={handleChange('state')}
-                                onBlur={handleBlur('state')}
-                                value={values.state}
-                            />
-                            {/* {touched.state && errors.state && <Text style={styles.error}>{errors.state}</Text>} */}
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.state && errors.state ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="State/Province"
+                                    onChangeText={handleChange('state')}
+                                    onBlur={handleBlur('state')}
+                                    value={values.state}
+                                />
+                                {/* {touched.state && errors.state && <Text style={styles.error}>{errors.state}</Text>} */}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.zipCode && errors.zipCode ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="Zip-Code*"
-                                onChangeText={handleChange('zipCode')}
-                                onBlur={handleBlur('zipCode')}
-                                value={values.zipCode}
-                            />
-                            {touched.zipCode && errors.zipCode && <Text style={styles.error}>{errors.zipCode}</Text>}
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.zipCode && errors.zipCode ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="Zip-Code*"
+                                    onChangeText={handleChange('zipCode')}
+                                    onBlur={handleBlur('zipCode')}
+                                    value={values.zipCode}
+                                />
+                                {touched.zipCode && errors.zipCode && <Text style={styles.error}>{errors.zipCode}</Text>}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.phoneNumber && errors.phoneNumber ? 'red' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="Phone number*"
-                                onChangeText={handleChange('phoneNumber')}
-                                onBlur={handleBlur('phoneNumber')}
-                                value={values.phoneNumber}
-                            />
-                            {touched.phoneNumber && errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber}</Text>}
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        {
+                                            borderColor: touched.phoneNumber && errors.phoneNumber ? 'red' : '#D3D3D3',
+                                        },
+                                    ]}
+                                    placeholder="Phone number*"
+                                    onChangeText={handleChange('phoneNumber')}
+                                    onBlur={handleBlur('phoneNumber')}
+                                    value={values.phoneNumber}
+                                />
+                                {touched.phoneNumber && errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber}</Text>}
 
 
+                            </View>
                             {/* <Button onPress={handleSubmit} title="Submit" /> */}
-                        </View>
+                            {/* </>
+                    )}
+                </Formik> */}
+
+
+                            <Text style={styles.subTitle}>Shipping method</Text>
+                            <RadioButton />
+
+
+                            <View style={{ marginTop: 30 }}>
+                                <Text style={[styles.textStyle, { fontSize: 20, fontWeight: "600" }]}>Coupon Code</Text>
+                            </View>
+
+                            <View style={styles.inputContainer}>
+                                <TextInput
+                                    placeholder="Have a code? type it here.."
+                                    value={couponCode}
+                                    onChangeText={setCouponCode}
+                                />
+                                <TouchableOpacity style={styles.validateButton}>
+                                    <Text style={styles.validateButtonText}>Validate</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                            <View style={{ marginTop: 30 }}>
+                                <Text style={[styles.textStyle, { fontSize: 20, fontWeight: "600" }]}>Billing Address</Text>
+                            </View>
+
+                            <View style={styles.checkboxContainer}>
+                                <Checkbox
+                                    color={'#508A7B'}
+                                    value={billingSameAsShipping}
+                                    onValueChange={setBillingSameAsShipping}
+                                />
+                                <Text style={styles.checkboxLabel}>Copy address data from shipping</Text>
+                            </View>
+
+                            <View style={{ marginTop: 20 }}>
+                                <CustomButton
+                                    // color={!billingSameAsShipping ? "#2D201C" : "#508A7B"}
+                                    // disabled={!billingSameAsShipping} // Disable if checkbox is not selected
+                                    title='Continue to payment' onPress={handleSubmit} />
+                            </View>
+                        </>
                     )}
                 </Formik>
-
-
-                <Text style={styles.subTitle}>Shipping method</Text>
-                <RadioButton />
-
-
-                <View style={{ marginTop: 30 }}>
-                    <Text style={[styles.textStyle, { fontSize: 20, fontWeight: "600" }]}>Coupon Code</Text>
-                </View>
-
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        placeholder="Have a code? type it here.."
-                        value={couponCode}
-                        onChangeText={setCouponCode}
-                    />
-                    <TouchableOpacity style={styles.validateButton}>
-                        <Text style={styles.validateButtonText}>Validate</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{ marginTop: 30 }}>
-                    <Text style={[styles.textStyle, { fontSize: 20, fontWeight: "600" }]}>Billing Address</Text>
-                </View>
-
-                <View style={styles.checkboxContainer}>
-                    <Checkbox
-                        color={'#508A7B'}
-                        value={billingSameAsShipping}
-                        onValueChange={setBillingSameAsShipping}
-                    />
-                    <Text style={styles.checkboxLabel}>Copy address data from shipping</Text>
-                </View>
-
-                <View style={{ marginTop: 20 }}>
-                    <CustomButton
-                        color={!billingSameAsShipping ? "#2D201C" : "#508A7B"}
-                        disabled={!billingSameAsShipping} // Disable if checkbox is not selected
-                        title='Continue to payment' onPress={handleNext} />
-                </View>
             </View>
         </ScrollView>
     );

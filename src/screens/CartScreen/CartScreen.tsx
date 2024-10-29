@@ -33,7 +33,7 @@ const CartScreen: FC<Props> = () =>
         showsVerticalScrollIndicator={false} // Optional: hides scrollbar for clean UI
       />
 
-      <View style={styles.bottomContainer}>
+      {cart.length > 0 ? (<View style={styles.bottomContainer}>
         <View style={styles.title}>
           <Text style={[styles.textStyle, { color: "#8A8A8F" }]}>SubTotal</Text>
           <Text style={[styles.textStyle, { fontWeight: "400" }]}>{subTotal}$</Text>
@@ -55,7 +55,12 @@ const CartScreen: FC<Props> = () =>
             Width={300}
           />
         </View>
-      </View>
+      </View>) : (
+        <Text style={[styles.textPosition, styles.textStyle]}>No items in cart</Text>
+      )}
+
+
+
     </View>
   );
 };
@@ -98,4 +103,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 10,
   },
+  textPosition: {
+    textAlign: 'center',
+    justifyContent: "center",
+    flex: 1,
+
+  }
 });
