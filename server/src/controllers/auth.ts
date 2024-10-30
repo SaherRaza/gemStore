@@ -13,7 +13,7 @@ import EmailVerificationToken from "#/models/emailVerificationToken";
 import PasswordResetToken from "#/models/passwordResetToken";
 import { isValidObjectId } from "mongoose";
 import crypto from "crypto";
-import { JWT_SECRET, PASSWORD_RESET_LINK } from "#/utils/variables";
+import { JWT_SECRET, MAILTRAP_PASS, MAILTRAP_USER, PASSWORD_RESET_LINK } from "#/utils/variables";
 import { RequestWithFiles } from "#/middleware/fileParser";
 import cloudinary from "#/cloud";
 import formidable from "formidable";
@@ -21,22 +21,23 @@ import formidable from "formidable";
 export const create: RequestHandler = async (req: CreateUser, res) => {
   const { email, password, name } = req.body;
 
-  // const oldUser = await User.findOne({ email });
-  // if (oldUser)
-  //   return res.status(403).json({ error: "Email is already in use!" });
+  const oldUser = await User.findOne({ email });
+  if (oldUser)
+    return res.status(403).json({ error: "Email is already in use!" });
 
   const user = await User.create({ name, email, password });
 
   // send verification email
-  // const token = generateToken();
-  // await EmailVerificationToken.create({
-  //   owner: user._id,
-  //   token,
-  // });
+  const token = generateToken();
+  await EmailVerificationToken.create({
+    owner: user._id,
+    token,
+  });
 
-  // sendVerificationMail(token, { name, email, userId: user._id.toString() });
+  sendVerificationMail(token, { name, email, userId: user._id.toString() });
 
-  res.status(201).json({ user: { id: user._id, name, email } });
+   res.status(201).json({ user: { id: user._id, name, email } });
+  //  res.status(201).json({ user });
 };
 
 export const verifyEmail: RequestHandler = async (

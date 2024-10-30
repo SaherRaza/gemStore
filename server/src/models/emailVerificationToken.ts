@@ -35,7 +35,7 @@ const emailVerificationTokenSchema = new Schema<
   },
 });
 
-emailVerificationTokenSchema.pre("save", async function (next) {
+emailVerificationTokenSchema.pre("save", async function(next) {
   // hash the token
   if (this.isModified("token")) {
     this.token = await hash(this.token, 10);
@@ -44,7 +44,7 @@ emailVerificationTokenSchema.pre("save", async function (next) {
   next();
 });
 
-emailVerificationTokenSchema.methods.compareToken = async function (token) {
+emailVerificationTokenSchema.methods.compareToken = async function(token) {
   const result = await compare(token, this.token);
   return result;
 };

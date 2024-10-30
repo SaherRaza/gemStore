@@ -21,7 +21,6 @@ const generateMailTransporter = () => {
       pass: MAILTRAP_PASS,
     },
   });
-
   return transport;
 };
 
@@ -36,14 +35,14 @@ export const sendVerificationMail = async (token: string, profile: Profile) => {
 
   const { name, email, userId } = profile;
 
-  const welcomeMessage = `Hi ${name}, welcome to Podify! There are so much thing that we do for verified users. Use the given OTP to verify your email.`;
+  const welcomeMessage = `Hi ${name}, welcome to GemApp! There are so much thing that we do for verified users. Use the given OTP to verify your email.`;
 
   transport.sendMail({
     to: email,
     from: VERIFICATION_EMAIL,
     subject: "Welcome message",
     html: generateTemplate({
-      title: "Welcome to Podify",
+      title: "Welcome to GemApp",
       message: welcomeMessage,
       logo: "cid:logo",
       banner: "cid:welcome",
