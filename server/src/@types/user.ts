@@ -9,8 +9,8 @@ declare global {
         email: string;
         verified: boolean;
         avatar?: string;
-        followers: number;
-        followings: number;
+        // followers: number;
+        // followings: number;
       };
       token: string;
     }

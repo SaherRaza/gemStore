@@ -21,20 +21,20 @@ import formidable from "formidable";
 export const create: RequestHandler = async (req: CreateUser, res) => {
   const { email, password, name } = req.body;
 
-  const oldUser = await User.findOne({ email });
-  if (oldUser)
-    return res.status(403).json({ error: "Email is already in use!" });
+  // const oldUser = await User.findOne({ email });
+  // if (oldUser)
+  //   return res.status(403).json({ error: "Email is already in use!" });
 
   const user = await User.create({ name, email, password });
 
   // send verification email
-  const token = generateToken();
-  await EmailVerificationToken.create({
-    owner: user._id,
-    token,
-  });
+  // const token = generateToken();
+  // await EmailVerificationToken.create({
+  //   owner: user._id,
+  //   token,
+  // });
 
-  sendVerificationMail(token, { name, email, userId: user._id.toString() });
+  // sendVerificationMail(token, { name, email, userId: user._id.toString() });
 
   res.status(201).json({ user: { id: user._id, name, email } });
 };
@@ -174,8 +174,8 @@ export const signIn: RequestHandler = async (req, res) => {
       email: user.email,
       verified: user.verified,
       avatar: user.avatar?.url,
-      followers: user.followers.length,
-      followings: user.followings.length,
+      // followers: user.followers.length,
+      // followings: user.followings.length,
     },
     token,
   });

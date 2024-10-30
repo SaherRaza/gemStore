@@ -1,69 +1,50 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ScreenHeader from '../../components/ScreenHeader';
-
-const orders = [
-    {
-        id: '1',
-        orderNumber: '#1524',
-        trackingNumber: 'IK287368838',
-        quantity: 2,
-        subtotal: 110,
-        date: '13/05/2021',
-        status: 'PENDING',
-    },
-    {
-        id: '2',
-        orderNumber: '#1524',
-        trackingNumber: 'IK2873218897',
-        quantity: 3,
-        subtotal: 230,
-        date: '12/05/2021',
-        status: 'PENDING',
-    },
-    {
-        id: '3',
-        orderNumber: '#1524',
-        trackingNumber: 'IK237368820',
-        quantity: 5,
-        subtotal: 490,
-        date: '10/05/2021',
-        status: 'PENDING',
-    },
-];
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 export default function MyOrdersScreen()
 {
     const navigation = useNavigation();
+    const checkoutData = useSelector((state: RootState) => state.checkout);
+
+    // Log to check checkoutData
+    useEffect(() =>
+    {
+        console.log("Checkout Data:", checkoutData);
+    }, [checkoutData]);
+
     return (
         <View style={styles.container}>
             {/* Header */}
             <ScreenHeader onPress={() => navigation.goBack()} title="My Orders" />
 
-            <View style={{ paddingTop: 30, flex: 1, }}>
-
-                {/* Order List */}
-                <FlatList
-                    data={orders}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <View style={styles.orderCard}>
-                            <View style={styles.orderHeader}>
-                                <Text style={styles.orderNumber}>Order {item.orderNumber}</Text>
-                                <Text style={styles.orderDate}>{item.date}</Text>
+            <View style={{ paddingTop: 30, flex: 1 }}>
+                {/* Check if checkoutData has content */}
+                {checkoutData ? (
+                    <FlatList
+                        data={[checkoutData]} // Displaying checkout data as a single order
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item }) => (
+                            <View style={styles.orderCard}>
+                                <View style={styles.orderHeader}>
+                                    <Text style={styles.orderNumber}>
+                                        {item.firstName ? `Order for ${ item.firstName }` : "Order"}
+                                    </Text>
+                                  // <Text style={styles.orderDate}>{item.date || "No Date"}</Text>
+                                </View>
+                                {/* Display other order details conditionally */}
+                                <TouchableOpacity onPress={() => navigation.navigate("OrderDetailScreen")} style={styles.detailsButton}>
+                                    <Text style={styles.detailsButtonText}>Details</Text>
+                                </TouchableOpacity>
                             </View>
-                            <Text style={styles.trackingNumber}>Tracking number: {item.trackingNumber}</Text>
-                            <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
-                            <Text style={styles.subtotal}>Subtotal: <Text style={styles.subtotalValue}>${item.subtotal}</Text></Text>
-                            <Text style={styles.status}>{item.status}</Text>
-                            <TouchableOpacity onPress={() => navigation.navigate("OrderDetailScreen")} style={styles.detailsButton}>
-                                <Text style={styles.detailsButtonText}>Details</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )}
-                />
+                        )}
+                    />
+                ) : (
+                    <Text style={styles.noDataText}>No order data available</Text>
+                )}
             </View>
         </View>
     );
@@ -74,7 +55,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-
+    noDataText: {
+        fontSize: 18,
+        textAlign: 'center',
+        color: '#7D7D7D',
+        marginTop: 20,
+    },
     orderCard: {
         backgroundColor: '#fff',
         borderRadius: 8,
@@ -86,8 +72,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 5,
         elevation: 2,
-        margin: 5,
-        gap: 5
     },
     orderHeader: {
         flexDirection: 'row',
@@ -102,26 +86,12 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#7D7D7D',
     },
-    trackingNumber: {
-        fontSize: 14,
-        color: '#7D7D7D',
-        marginBottom: 5,
-    },
     quantity: {
         fontSize: 14,
         marginBottom: 5,
     },
     subtotal: {
         fontSize: 14,
-        marginBottom: 10,
-    },
-    subtotalValue: {
-        fontWeight: 'bold',
-        color: '#000',
-    },
-    status: {
-        color: '#F57C00',
-        fontWeight: 'bold',
         marginBottom: 10,
     },
     detailsButton: {
@@ -131,7 +101,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         paddingVertical: 12,
         paddingHorizontal: 16,
-        bottom: 10
     },
     detailsButtonText: {
         fontSize: 14,

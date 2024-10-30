@@ -39,8 +39,8 @@ export const mustAuth: RequestHandler = async (req, res, next) => {
     email: user.email,
     verified: user.verified,
     avatar: user.avatar?.url,
-    followers: user.followers.length,
-    followings: user.followings.length,
+    // followers: user.followers.length,
+    // followings: user.followings.length,
   };
   req.token = token;
 
@@ -64,8 +64,8 @@ export const isAuth: RequestHandler = async (req, res, next) => {
       email: user.email,
       verified: user.verified,
       avatar: user.avatar?.url,
-      followers: user.followers.length,
-      followings: user.followings.length,
+      // followers: user.followers.length,
+      // followings: user.followings.length,
     };
     req.token = token;
   }
