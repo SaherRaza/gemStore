@@ -29,7 +29,7 @@ const OrderDetailScreen: React.FC = () =>
                 </View>
                 <View style={styles.infoRow}>
                     <Text style={styles.infoLabel}>Delivery address</Text>
-                    <Text style={styles.infoValue}> {checkoutData.streetName}lahore</Text>
+                    <Text style={styles.infoValue}>lahore</Text>
                 </View>
             </View>
 

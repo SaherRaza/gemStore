@@ -33,7 +33,7 @@ export default function MyOrdersScreen()
                                     <Text style={styles.orderNumber}>
                                         {item.firstName ? `Order for ${ item.firstName }` : "Order"}
                                     </Text>
-                                  // <Text style={styles.orderDate}>{item.date || "No Date"}</Text>
+                                    <Text style={styles.orderDate}>{item.lastName || "No Date"}</Text>
                                 </View>
                                 {/* Display other order details conditionally */}
                                 <TouchableOpacity onPress={() => navigation.navigate("OrderDetailScreen")} style={styles.detailsButton}>
