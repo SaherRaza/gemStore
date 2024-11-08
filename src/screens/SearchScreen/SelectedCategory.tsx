@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProduct } from "../../store/productSlice";
 import ScreenHeader from "../../components/ScreenHeader";
 import CustomStarRating from "../../components/CustomStarRating";
+import { useFocusEffect } from "@react-navigation/native";
 
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
@@ -47,8 +48,16 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
       // Navigate to product details screen when product is selected
       navigation.navigate('DetailScreen', { product: selectedProduct });
     }
-  }, [selectedProduct, navigation]);
+  }, [selectedProduct]);
 
+
+  useFocusEffect(
+    React.useCallback(() =>
+    {
+      dispatch(setSelectedProduct("")); // Clear selected product on focus
+      // Optionally reset other states if needed
+    }, [dispatch])
+  );
 
   const { category } = route.params;
   console.log(category);

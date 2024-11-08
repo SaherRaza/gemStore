@@ -75,6 +75,7 @@ const SearchScreen: React.FC<Props> = ({ navigation }) =>
 
   };
 
+
   const [text, onChangeText] = useState<string>('');
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showCategories, setShowCategories] = useState<boolean>(true);
