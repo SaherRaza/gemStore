@@ -23,7 +23,8 @@ import OrderDetailScreen from "./src/screens/CartScreen/OrderDetailScreen";
 import { Provider } from "react-redux";
 import { store } from "./src/store";
 const Stack = createNativeStackNavigator();
-export default function App()
+
+const App = () =>
 {
   // useEffect(() => {
   //   // Load custom fonts
@@ -69,7 +70,7 @@ export default function App()
       {/* <LoginScreen /> */}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -79,3 +80,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+export default App;
