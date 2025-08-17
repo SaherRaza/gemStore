@@ -6,6 +6,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ProfileParamList } from "../BottomTab/MyTabs";
+
 const ProfileScreen: React.FC = () =>
 {
   const navigation = useNavigation<NavigationProp<ProfileParamList>>();
@@ -22,7 +23,7 @@ const ProfileScreen: React.FC = () =>
             <Text>suniepham@gmail.com</Text>
           </View>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("ProfileSetting")}>
           <Ionicons name="settings" size={24} color="black" />
         </TouchableOpacity>
       </View>

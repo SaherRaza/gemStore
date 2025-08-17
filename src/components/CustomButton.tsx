@@ -5,7 +5,7 @@ interface CustomButtonProps
 {
   title: string;
   Width?: number;
-  onPress: () => void;
+  onPress?: () => void;
   disabled?: boolean;
   color?: string;
 }

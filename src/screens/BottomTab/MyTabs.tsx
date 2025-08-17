@@ -22,6 +22,7 @@ import OrderSummary from './../CartScreen/OrderSummary';
 import { Product } from "../../../assets/data/data";
 import WishlistScreen from './../ProfileScreen/WishlistScreen';
 import RateAppScreen from "../ProfileScreen/RateAppScreen";
+import ProfileSetting from "../ProfileScreen/ProfileSetting";
 
 
 
@@ -104,6 +105,7 @@ export type ProfileParamList = {
   ProfileScreen: undefined;
   WishlistScreen: undefined;
   RateAppScreen: undefined;
+  ProfileSetting: undefined;
 };
 const ProfileStack = createNativeStackNavigator<ProfileParamList>();
 
@@ -118,6 +120,7 @@ function ProfileStackScreen()
       <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
       <ProfileStack.Screen name="WishlistScreen" component={WishlistScreen} />
       <ProfileStack.Screen name="RateAppScreen" component={RateAppScreen} />
+      <ProfileStack.Screen name="ProfileSetting" component={ProfileSetting} />
     </ProfileStack.Navigator>
   );
 }
