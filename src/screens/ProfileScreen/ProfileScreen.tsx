@@ -6,10 +6,14 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ProfileParamList } from "../BottomTab/MyTabs";
+import { useSelector } from "react-redux";
 
 const ProfileScreen: React.FC = () =>
 {
   const navigation = useNavigation<NavigationProp<ProfileParamList>>();
+  const profile = useSelector((state: any) => state.profile);
+  const { firstName, lastName, email } = profile;
+  console.log(profile.firstName);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
@@ -19,8 +23,8 @@ const ProfileScreen: React.FC = () =>
             source={require("../../../assets/images/profile.png")} />
 
           <View>
-            <Text style={{ fontWeight: "700" }}>Sunie Pham</Text>
-            <Text>suniepham@gmail.com</Text>
+            <Text style={{ fontWeight: "700" }}>{firstName} {lastName}</Text>
+            <Text>{email}</Text>
           </View>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate("ProfileSetting")}>

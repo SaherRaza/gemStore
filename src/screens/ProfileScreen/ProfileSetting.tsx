@@ -1,16 +1,34 @@
 import { StyleSheet, Text, View, Image, Pressable, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import ScreenHeader from '../../components/ScreenHeader';
 import { ProfileParamList } from '../BottomTab/MyTabs';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Feather from '@expo/vector-icons/Feather';
 import CustomButton from '../../components/CustomButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile } from '../../store/profileSlice';
 
 interface Props { };
 
 const ProfileSetting: React.FC<Props> = () =>
 {
     const navigation = useNavigation<NavigationProp<ProfileParamList>>();
+
+    const dispatch = useDispatch();
+
+    const profile = useSelector((state: any) => state.profile);
+
+    const [firstName, setFirstName] = useState(profile.firstName);
+    const [lastName, setLastName] = useState(profile.lastName);
+    const [email, setEmail] = useState(profile.email);
+    const [gender, setGender] = useState(profile.gender);
+    const [phone, setPhone] = useState(profile.phone);
+
+    const handleSave = () =>
+    {
+        dispatch(updateProfile({ firstName, lastName, email, gender, phone }));
+    };
+
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={styles.container}>
             <View>
@@ -30,12 +48,16 @@ const ProfileSetting: React.FC<Props> = () =>
                         flexDirection: "row", justifyContent: "space-around",
                     }}>
                         <TextInput
+                            value={firstName}
                             style={[styles.input, { width: "40%" }]}
                             placeholder="First Name"
+                            onChangeText={setFirstName}
                         />
                         <TextInput
                             style={[styles.input, { width: "40%" }]}
                             placeholder="Last Name"
+                            value={lastName}
+                            onChangeText={setLastName}
                         />
                     </View>
                     <View style={{
@@ -44,6 +66,8 @@ const ProfileSetting: React.FC<Props> = () =>
                         <TextInput
                             style={[styles.input, { width: "90%" }]}
                             placeholder="Email"
+                            value={email}
+                            onChangeText={setEmail}
                         />
                     </View>
                     <View style={{
@@ -52,10 +76,14 @@ const ProfileSetting: React.FC<Props> = () =>
                         <TextInput
                             style={[styles.input, { width: "30%" }]}
                             placeholder="Gender"
+                            value={gender}
+                            onChangeText={setGender}
                         />
                         <TextInput
                             style={[styles.input, { width: "50%" }]}
                             placeholder="Phone"
+                            value={phone}
+                            onChangeText={setPhone}
                         />
                     </View>
                 </View>
@@ -65,6 +93,7 @@ const ProfileSetting: React.FC<Props> = () =>
                     justifyContent: "center",
                 }}>
                     <CustomButton
+                        onPress={handleSave}
                         color="#343434"
                         title='Save Change'
                         Width={203} />
