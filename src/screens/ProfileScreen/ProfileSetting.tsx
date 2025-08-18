@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React from 'react';
 import ScreenHeader from '../../components/ScreenHeader';
 import { ProfileParamList } from '../BottomTab/MyTabs';
@@ -12,28 +12,65 @@ const ProfileSetting: React.FC<Props> = () =>
 {
     const navigation = useNavigation<NavigationProp<ProfileParamList>>();
     return (
-        <View style={styles.container}>
-            <ScreenHeader onPress={() => navigation.goBack()} title="Profile Setting" />
-            <View style={styles.imageContainer}>
-                <Image
-                    style={styles.imgStyle}
-                    resizeMode='contain'
-                    source={require("../../../assets/images/profile.png")} />
-                <Pressable style={styles.iconPosition}>
-                    <Feather name="camera" size={18} color="white" />
-                </Pressable>
-            </View>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={styles.container}>
+            <View>
+                <ScreenHeader onPress={() => navigation.goBack()} title="Profile Setting" />
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={styles.imgStyle}
+                        resizeMode='contain'
+                        source={require("../../../assets/images/profile.png")} />
+                    <Pressable style={styles.iconPosition}>
+                        <Feather name="camera" size={18} color="white" />
+                    </Pressable>
+                </View>
 
-            <View style={{
-                marginTop: 20, alignItems: "center",
-                justifyContent: "center",
-            }}>
-                <CustomButton
-                    color="#343434"
-                    title='Save Change'
-                    Width={203} />
+                <View style={{ padding: 10 }}>
+                    <View style={{
+                        flexDirection: "row", justifyContent: "space-around",
+                    }}>
+                        <TextInput
+                            style={[styles.input, { width: "40%" }]}
+                            placeholder="First Name"
+                        />
+                        <TextInput
+                            style={[styles.input, { width: "40%" }]}
+                            placeholder="Last Name"
+                        />
+                    </View>
+                    <View style={{
+                        flexDirection: "row", justifyContent: "space-around",
+                    }}>
+                        <TextInput
+                            style={[styles.input, { width: "90%" }]}
+                            placeholder="Email"
+                        />
+                    </View>
+                    <View style={{
+                        flexDirection: "row", justifyContent: "space-around",
+                    }}>
+                        <TextInput
+                            style={[styles.input, { width: "30%" }]}
+                            placeholder="Gender"
+                        />
+                        <TextInput
+                            style={[styles.input, { width: "50%" }]}
+                            placeholder="Phone"
+                        />
+                    </View>
+                </View>
+
+                <View style={{
+                    marginTop: 70, alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <CustomButton
+                        color="#343434"
+                        title='Save Change'
+                        Width={203} />
+                </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 };
 
@@ -62,7 +99,16 @@ const styles = StyleSheet.create({
         top: -30,
         left: 30
 
-    }
+    },
+    input: {
+        height: 40,
+        borderWidth: 1,
+        marginBottom: 10,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        marginVertical: 12
+    },
 });
 
 export default ProfileSetting;

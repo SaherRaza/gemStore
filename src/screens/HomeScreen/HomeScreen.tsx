@@ -13,9 +13,12 @@ import React, { useState } from "react";
 import { Ionicons, Foundation } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
 import { Product, DATA } from "../../../assets/data/data";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { HomeParamList, ProfileParamList } from "../BottomTab/MyTabs";
 
 const HomeScreen: React.FC = () =>
 {
+  const navigation = useNavigation<NavigationProp<HomeParamList>>();
   const [selectedIcon, setSelectedIcon] = useState<number | null>(null); // manages the selected category
 
   // updates the selected category
@@ -35,7 +38,7 @@ const HomeScreen: React.FC = () =>
         </TouchableOpacity> */}
         <View />
         <Text style={styles.textStyle}>GemStore</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("NotificationScreen")}>
           <View style={styles.circle} />
           <Ionicons name="notifications-outline" size={20} color="black" />
         </TouchableOpacity>

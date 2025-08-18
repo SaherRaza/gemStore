@@ -23,11 +23,13 @@ import { Product } from "../../../assets/data/data";
 import WishlistScreen from './../ProfileScreen/WishlistScreen';
 import RateAppScreen from "../ProfileScreen/RateAppScreen";
 import ProfileSetting from "../ProfileScreen/ProfileSetting";
+import NotificationScreen from "../HomeScreen/NotificationScreen";
 
 
 
 export type HomeParamList = {
   HomeScreen: undefined;
+  NotificationScreen: undefined;
 };
 
 
@@ -41,6 +43,7 @@ const HomeStackScreen: React.FC = () =>
   return (
     <HomeStack.Navigator screenOptions={screenOptions}>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+      <HomeStack.Screen name="NotificationScreen" component={NotificationScreen} />
       {/* Other screens if any */}
     </HomeStack.Navigator>
   );
