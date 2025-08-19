@@ -1,13 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
-import productReducer from "./productSlice";  // Import the default reducer
+import { persistStore, persistReducer } from 'redux-persist'
+import productSlice from "./productSlice";  // Import the default reducer
  import { cartSlice } from "./cartSlice";
 import favoriteSlice from "./favoriteSlice";
 import checkoutSlice from "./checkoutSlice";
 import profileSlice from "./profileSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const persistConfig = {
+    key: 'root',
+    storage:AsyncStorage
+}
+
+const persistedReducer = persistReducer(persistConfig,profileSlice)
 
 // Define the store's state types based on slices
 export type RootState = {
-    products: ReturnType<typeof productReducer>;
+    products: ReturnType<typeof productSlice>;
     cart: ReturnType<typeof cartSlice.reducer>;
     favorites: ReturnType<typeof favoriteSlice>
     checkout: ReturnType<typeof checkoutSlice>
@@ -16,13 +25,19 @@ export type RootState = {
 
 export const store = configureStore({
     reducer: {
-        products: productReducer,  // Use default reducer import
+        products: productSlice,  // Use default reducer import
         cart: cartSlice.reducer,
         favorites: favoriteSlice,
         checkout: checkoutSlice,
-        profile:profileSlice
-    }
+        profile:persistedReducer
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,// required for redux-persist
+            
+        })
 });
+export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type AppDispatch = typeof store.dispatch;

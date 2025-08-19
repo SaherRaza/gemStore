@@ -21,7 +21,8 @@ import LoginScreen from "./src/screens/LoginScreens/LoginScreen";
 import ForgotPasswordScreen from "./src/screens/LoginScreens/ForgotPasswordScreen";
 import OrderDetailScreen from "./src/screens/CartScreen/OrderDetailScreen";
 import { Provider } from "react-redux";
-import { store } from "./src/store";
+import { store, persistor } from "./src/store";
+import { PersistGate } from "redux-persist/integration/react";
 const Stack = createNativeStackNavigator();
 
 const App = () =>
@@ -38,25 +39,27 @@ const App = () =>
     <>
       <StatusBar style="auto" />
       <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="LoginScreen"
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
-            <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-            <Stack.Screen name="CheckOutScreen2" component={CheckOutScreen2} />
-            <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
-            <Stack.Screen name="SlidingScreens" component={SlidingScreens} />
-            <Stack.Screen name="CheckOutScreen3" component={CheckOutScreen3} />
-            <Stack.Screen name="MyOrdersScreen" component={MyOrdersScreen} />
-            <Stack.Screen name="OrderDetailScreen" component={OrderDetailScreen} />
-            <Stack.Screen name="MyTabs" component={MyTabs} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="LoginScreen"
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+              <Stack.Screen name="LoginScreen" component={LoginScreen} />
+              <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+              <Stack.Screen name="CheckOutScreen2" component={CheckOutScreen2} />
+              <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
+              <Stack.Screen name="SlidingScreens" component={SlidingScreens} />
+              <Stack.Screen name="CheckOutScreen3" component={CheckOutScreen3} />
+              <Stack.Screen name="MyOrdersScreen" component={MyOrdersScreen} />
+              <Stack.Screen name="OrderDetailScreen" component={OrderDetailScreen} />
+              <Stack.Screen name="MyTabs" component={MyTabs} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
       {/* <CartScreen /> */}
       {/* <CheckOutScreen /> */}
