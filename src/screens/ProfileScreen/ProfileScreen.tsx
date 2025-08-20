@@ -41,7 +41,7 @@ const ProfileScreen: React.FC = () =>
 
         <View style={styles.lineBreak} />
 
-        <TouchableOpacity style={styles.option}>
+        <TouchableOpacity onPress={() => navigation.navigate("PaymentScreen")} style={styles.option}>
           <FontAwesome5 name="credit-card" size={24} color="#B1B5C3" />
           <Text style={styles.optionText}>Payment method</Text>
           <Entypo style={styles.arrowIcon} name="chevron-right" size={24} color="black" />
