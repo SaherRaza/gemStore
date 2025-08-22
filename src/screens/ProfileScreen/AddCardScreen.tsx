@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, View, Dimensions, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenHeader from '../../components/ScreenHeader';
@@ -7,6 +7,11 @@ import { cardValidationSchema, setCardHolderName, setCardNumber, setCVV, setExpi
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import CustomButton from '../../components/CustomButton';
+import { LinearGradient } from "expo-linear-gradient";
+
+const { width } = Dimensions.get("window");
+const CARD_WIDTH = width * 0.9;
+const CARD_HEIGHT = CARD_WIDTH * 0.55;
 
 const AddCardScreen: React.FC = () =>
 {
@@ -23,122 +28,214 @@ const AddCardScreen: React.FC = () =>
     };
     const navigation = useNavigation<NavigationProp<ProfileParamList>>();
     return (
-        <View>
-            <ScreenHeader onPress={() => navigation.goBack()} title="Add New Card" />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={{ flex: 1 }}>
+                <ScreenHeader onPress={() => navigation.goBack()} title="Add New Card" />
 
-            <Formik
-                initialValues={{ cardHolderName: '', cardNumber: '', expire: '', cvv: '', }}
-                validationSchema={cardValidationSchema}
-                onSubmit={(values) =>
-                {
-                    // Check if any field is empty
-                    const isFormValid = Object.values(values).every(value => value.trim() !== '');
 
-                    if (!isFormValid)
+                <LinearGradient
+                    colors={["#36D1DC", "#5B86E5"]}
+                    style={styles.card}>
+                    {/* Brand */}
+                    <Text style={styles.brand}>VISA</Text>
+
+                    {/* Number */}
+                    <Text style={styles.number}>**** **** **** ****</Text>
+
+                    <View style={styles.row}>
+                        <View>
+                            <Text style={styles.label}>CARDHOLDER NAME</Text>
+                            <Text style={styles.value}>NAME</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.label}>VALID THRU</Text>
+                            <Text style={styles.value}>MM/YY</Text>
+                        </View>
+                    </View>
+                </LinearGradient>
+
+                <Formik
+                    initialValues={{ cardHolderName: '', cardNumber: '', expire: '', cvv: '', }}
+                    validationSchema={cardValidationSchema}
+                    onSubmit={(values) =>
                     {
-                        Alert.alert('Error', 'Please fill all the required fields.');
-                        return;
+                        // Check if any field is empty
+                        const isFormValid = Object.values(values).every(value => value.trim() !== '');
+
+                        if (!isFormValid)
+                        {
+                            Alert.alert('Error', 'Please fill all the required fields.');
+                            return;
+                        }
+
+                        //handleNext();
+                        // If all checks pass, dispatch the values and navigate to the next screen
+                        handleFormSubmit(values);
+                        navigation.navigate("PaymentScreen");
                     }
+                    }
+                >
+                    {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+                        <>
 
-                    //handleNext();
-                    // If all checks pass, dispatch the values and navigate to the next screen
-                    handleFormSubmit(values);
-                    //navigation.navigate("CheckOutScreen2");
-                }
-                }
-            >
-                {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-                    <>
-                        <View style={{
-                            flex: 1,
-                        }}>
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.cardHolderName && errors.cardHolderName ? '#ED0006' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="Card Holder Name*"
-                                onChangeText={handleChange('cardHolderName')}
-                                onBlur={handleBlur('cardHolderName')}
-                                value={values.cardHolderName}
-                            />
-                            {touched.cardHolderName && errors.cardHolderName && <Text style={styles.error}>{errors.cardHolderName}</Text>}
+                            <View style={styles.container}>
+                                <Text style={styles.formikLabel}>CARDHOLDER NAME</Text>
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        touched.cardHolderName && errors.cardHolderName && { borderColor: '#ED0006' }
+                                    ]}
+                                    placeholder="Card Holder Name*"
+                                    onChangeText={handleChange('cardHolderName')}
+                                    onBlur={handleBlur('cardHolderName')}
+                                    value={values.cardHolderName}
+                                />
+                                {touched.cardHolderName && errors.cardHolderName && <Text style={styles.error}>{errors.cardHolderName}</Text>}
 
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.cardNumber && errors.cardNumber ? '#ED0006' : '#D3D3D3',
-                                    },
-                                ]}
-                                placeholder="Card Number*"
-                                onChangeText={handleChange('cardNumber')}
-                                onBlur={handleBlur('cardNumber')}
-                                value={values.cardNumber}
-                            />
-                            {touched.cardNumber && errors.cardNumber && <Text style={styles.error}>{errors.cardNumber}</Text>}
+                                <Text style={styles.formikLabel}>CARD NUMBER</Text>
+                                <TextInput
+                                    style={[
+                                        styles.input,
+                                        touched.cardNumber && errors.cardNumber && { borderColor: '#ED0006' }
+                                    ]}
+                                    placeholder="Card Number*"
+                                    onChangeText={handleChange('cardNumber')}
+                                    onBlur={handleBlur('cardNumber')}
+                                    value={values.cardNumber}
+                                    keyboardType="numeric"
+                                />
+                                {touched.cardNumber && errors.cardNumber && <Text style={styles.error}>{errors.cardNumber}</Text>}
 
+                                <View style={styles.formikRow}>
+                                    <View style={styles.halfInput}>
+                                        <Text style={styles.formikLabel}>EXPIRES</Text>
+                                        <TextInput
+                                            style={[
+                                                styles.input,
+                                                touched.expire && errors.expire && { borderColor: '#ED0006' }
+                                            ]}
+                                            placeholder="MM/YY"
+                                            onChangeText={handleChange('expire')}
+                                            onBlur={handleBlur('expire')}
+                                            value={values.expire}
+                                            keyboardType="default"
+                                        />
+                                        {touched.expire && errors.expire && <Text style={styles.error}>{errors.expire}</Text>}
+                                    </View>
 
-
-                        </View>
-                        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.expire && errors.expire ? '#ED0006' : '#D3D3D3',
-                                        width: "40%"
-                                    },
-                                ]}
-                                placeholder="Expire*"
-                                onChangeText={handleChange('expire')}
-                                onBlur={handleBlur('expire')}
-                                value={values.expire}
-                            />
-                            {touched.expire && errors.expire && <Text style={styles.error}>{errors.expire}</Text>}
-
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    {
-                                        borderColor: touched.cvv && errors.cvv ? '#ED0006' : '#D3D3D3',
-                                        width: "40%",
-                                    },
-                                ]}
-                                placeholder="CVV*"
-                                onChangeText={handleChange('streetName')}
-                                onBlur={handleBlur('streetName')}
-                                value={values.cvv}
-                            />
-                            {touched.cvv && errors.cvv && <Text style={styles.error}>{errors.cvv}</Text>}
-                        </View>
+                                    <View style={styles.halfInput}>
+                                        <Text style={styles.formikLabel}>CVV</Text>
+                                        <TextInput
+                                            style={[
+                                                styles.input,
+                                                touched.cvv && errors.cvv && { borderColor: '#ED0006' }
+                                            ]}
+                                            placeholder="CVV*"
+                                            onChangeText={handleChange('cvv')}
+                                            onBlur={handleBlur('cvv')}
+                                            value={values.cvv}
+                                            keyboardType="numeric"
+                                            maxLength={4}
+                                        />
+                                        {touched.cvv && errors.cvv && <Text style={styles.error}>{errors.cvv}</Text>}
+                                    </View>
+                                </View>
+                                <View style={styles.btnContainer}>
+                                    <CustomButton
+                                        Width={180}
+                                        onPress={handleSubmit}
+                                        title='Add Card' />
+                                </View>
+                            </View>
 
 
-                        <View style={{ marginTop: 20 }}>
-                            <CustomButton
-                                title='Add Card' />
-                        </View>
-                    </>
-                )}
-            </Formik>
-        </View>
+                        </>
+                    )}
+                </Formik>
+
+            </View >
+        </TouchableWithoutFeedback >
     );
 };
 
 export default AddCardScreen;
 
 const styles = StyleSheet.create({
+    card: {
+        width: CARD_WIDTH,
+        height: CARD_HEIGHT,
+        borderRadius: 16,
+        padding: 20, justifyContent: "space-between",
+        alignSelf: "center",
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 5,
+        marginTop: 50
+    },
+    brand: {
+        fontSize: 22,
+        fontWeight: "bold",
+        color: "#fff",
+        alignSelf: "flex-end",
+    },
+    number: {
+        fontSize: 22,
+        letterSpacing: 2,
+        color: "#fff",
+        fontWeight: "600",
+    },
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    label: {
+        fontSize: 10,
+        color: "#ddd",
+    },
+    value: {
+        fontSize: 14,
+        color: "#fff",
+        fontWeight: "bold",
+    },
+    container: {
+        padding: 20,
+        flex: 1,
+        marginTop: 20,
+    },
     input: {
-        height: 40,
+        height: 50,
         borderWidth: 1,
+        borderColor: '#D3D3D3',
+        borderRadius: 12,
+        paddingHorizontal: 15,
+        backgroundColor: '#FAFAFA',
+        fontSize: 16,
+        color: '#000',
         marginBottom: 10,
-        marginVertical: 12,
-        width: "80%",
-        borderRadius: 13,
     },
     error: {
         color: '#ED0006',
+        fontSize: 12,
+        marginBottom: 8,
     },
+    formikLabel: {
+        fontSize: 12,
+        color: "#777",
+        marginBottom: 4,
+        fontWeight: "500",
+    },
+    formikRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%",
+    },
+    halfInput: {
+        width: "48%",
+    },
+    btnContainer: {
+        alignSelf: "center",
+        marginTop: 30,
+    }
 });
