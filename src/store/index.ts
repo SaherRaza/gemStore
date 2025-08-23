@@ -6,13 +6,15 @@ import favoriteSlice from "./favoriteSlice";
 import checkoutSlice from "./checkoutSlice";
 import profileSlice from "./profileSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import creditCardSlice from './creditCardSlice';
 
 const persistConfig = {
     key: 'root',
     storage:AsyncStorage
 }
 
-const persistedReducer = persistReducer(persistConfig,profileSlice)
+const persistedReducer = persistReducer(persistConfig, profileSlice);
+const persistedReducer1 = persistReducer(persistConfig, creditCardSlice);
 
 // Define the store's state types based on slices
 export type RootState = {
@@ -20,7 +22,8 @@ export type RootState = {
     cart: ReturnType<typeof cartSlice.reducer>;
     favorites: ReturnType<typeof favoriteSlice>
     checkout: ReturnType<typeof checkoutSlice>
-     profile:ReturnType<typeof profileSlice>
+    profile: ReturnType<typeof profileSlice>
+     card:ReturnType<typeof creditCardSlice>
 };
 
 export const store = configureStore({
@@ -29,7 +32,8 @@ export const store = configureStore({
         cart: cartSlice.reducer,
         favorites: favoriteSlice,
         checkout: checkoutSlice,
-        profile:persistedReducer
+        profile: persistedReducer,
+        card:persistedReducer1
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

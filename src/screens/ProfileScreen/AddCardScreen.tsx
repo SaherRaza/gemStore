@@ -99,10 +99,18 @@ const AddCardScreen: React.FC = () =>
                                         touched.cardNumber && errors.cardNumber && { borderColor: '#ED0006' }
                                     ]}
                                     placeholder="Card Number*"
-                                    onChangeText={handleChange('cardNumber')}
+                                    onChangeText={(text) =>
+                                    {
+                                        // Remove all non-digit characters
+                                        let cleaned = text.replace(/\D/g, '');
+                                        // Add space every 4 digits
+                                        let formatted = cleaned.replace(/(.{4})/g, '$1 ').trim();
+                                        handleChange('cardNumber')(formatted);
+                                    }}
                                     onBlur={handleBlur('cardNumber')}
                                     value={values.cardNumber}
                                     keyboardType="numeric"
+                                    maxLength={19}
                                 />
                                 {touched.cardNumber && errors.cardNumber && <Text style={styles.error}>{errors.cardNumber}</Text>}
 
@@ -147,8 +155,6 @@ const AddCardScreen: React.FC = () =>
                                         title='Add Card' />
                                 </View>
                             </View>
-
-
                         </>
                     )}
                 </Formik>

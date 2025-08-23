@@ -4,6 +4,8 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import ScreenHeader from '../../components/ScreenHeader';
 import { ProfileParamList } from '../BottomTab/MyTabs';
 import { LinearGradient } from "expo-linear-gradient";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.9;
@@ -14,6 +16,10 @@ const CARD_HEIGHT = CARD_WIDTH * 0.55;
 const PaymentScreen: React.FC = ({ }) =>
 {
     const navigation = useNavigation<NavigationProp<ProfileParamList>>();
+
+    const cardDetails = useSelector((state: RootState) => state.card);
+    const { cardHolderName, cardNumber, expire, cvv } = cardDetails;
+
     return (
         <View style={styles.container}>
             <ScreenHeader onPress={() => navigation.goBack()} title="Payment" />
@@ -32,16 +38,16 @@ const PaymentScreen: React.FC = ({ }) =>
                 <Text style={styles.brand}>VISA</Text>
 
                 {/* Number */}
-                <Text style={styles.number}>4364 1345 8932 8378</Text>
+                <Text style={styles.number}>{cardNumber?.trim() ? cardNumber : "**** **** **** ****"}</Text>
 
                 <View style={styles.row}>
                     <View>
                         <Text style={styles.label}>CARDHOLDER NAME</Text>
-                        <Text style={styles.value}>Sunie Pham</Text>
+                        <Text style={styles.value}>{cardHolderName?.trim() ? cardHolderName : "Name"}</Text>
                     </View>
                     <View>
                         <Text style={styles.label}>VALID THRU</Text>
-                        <Text style={styles.value}>05/24</Text>
+                        <Text style={styles.value}>{expire?.trim() ? expire : "MM/YY"}</Text>
                     </View>
                 </View>
             </LinearGradient>
