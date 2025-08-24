@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -8,12 +8,23 @@ import CustomButton from '../../components/CustomButton';
 import ScreenHeader from '../../components/ScreenHeader';
 import { useSelector } from 'react-redux';
 import { selectSubtotal } from '../../store/cartSlice';
+import { LinearGradient } from "expo-linear-gradient";
+import { RootState } from '../../store';
+const { width } = Dimensions.get("window");
+const CARD_WIDTH = width * 0.9;
+const CARD_HEIGHT = CARD_WIDTH * 0.55;
+
+
 
 export default function CheckOutScreen2()
 {
     const navigation = useNavigation<NavigationProp<CartParamList>>();
     const [isAgreed, setIsAgreed] = useState(false);
     const subTotal = useSelector(selectSubtotal);
+
+
+    const cardDetails = useSelector((state: RootState) => state.card);
+    const { cardHolderName, cardNumber, expire, cvv } = cardDetails;
 
     const handleNext = () =>
     {
@@ -74,18 +85,29 @@ export default function CheckOutScreen2()
                 </View>
 
                 {/* Card Section */}
-                <View style={styles.cardSection}>
-                    <Text style={styles.cardSectionTitle}>Choose your card</Text>
-                    <TouchableOpacity style={styles.addNew}>
-                        <Text style={styles.addNewText}>Add new+</Text>
-                    </TouchableOpacity>
-                    <Image resizeMode='cover'
-                        source={require("../../../assets/images/card.png")} style={styles.cardImage} />
-                    {/* Replace the above placeholder image with the card image */}
-                </View>
+                <LinearGradient
+                    colors={["#36D1DC", "#5B86E5"]}
+                    style={styles.card}>
+                    {/* Brand */}
+                    <Text style={styles.brand}>VISA</Text>
+
+                    {/* Number */}
+                    <Text style={styles.number}>{cardNumber?.trim() ? cardNumber : "**** **** **** ****"}</Text>
+
+                    <View style={styles.row}>
+                        <View>
+                            <Text style={styles.label}>CARDHOLDER NAME</Text>
+                            <Text style={styles.value}>{cardHolderName?.trim() ? cardHolderName : "Name"}</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.label}>VALID THRU</Text>
+                            <Text style={styles.value}>{expire?.trim() ? expire : "MM/YY"}</Text>
+                        </View>
+                    </View>
+                </LinearGradient>
 
 
-                <View style={{ marginTop: 10 }}>
+                <View style={{ marginTop: 40 }}>
                     <Text>or check out with</Text>
                 </View>
 
@@ -334,5 +356,43 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         alignSelf: "center"
-    }
+    },
+    card: {
+        width: CARD_WIDTH,
+        height: CARD_HEIGHT,
+        borderRadius: 16,
+        padding: 20, justifyContent: "space-between",
+        alignSelf: "center",
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 5,
+        marginTop: 50
+    },
+    brand: {
+        fontSize: 22,
+        fontWeight: "bold",
+        color: "#fff",
+        alignSelf: "flex-end",
+    },
+    number: {
+        fontSize: 22,
+        letterSpacing: 2,
+        color: "#fff",
+        fontWeight: "600",
+    },
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    label: {
+        fontSize: 10,
+        color: "#ddd",
+    },
+    value: {
+        fontSize: 14,
+        color: "#fff",
+        fontWeight: "bold",
+    },
 });

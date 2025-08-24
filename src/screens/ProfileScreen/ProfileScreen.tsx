@@ -3,7 +3,7 @@ import React from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Entypo from '@expo/vector-icons/Entypo';
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, AntDesign } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ProfileParamList } from "../BottomTab/MyTabs";
 import { useSelector } from "react-redux";
@@ -61,6 +61,15 @@ const ProfileScreen: React.FC = () =>
           style={styles.option}>
           <FontAwesome name="heart" size={24} color="#B1B5C3" />
           <Text style={styles.optionText}>My Wishlist</Text>
+          <Entypo style={styles.arrowIcon} name="chevron-right" size={24} color="black" />
+        </TouchableOpacity>
+
+        <View style={styles.lineBreak} />
+
+        <TouchableOpacity onPress={() => navigation.navigate("NotificationSetting")}
+          style={styles.option}>
+          <AntDesign name="notification" size={24} color="#B1B5C3" />
+          <Text style={styles.optionText}>Notification Settings</Text>
           <Entypo style={styles.arrowIcon} name="chevron-right" size={24} color="black" />
         </TouchableOpacity>
 

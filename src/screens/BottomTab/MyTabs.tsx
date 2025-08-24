@@ -26,6 +26,7 @@ import ProfileSetting from "../ProfileScreen/ProfileSetting";
 import NotificationScreen from "../HomeScreen/NotificationScreen";
 import PaymentScreen from "../ProfileScreen/PaymentScreen";
 import AddCardScreen from "../ProfileScreen/AddCardScreen";
+import NotificationSetting from './../ProfileScreen/NotificationSetting';
 
 
 
@@ -113,6 +114,7 @@ export type ProfileParamList = {
   ProfileSetting: undefined;
   PaymentScreen: undefined;
   AddCardScreen: undefined;
+  NotificationSetting: undefined;
 };
 const ProfileStack = createNativeStackNavigator<ProfileParamList>();
 
@@ -130,6 +132,7 @@ function ProfileStackScreen()
       <ProfileStack.Screen name="ProfileSetting" component={ProfileSetting} />
       <ProfileStack.Screen name="PaymentScreen" component={PaymentScreen} />
       <ProfileStack.Screen name="AddCardScreen" component={AddCardScreen} />
+      <ProfileStack.Screen name="NotificationSetting" component={NotificationSetting} />
     </ProfileStack.Navigator>
   );
 }

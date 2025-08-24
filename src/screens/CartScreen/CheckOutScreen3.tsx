@@ -23,7 +23,7 @@ const CheckOutScreen3 = () =>
     {
         dispatch(emptyCart());  // Reset the cart
         navigation.navigate("HomeScreen");
-        navigation.navigate("CartScreen");
+        //  navigation.navigate("CartScreen");
     };
     return (
         <View style={styles.container}>
