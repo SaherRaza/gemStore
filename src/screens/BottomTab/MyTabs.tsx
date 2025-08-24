@@ -27,6 +27,7 @@ import NotificationScreen from "../HomeScreen/NotificationScreen";
 import PaymentScreen from "../ProfileScreen/PaymentScreen";
 import AddCardScreen from "../ProfileScreen/AddCardScreen";
 import NotificationSetting from './../ProfileScreen/NotificationSetting';
+import FilterModal from "../SearchScreen/FilterModal";
 
 
 
@@ -59,6 +60,7 @@ export type SearchParamList = {
     category?: string;
   };
   DetailScreen: { product: Product; };
+  FilterModal: undefined;
 };
 
 const SearchStack = createNativeStackNavigator<SearchParamList>();

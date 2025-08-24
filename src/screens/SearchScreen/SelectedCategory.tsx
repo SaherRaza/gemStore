@@ -7,8 +7,9 @@ import
   View,
   FlatList,
   Image,
+  Modal,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SearchParamList } from "../BottomTab/MyTabs";
@@ -18,12 +19,14 @@ import { setSelectedProduct } from "../../store/productSlice";
 import ScreenHeader from "../../components/ScreenHeader";
 import CustomStarRating from "../../components/CustomStarRating";
 import { useFocusEffect } from "@react-navigation/native";
+import FilterModal from "./FilterModal";
 
 
 type Props = NativeStackScreenProps<SearchParamList, "SelectedCategory">;
 
 const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
 {
+  const [filterVisible, setFilterVisible] = useState(false);
   const dispatch = useDispatch();
   // const navigation = useNavigation<NativeStackScreenProps<SearchParamList>>(); // not needed
 
@@ -62,6 +65,8 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
   const { category } = route.params;
   console.log(category);
 
+
+
   return (
     <View style={styles.container}>
       <ScreenHeader onPress={() => navigation.goBack()} title={category} />
@@ -72,7 +77,8 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
           <Text style={styles.textStyle}>Found</Text>
           <Text style={styles.textStyle}>{filteredCount} results</Text>
         </View>
-        <TouchableOpacity style={styles.filterIcon}>
+        <TouchableOpacity onPress={() => setFilterVisible(true)}
+          style={styles.filterIcon}>
           <Text>Filter</Text>
           <AntDesign
             style={{ marginLeft: 8 }}
@@ -81,7 +87,21 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
             color="black"
           />
         </TouchableOpacity>
+
       </View>
+      {/* Your Filter Modal */}
+      <Modal
+        visible={filterVisible}
+        animationType="slide"
+        transparent={true} // makes background dim
+        onRequestClose={() => setFilterVisible(false)} // Android back button
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <FilterModal onClose={() => setFilterVisible(false)} />
+          </View>
+        </View>
+      </Modal>
 
       <View style={{ flex: 1 }}>
         <FlatList
@@ -218,6 +238,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "grey",
     marginLeft: 5,
+  },
+  filterIcon: { flexDirection: 'row', alignItems: 'center', padding: 8, borderWidth: 1, borderRadius: 8 },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'flex-end', // slide from bottom
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 16,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    maxHeight: '80%', // so it doesn’t cover entire screen
   },
 });
 
