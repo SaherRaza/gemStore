@@ -158,7 +158,7 @@ const AddCardScreen: React.FC = () =>
                                         onBlur={handleBlur('cvv')}
                                         value={values.cvv}
                                         keyboardType="numeric"
-                                        maxLength={4}
+                                        maxLength={3}
                                     />
                                     {touched.cvv && errors.cvv && <Text style={styles.error}>{errors.cvv}</Text>}
                                 </View>
