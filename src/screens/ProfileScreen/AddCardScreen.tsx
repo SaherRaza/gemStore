@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TextInput, View, Dimensions, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, View, Dimensions, ScrollView } from 'react-native';
 import React from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenHeader from '../../components/ScreenHeader';
@@ -28,139 +28,153 @@ const AddCardScreen: React.FC = () =>
     };
     const navigation = useNavigation<NavigationProp<ProfileParamList>>();
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <View style={{ flex: 1 }}>
-                <ScreenHeader onPress={() => navigation.goBack()} title="Add New Card" />
+        <ScrollView
+            keyboardDismissMode={'on-drag'}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 170 }}
+            style={{ flex: 1 }}>
+
+            <ScreenHeader onPress={() => navigation.goBack()} title="Add New Card" />
 
 
-                <LinearGradient
-                    colors={["#36D1DC", "#5B86E5"]}
-                    style={styles.card}>
-                    {/* Brand */}
-                    <Text style={styles.brand}>VISA</Text>
+            <LinearGradient
+                colors={["#36D1DC", "#5B86E5"]}
+                style={styles.card}>
+                {/* Brand */}
+                <Text style={styles.brand}>VISA</Text>
 
-                    {/* Number */}
-                    <Text style={styles.number}>**** **** **** ****</Text>
+                {/* Number */}
+                <Text style={styles.number}>**** **** **** ****</Text>
 
-                    <View style={styles.row}>
-                        <View>
-                            <Text style={styles.label}>CARDHOLDER NAME</Text>
-                            <Text style={styles.value}>NAME</Text>
-                        </View>
-                        <View>
-                            <Text style={styles.label}>VALID THRU</Text>
-                            <Text style={styles.value}>MM/YY</Text>
-                        </View>
+                <View style={styles.row}>
+                    <View>
+                        <Text style={styles.label}>CARDHOLDER NAME</Text>
+                        <Text style={styles.value}>NAME</Text>
                     </View>
-                </LinearGradient>
+                    <View>
+                        <Text style={styles.label}>VALID THRU</Text>
+                        <Text style={styles.value}>MM/YY</Text>
+                    </View>
+                </View>
+            </LinearGradient>
 
-                <Formik
-                    initialValues={{ cardHolderName: '', cardNumber: '', expire: '', cvv: '', }}
-                    validationSchema={cardValidationSchema}
-                    onSubmit={(values) =>
+            <Formik
+                initialValues={{ cardHolderName: '', cardNumber: '', expire: '', cvv: '', }}
+                validationSchema={cardValidationSchema}
+                onSubmit={(values) =>
+                {
+                    // Check if any field is empty
+                    const isFormValid = Object.values(values).every(value => value.trim() !== '');
+
+                    if (!isFormValid)
                     {
-                        // Check if any field is empty
-                        const isFormValid = Object.values(values).every(value => value.trim() !== '');
-
-                        if (!isFormValid)
-                        {
-                            Alert.alert('Error', 'Please fill all the required fields.');
-                            return;
-                        }
-
-                        //handleNext();
-                        // If all checks pass, dispatch the values and navigate to the next screen
-                        handleFormSubmit(values);
-                        navigation.navigate("PaymentScreen");
+                        Alert.alert('Error', 'Please fill all the required fields.');
+                        return;
                     }
-                    }
-                >
-                    {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-                        <>
 
-                            <View style={styles.container}>
-                                <Text style={styles.formikLabel}>CARDHOLDER NAME</Text>
-                                <TextInput
-                                    style={[
-                                        styles.input,
-                                        touched.cardHolderName && errors.cardHolderName && { borderColor: '#ED0006' }
-                                    ]}
-                                    placeholder="Card Holder Name*"
-                                    onChangeText={handleChange('cardHolderName')}
-                                    onBlur={handleBlur('cardHolderName')}
-                                    value={values.cardHolderName}
-                                />
-                                {touched.cardHolderName && errors.cardHolderName && <Text style={styles.error}>{errors.cardHolderName}</Text>}
+                    //handleNext();
+                    // If all checks pass, dispatch the values and navigate to the next screen
+                    handleFormSubmit(values);
+                    navigation.navigate("PaymentScreen");
+                }
+                }
+            >
+                {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+                    <>
 
-                                <Text style={styles.formikLabel}>CARD NUMBER</Text>
-                                <TextInput
-                                    style={[
-                                        styles.input,
-                                        touched.cardNumber && errors.cardNumber && { borderColor: '#ED0006' }
-                                    ]}
-                                    placeholder="Card Number*"
-                                    onChangeText={(text) =>
-                                    {
-                                        // Remove all non-digit characters
-                                        let cleaned = text.replace(/\D/g, '');
-                                        // Add space every 4 digits
-                                        let formatted = cleaned.replace(/(.{4})/g, '$1 ').trim();
-                                        handleChange('cardNumber')(formatted);
-                                    }}
-                                    onBlur={handleBlur('cardNumber')}
-                                    value={values.cardNumber}
-                                    keyboardType="numeric"
-                                    maxLength={19}
-                                />
-                                {touched.cardNumber && errors.cardNumber && <Text style={styles.error}>{errors.cardNumber}</Text>}
+                        <View style={styles.container}>
+                            <Text style={styles.formikLabel}>CARDHOLDER NAME</Text>
+                            <TextInput
+                                style={[
+                                    styles.input,
+                                    touched.cardHolderName && errors.cardHolderName && { borderColor: '#ED0006' }
+                                ]}
+                                placeholder="Card Holder Name*"
+                                onChangeText={handleChange('cardHolderName')}
+                                onBlur={handleBlur('cardHolderName')}
+                                value={values.cardHolderName}
+                            />
+                            {touched.cardHolderName && errors.cardHolderName && <Text style={styles.error}>{errors.cardHolderName}</Text>}
 
-                                <View style={styles.formikRow}>
-                                    <View style={styles.halfInput}>
-                                        <Text style={styles.formikLabel}>EXPIRES</Text>
-                                        <TextInput
-                                            style={[
-                                                styles.input,
-                                                touched.expire && errors.expire && { borderColor: '#ED0006' }
-                                            ]}
-                                            placeholder="MM/YY"
-                                            onChangeText={handleChange('expire')}
-                                            onBlur={handleBlur('expire')}
-                                            value={values.expire}
-                                            keyboardType="default"
-                                        />
-                                        {touched.expire && errors.expire && <Text style={styles.error}>{errors.expire}</Text>}
-                                    </View>
+                            <Text style={styles.formikLabel}>CARD NUMBER</Text>
+                            <TextInput
+                                style={[
+                                    styles.input,
+                                    touched.cardNumber && errors.cardNumber && { borderColor: '#ED0006' }
+                                ]}
+                                placeholder="Card Number*"
+                                onChangeText={(text) =>
+                                {
+                                    // Remove all non-digit characters
+                                    let cleaned = text.replace(/\D/g, '');
+                                    // Add space every 4 digits
+                                    let formatted = cleaned.replace(/(.{4})/g, '$1 ').trim();
+                                    handleChange('cardNumber')(formatted);
+                                }}
+                                onBlur={handleBlur('cardNumber')}
+                                value={values.cardNumber}
+                                keyboardType="numeric"
+                                maxLength={19}
+                            />
+                            {touched.cardNumber && errors.cardNumber && <Text style={styles.error}>{errors.cardNumber}</Text>}
 
-                                    <View style={styles.halfInput}>
-                                        <Text style={styles.formikLabel}>CVV</Text>
-                                        <TextInput
-                                            style={[
-                                                styles.input,
-                                                touched.cvv && errors.cvv && { borderColor: '#ED0006' }
-                                            ]}
-                                            placeholder="CVV*"
-                                            onChangeText={handleChange('cvv')}
-                                            onBlur={handleBlur('cvv')}
-                                            value={values.cvv}
-                                            keyboardType="numeric"
-                                            maxLength={4}
-                                        />
-                                        {touched.cvv && errors.cvv && <Text style={styles.error}>{errors.cvv}</Text>}
-                                    </View>
+                            <View style={styles.formikRow}>
+                                <View style={styles.halfInput}>
+                                    <Text style={styles.formikLabel}>EXPIRES</Text>
+                                    <TextInput
+                                        style={[
+                                            styles.input,
+                                            touched.expire && errors.expire && { borderColor: '#ED0006' }
+                                        ]}
+                                        maxLength={5}
+                                        placeholder="MM/YY"
+                                        onChangeText={(text) =>
+                                        {
+                                            // remove any non-digits
+                                            let cleaned = text.replace(/\D/g, '');
+                                            // format: add slash after first 2 digits
+                                            if (cleaned.length > 2)
+                                            {
+                                                cleaned = cleaned.slice(0, 2) + '/' + cleaned.slice(2, 4);
+                                            }
+                                            handleChange('expire')(cleaned);
+                                        }}
+                                        onBlur={handleBlur('expire')}
+                                        value={values.expire}
+                                        keyboardType="numeric"
+                                    />
+                                    {touched.expire && errors.expire && <Text style={styles.error}>{errors.expire}</Text>}
                                 </View>
-                                <View style={styles.btnContainer}>
-                                    <CustomButton
-                                        Width={180}
-                                        onPress={handleSubmit}
-                                        title='Add Card' />
+
+                                <View style={styles.halfInput}>
+                                    <Text style={styles.formikLabel}>CVV</Text>
+                                    <TextInput
+                                        style={[
+                                            styles.input,
+                                            touched.cvv && errors.cvv && { borderColor: '#ED0006' }
+                                        ]}
+                                        placeholder="CVV*"
+                                        onChangeText={handleChange('cvv')}
+                                        onBlur={handleBlur('cvv')}
+                                        value={values.cvv}
+                                        keyboardType="numeric"
+                                        maxLength={4}
+                                    />
+                                    {touched.cvv && errors.cvv && <Text style={styles.error}>{errors.cvv}</Text>}
                                 </View>
                             </View>
-                        </>
-                    )}
-                </Formik>
+                            <View style={styles.btnContainer}>
+                                <CustomButton
+                                    Width={180}
+                                    onPress={handleSubmit}
+                                    title='Add Card' />
+                            </View>
+                        </View>
+                    </>
+                )}
+            </Formik>
 
-            </View >
-        </TouchableWithoutFeedback >
+        </ScrollView>
     );
 };
 
