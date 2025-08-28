@@ -17,7 +17,7 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
     const [maxPrice, setMaxPrice] = useState(80);
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
     const [rating, setRating] = useState<number>(0);
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(categories[0]);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedDiscounts, setSelectedDiscounts] = useState<number[]>([]);
 
     const toggleDiscount = (value: number) =>
@@ -36,10 +36,10 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
     const onReset = () =>
     {
         setMinPrice(10);
-        setMaxPrice(80);
+        setMaxPrice(90);
         setSelectedColor(null);
         setRating(0);
-        setSelectedCategory(categories[0]);
+        setSelectedCategory(null);
         setSelectedDiscounts([]);
         dispatch(resetFilters());
     };
@@ -59,7 +59,9 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
                 maximumValue={200}
                 value={maxPrice}
                 step={1}
+                minimumTrackTintColor="black" // Red for the minimum track
                 onValueChange={setMaxPrice}
+
             />
             <Text>${minPrice} - ${maxPrice}</Text>
 
@@ -84,7 +86,7 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
                         style={[styles.ratingBtn, rating === star && styles.activeRating]}
                         onPress={() => setRating(star)}
                     >
-                        <Text>★{star}</Text>
+                        <Text style={rating === star && { color: "white" }}>★ {star}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
@@ -114,14 +116,14 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
                         style={[styles.discountBtn, selectedDiscounts.includes(d) && styles.activeDiscount]}
                         onPress={() => toggleDiscount(d)}
                     >
-                        <Text>{d}% off</Text>
+                        <Text style={selectedDiscounts.includes(d) && { color: "white" }}>{d}% off</Text>
                     </TouchableOpacity>
                 ))}
             </View>
 
             {/* Buttons */}
             <View style={styles.footer}>
-                <TouchableOpacity onPress={onReset}><Text>Reset</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.applyBtn} onPress={onReset}><Text style={{ color: '#fff' }}>Reset</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.applyBtn} onPress={onApply}><Text style={{ color: '#fff' }}>Apply</Text></TouchableOpacity>
             </View>
         </View>
@@ -135,13 +137,13 @@ const styles = StyleSheet.create({
     header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
     headerText: { fontSize: 18, fontWeight: '600' },
     label: { marginTop: 10, fontWeight: '600' },
-    row: { flexDirection: 'row', flexWrap: 'wrap', marginVertical: 8 },
+    row: { flexDirection: 'row', flexWrap: 'wrap', marginVertical: 8, gap: 4 },
     colorDot: { width: 28, height: 28, borderRadius: 14, margin: 4 },
-    ratingBtn: { borderWidth: 1, borderColor: '#ccc', padding: 6, borderRadius: 20, margin: 4 },
+    ratingBtn: { borderWidth: 1, borderColor: '#33302E', padding: 12, borderRadius: 360, margin: 4, },
     activeRating: { backgroundColor: '#000', borderColor: '#000', color: '#fff' },
     categoryBtn: { padding: 6, borderWidth: 1, borderRadius: 8, margin: 4 },
     activeCategory: { backgroundColor: '#000', borderColor: '#000', color: '#fff' },
-    discountBtn: { borderWidth: 1, padding: 6, borderRadius: 16, margin: 4 },
+    discountBtn: { borderWidth: 1, padding: 10, borderRadius: 26, margin: 4 },
     activeDiscount: { backgroundColor: '#000', borderColor: '#000', color: '#fff' },
     footer: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 16 },
     applyBtn: { backgroundColor: '#000', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 20 }

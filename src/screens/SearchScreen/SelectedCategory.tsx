@@ -88,22 +88,30 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
           />
         </TouchableOpacity>
 
-      </View>
-      {/* Your Filter Modal */}
-      <Modal
-        visible={filterVisible}
-        animationType="slide"
-        transparent={true} // makes background dim
-        onRequestClose={() => setFilterVisible(false)} // Android back button
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <FilterModal onClose={() => setFilterVisible(false)} />
-          </View>
-        </View>
-      </Modal>
+        {/* Actual modal */}
+        <Modal
+          visible={filterVisible}
+          transparent
+          animationType="slide"
+          onRequestClose={() => setFilterVisible(false)} // for Android back button
+        >
+          <TouchableWithoutFeedback onPress={() => setFilterVisible(false)}>
+            <View style={styles.modalOverlay}>
+              <TouchableWithoutFeedback>
+                <View style={styles.modalContent}>
+                  <FilterModal onClose={() => setFilterVisible(false)} />
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
 
-      <View style={{ flex: 1 }}>
+      </View>
+
+
+
+
+      <View>
         <FlatList
           data={filteredProducts}
           showsVerticalScrollIndicator={false}
@@ -177,7 +185,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    margin: 40,
+    padding: 24
   },
   filterIcon: {
     flexDirection: "row",
@@ -239,18 +247,19 @@ const styles = StyleSheet.create({
     color: "grey",
     marginLeft: 5,
   },
-  filterIcon: { flexDirection: 'row', alignItems: 'center', padding: 8, borderWidth: 1, borderRadius: 8 },
+
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'flex-end', // slide from bottom
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center', // center vertically
+    alignItems: 'center', // center horizontally
   },
   modalContent: {
+    width: '90%',
+    height: '80%', // you can adjust
     backgroundColor: '#fff',
+    borderRadius: 16,
     padding: 16,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    maxHeight: '80%', // so it doesn’t cover entire screen
   },
 });
 
