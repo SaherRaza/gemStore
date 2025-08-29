@@ -34,10 +34,23 @@ export const productSlice = createSlice({
             )
             //update the count of filtered products
             state.filteredCount = state.filteredProducts.length;
+        },
+        filteredProductsByCategory: (state, action: PayloadAction<string>) =>
+        {
+            const category = action.payload;
+            state.filteredProducts = state.products.filter(
+                (product) => product.category === category
+            );
+            state.filteredCount = state.filteredProducts.length;
+        },
+        showAllProducts: (state) =>
+        {
+            state.filteredProducts = state.products;
+            state.filteredCount = state.products.length;
         }
     }
 });
 
 // Export the actions and the reducer
-export const { setSelectedProduct, setSelectedCategory } = productSlice.actions;
+export const { setSelectedProduct, setSelectedCategory,filteredProductsByCategory,showAllProducts } = productSlice.actions;
 export default productSlice.reducer;

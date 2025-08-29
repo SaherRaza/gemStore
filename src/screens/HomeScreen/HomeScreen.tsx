@@ -175,7 +175,7 @@ const HomeScreen: React.FC = () =>
 
         <View style={styles.textContainer}>
           <Text style={styles.textStyle}>Feature Products</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("AllProductsScreen")}>
             <Text style={{ color: "#9B9B9B", fontSize: 16 }}>show all</Text>
           </TouchableOpacity>
         </View>

@@ -28,12 +28,14 @@ import PaymentScreen from "../ProfileScreen/PaymentScreen";
 import AddCardScreen from "../ProfileScreen/AddCardScreen";
 import NotificationSetting from './../ProfileScreen/NotificationSetting';
 import FilterModal from "../SearchScreen/FilterModal";
+import AllProductsScreen from "../HomeScreen/AllProductsScreen";
 
 
 
 export type HomeParamList = {
   HomeScreen: undefined;
   NotificationScreen: undefined;
+  AllProductsScreen: undefined;
 };
 
 
@@ -48,6 +50,7 @@ const HomeStackScreen: React.FC = () =>
     <HomeStack.Navigator screenOptions={screenOptions}>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen name="NotificationScreen" component={NotificationScreen} />
+      <HomeStack.Screen name="AllProductsScreen" component={AllProductsScreen} />
       {/* Other screens if any */}
     </HomeStack.Navigator>
   );

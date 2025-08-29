@@ -15,7 +15,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SearchParamList } from "../BottomTab/MyTabs";
 import { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedProduct } from "../../store/productSlice";
+import { filteredProductsByCategory, setSelectedCategory, setSelectedProduct } from "../../store/productSlice";
 import ScreenHeader from "../../components/ScreenHeader";
 import CustomStarRating from "../../components/CustomStarRating";
 import { useFocusEffect } from "@react-navigation/native";
@@ -99,7 +99,13 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
             <View style={styles.modalOverlay}>
               <TouchableWithoutFeedback>
                 <View style={styles.modalContent}>
-                  <FilterModal onClose={() => setFilterVisible(false)} />
+                  <FilterModal onClose={() => setFilterVisible(false)}
+                    onCategorySelect={(selectedCategory) =>
+                    {
+                      dispatch(filteredProductsByCategory(selectedCategory));
+                      setFilterVisible(false);
+                    }}
+                  />
                 </View>
               </TouchableWithoutFeedback>
             </View>
@@ -108,64 +114,60 @@ const SelectedCategory: React.FC<Props> = ({ route, navigation }) =>
 
       </View>
 
-
-
-
-      <View>
-        <FlatList
-          data={filteredProducts}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          numColumns={2} // To display two columns
-          columnWrapperStyle={styles.row} // Styles for the row wrapper
-          renderItem={({ item }) =>
+      <FlatList
+        data={filteredProducts}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        numColumns={2} // To display two columns
+        columnWrapperStyle={styles.row} // Styles for the row wrapper
+        renderItem={({ item }) =>
+        {
+          // Function to render the stars based on the rating
+          const renderStars = () =>
           {
-            // Function to render the stars based on the rating
-            const renderStars = () =>
+            const stars = [];
+            const floorRating = Math.floor(1);
+            for (let i = 0; i < 5; i++)
             {
-              const stars = [];
-              const floorRating = Math.floor(1);
-              for (let i = 0; i < 5; i++)
-              {
-                stars.push(
-                  <FontAwesome
-                    key={i}
-                    name={i < floorRating ? "star" : "star-o"}
-                    size={14}
-                    color={i < floorRating ? "#508A7B" : "#508A7B"}
+              stars.push(
+                <FontAwesome
+                  key={i}
+                  name={i < floorRating ? "star" : "star-o"}
+                  size={14}
+                  color={i < floorRating ? "#508A7B" : "#508A7B"}
+                />
+              );
+            }
+            return stars;
+          };
+          return (
+            <TouchableWithoutFeedback
+              onPress={() => handleProductSelect(item.id)}
+            >
+              <View style={styles.card}>
+                <View>
+                  <Image
+                    resizeMode="cover"
+                    source={item.image}
+                    style={styles.image}
                   />
-                );
-              }
-              return stars;
-            };
-            return (
-              <TouchableWithoutFeedback
-                onPress={() => handleProductSelect(item.id)}
-              >
-                <View style={styles.card}>
-                  <View>
-                    <Image
-                      resizeMode="cover"
-                      source={item.image}
-                      style={styles.image}
-                    />
-                  </View>
-                  <Text style={styles.type}>{item.name}</Text>
-                  <Text style={styles.price}>{item.price}$</Text>
-                  <View style={styles.ratingContainer}>
-                    {/* <Text style={styles.rating}>
+                </View>
+                <Text style={styles.type}>{item.name}</Text>
+                <Text style={styles.price}>{item.price}$</Text>
+                <View style={styles.ratingContainer}>
+                  {/* <Text style={styles.rating}>
                     {"⭐️".repeat(Math.floor(item.rating))}
                   </Text> */}
-                    {renderStars()}
+                  {renderStars()}
 
-                    <Text style={styles.reviewCount}>{renderStars().length}</Text>
-                  </View>
+                  <Text style={styles.reviewCount}>{renderStars().length}</Text>
                 </View>
-              </TouchableWithoutFeedback>
-            );
-          }}
-        />
-      </View>
+              </View>
+            </TouchableWithoutFeedback>
+          );
+        }}
+      />
     </View>
   );
 };

@@ -6,10 +6,18 @@ import { useDispatch } from 'react-redux';
 import { applyFilters, resetFilters } from '../../store/filterSlice';
 
 const colors = ['#f4a226', '#e63946', '#ef476f', '#073b4c', '#264653', '#6d4c41', '#e9c46a', '#f1dede'];
-const discounts = [50, 40, 30, 25];
-const categories = ['Crop Tops', 'T-Shirts', 'Jeans'];
+const discounts = [50, 40, 30, 25, 10, 5];
+const categories = ['Hoodies', 'Shoes', 'Clothing'];
+//const categories = ['Hoodies', 'Shoes', 'Clothing', 'Accessories', 'Suits', 'Collection'];
 
-const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
+
+interface Props
+{
+    onClose: () => void;
+    onCategorySelect: (category: string) => void;
+}
+
+const FilterModal: React.FC<Props> = ({ onClose, onCategorySelect }) =>
 {
     const dispatch = useDispatch();
 
@@ -19,6 +27,8 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
     const [rating, setRating] = useState<number>(0);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedDiscounts, setSelectedDiscounts] = useState<number[]>([]);
+
+    const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
 
     const toggleDiscount = (value: number) =>
     {
@@ -41,7 +51,9 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
         setRating(0);
         setSelectedCategory(null);
         setSelectedDiscounts([]);
+        setCategoryDropdownOpen(false);
         dispatch(resetFilters());
+
     };
 
     return (
@@ -93,19 +105,37 @@ const FilterModal: React.FC<{ onClose: () => void; }> = ({ onClose }) =>
 
             {/* Category Dropdown (simple selection here) */}
             <Text style={styles.label}>Category</Text>
-            <FlatList
-                horizontal
-                data={categories}
-                keyExtractor={(item) => item}
-                renderItem={({ item }) => (
-                    <TouchableOpacity
-                        style={[styles.categoryBtn, selectedCategory === item && styles.activeCategory]}
-                        onPress={() => setSelectedCategory(item)}
-                    >
-                        <Text>{item}</Text>
-                    </TouchableOpacity>
+            <View style={styles.dropdownContainer}>
+                <TouchableOpacity
+                    style={styles.dropdownHeader}
+                    onPress={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
+                >
+                    <Text style={styles.dropdownHeaderText}>
+                        {selectedCategory || 'Select Category'}
+                    </Text>
+                    <Ionicons name={categoryDropdownOpen ? 'chevron-up' : 'chevron-down'} size={20} />
+                </TouchableOpacity>
+
+                {categoryDropdownOpen && (
+                    <FlatList
+                        data={categories}
+                        keyExtractor={(item) => item}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                style={styles.dropdownItem}
+                                onPress={() =>
+                                {
+                                    onCategorySelect(item);
+                                    setSelectedCategory(item);
+                                    setCategoryDropdownOpen(false);
+                                }}
+                            >
+                                <Text style={styles.dropdownItemText}>{item}</Text>
+                            </TouchableOpacity>
+                        )}
+                    />
                 )}
-            />
+            </View>
 
             {/* Discounts */}
             <Text style={styles.label}>Discount</Text>
@@ -141,10 +171,35 @@ const styles = StyleSheet.create({
     colorDot: { width: 28, height: 28, borderRadius: 14, margin: 4 },
     ratingBtn: { borderWidth: 1, borderColor: '#33302E', padding: 12, borderRadius: 360, margin: 4, },
     activeRating: { backgroundColor: '#000', borderColor: '#000', color: '#fff' },
-    categoryBtn: { padding: 6, borderWidth: 1, borderRadius: 8, margin: 4 },
-    activeCategory: { backgroundColor: '#000', borderColor: '#000', color: '#fff' },
+    dropdownContainer: {
+        width: '100%',
+        marginVertical: 8,
+    },
+    dropdownHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 26,
+        padding: 10,
+        backgroundColor: '#fff',
+    },
+    dropdownHeaderText: {
+        fontSize: 16,
+    },
+    dropdownItem: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee',
+        backgroundColor: '#fff',
+    },
+    dropdownItemText: {
+        fontSize: 16,
+    },
+
     discountBtn: { borderWidth: 1, padding: 10, borderRadius: 26, margin: 4 },
     activeDiscount: { backgroundColor: '#000', borderColor: '#000', color: '#fff' },
     footer: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 16 },
-    applyBtn: { backgroundColor: '#000', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 20 }
+    applyBtn: { backgroundColor: '#000', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 26 }
 });
