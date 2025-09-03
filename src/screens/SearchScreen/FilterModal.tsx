@@ -7,7 +7,7 @@ import { applyFilters, resetFilters } from '../../store/filterSlice';
 
 const colors = ['#f4a226', '#e63946', '#ef476f', '#073b4c', '#264653', '#6d4c41', '#e9c46a', '#f1dede'];
 const discounts = [50, 40, 30, 25, 10, 5];
-const categories = ['Hoodies', 'Shoes', 'Clothing'];
+const categories = ['All', 'HOODIES', 'Shoes', 'COLLECTION'];
 //const categories = ['Hoodies', 'Shoes', 'Clothing', 'Accessories', 'Suits', 'Collection'];
 
 
@@ -115,6 +115,7 @@ const FilterModal: React.FC<Props> = ({ onClose, onCategorySelect }) =>
                     </Text>
                     <Ionicons name={categoryDropdownOpen ? 'chevron-up' : 'chevron-down'} size={20} />
                 </TouchableOpacity>
+
 
                 {categoryDropdownOpen && (
                     <FlatList

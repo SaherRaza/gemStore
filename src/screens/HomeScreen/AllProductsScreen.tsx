@@ -15,7 +15,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SearchParamList } from "../BottomTab/MyTabs";
 import { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { filteredProductsByCategory, setSelectedCategory, setSelectedProduct } from "../../store/productSlice";
+import { filteredProductsByCategory, setSelectedCategory, setSelectedProduct, showAllProducts } from "../../store/productSlice";
 import ScreenHeader from "../../components/ScreenHeader";
 import CustomStarRating from "../../components/CustomStarRating";
 import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -52,12 +52,14 @@ const AllProductsScreen: React.FC<Props> = () =>
         }
     }, [selectedProduct]);
 
+    // Reset selectedProduct on focus
 
     useFocusEffect(
         React.useCallback(() =>
         {
             dispatch(setSelectedProduct("")); // Clear selected product on focus
-            // Optionally reset other states if needed
+            // By default show all products
+            dispatch(showAllProducts());
         }, [dispatch])
     );
 
@@ -99,7 +101,13 @@ const AllProductsScreen: React.FC<Props> = () =>
                                     <FilterModal onClose={() => setFilterVisible(false)}
                                         onCategorySelect={(selectedCategory) =>
                                         {
-                                            dispatch(filteredProductsByCategory(selectedCategory));
+                                            if (selectedCategory === "All")
+                                            {
+                                                dispatch(showAllProducts());
+                                            } else
+                                            {
+                                                dispatch(filteredProductsByCategory(selectedCategory));
+                                            }
                                             setFilterVisible(false);
                                         }}
                                     />
